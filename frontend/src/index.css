@@ -7,3 +7,21 @@
 img {
   max-width: 100%;
 }
+
+@font-face {
+  font-family: urbanist;
+  src: url(../public/fonts/Urbanist-VariableFont_wght.ttf);
+}
+
+:root {
+  --mid-pink: #ff4d67;
+  --light-pink: #ff8a9b;
+
+  --icons-grey: #9e9e9e;
+  --input-grey: #fafafa;
+  --loginfont-grey: #9e9e9e;
+
+  --hashtag-blue: #3f51b2;
+
+  --main-background: #ffffff;
+}
