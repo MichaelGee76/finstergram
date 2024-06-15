@@ -11,15 +11,17 @@ import Search from "./pages/Search/Search";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/chatDashboard" element={<ChatDashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/signinup" element={<SignInUp />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/search" element={<Search />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/chatDashboard" element={<ChatDashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/signinup" element={<SignInUp />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
