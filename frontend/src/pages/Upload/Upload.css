@@ -1,0 +1,241 @@
+.upload_section {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.upload_heading {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-block: 9.5px;
+}
+
+.nobtn {
+  background: unset;
+  border: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img_upload_wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: var(--loginfont-grey);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img_upload_wrapper label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--mid-pink);
+  height: 45px;
+  width: 75%;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  cursor: pointer;
+}
+
+.img_upload_wrapper p {
+  color: var(--main-background);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.change_img {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 3px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.change_img img {
+  width: 15px;
+}
+
+.change_img p {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.upload_text_section {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.upload_profile_img {
+  width: 56px;
+  height: 56px;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.upload_text_section textarea {
+  width: 100%;
+  background-color: var(--input-grey);
+  border: unset;
+  border-radius: 12px;
+  padding: 18px 20px;
+  height: auto;
+}
+
+.upload_text_section textarea::placeholder {
+  color: var(--icons-grey);
+  font-size: 14px;
+  font-family: urbanist;
+  letter-spacing: 0.2px;
+}
+
+.upload_text_section textarea:focus {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_text_section textarea:focus-visible {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_mini_img {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.auto-resize-textarea {
+  overflow: hidden;
+  resize: none;
+}
+
+.upload_hashtags_section {
+  padding-left: 3px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.hashtag_input_wrapper {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.upload_hashtags_section input {
+  border: unset;
+}
+
+.upload_hashtags_section input::placeholder {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--main-text);
+}
+
+.upload_hashtags_section input:focus {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_hashtags_section input:focus-visible {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_hashtags_section label .hashtag {
+  font-size: 22px;
+}
+
+.hashtags_output {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.hashtags_output div {
+  background-color: var(--light-pink);
+  padding: 5px 5px 5px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hashtags_output div p {
+  color: var(--input-grey);
+}
+
+.hashtags_output div button {
+  background-color: unset;
+  height: 18px;
+  width: 18px;
+  padding-bottom: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--input-grey);
+  border-radius: 10px;
+  color: var(--input-grey);
+  opacity: 0.5;
+}
+
+.upload_location_section {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.upload_location_section form {
+  display: flex;
+  gap: 16px;
+}
+
+.upload_location_section input {
+  border: unset;
+}
+
+.upload_location_section input::placeholder {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--main-text);
+}
+
+.upload_location_section input:focus {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_location_section input:focus-visible {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_location_section label .hashtag {
+  font-size: 22px;
+}
+
+.location_suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.location_suggestions div {
+  display: flex;
+  gap: 6px;
+}
+
+.location_city {
+  font-size: 16px;
+  font-weight: 500;
+}
