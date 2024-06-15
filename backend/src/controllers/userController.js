@@ -12,6 +12,19 @@ const postRegisterUserCtrl = asyncHandler(async (req, res) => {
     res.status(201).json({ result });
 });
 
+const postLoginUserCtrl = asyncHandler(async (req, res) => {
+    const userInfo = {
+        email: req.body.email,
+        password: req.body.password,
+    };
+
+    const result = await UserService.loginUser(userInfo);
+    if (!result) {
+        res.status(500).json("Could not register user");
+    }
+    res.status(200).json({ result });
+});
+
 const postVerifyEmailUserCtrl = asyncHandler(async (req, res) => {
     const userId = req.params.id;
 
@@ -48,10 +61,38 @@ const postRefreshAccessTokenCtrl = asyncHandler(async (req, res) => {
     res.status(200).json({ result });
 });
 
+const updateUserCtrl = asyncHandler(async (req, res) => {
+    const authenticatedUserId = req.authenticatedUserId;
+    const updatedData = req.body;
+
+    const result = await UserService.updateUser(
+        authenticatedUserId,
+        updatedData
+    );
+    if (!result) {
+        res.status(500).json("Could not update user ");
+    }
+    res.status(200).json({ result });
+});
+
+const deleteUserCtrl = asyncHandler(async (req, res) => {
+    // const authenticatedUserId = req.authenticatedUserId;
+    const userId = req.params.userId;
+    const result = await UserService.deleteUser(userId);
+
+    if (!result) {
+        res.status(500).json("Could not delete user ");
+    }
+    res.status(200).json({ result });
+});
+
 export const UserController = {
     postRegisterUserCtrl,
     postVerifyEmailUserCtrl,
     getAllUsersCtrl,
     getOneUserCtrl,
     postRefreshAccessTokenCtrl,
+    updateUserCtrl,
+    postLoginUserCtrl,
+    deleteUserCtrl,
 };
