@@ -1,5 +1,6 @@
 .profile_name {
   display: flex;
+  align-items: center;
 }
 .profile_nav {
   display: flex;
@@ -8,10 +9,61 @@
   display: flex;
   justify-content: space-between;
   margin-top: 32px;
+  margin-bottom: 24px;
+  align-items: center;
 }
+
 .profile svg {
-  margin-right: 20px;
+  margin-left: 16px;
 }
-.profile svg:nth-of-type(1) {
+.profile_name svg {
   margin-right: 16px;
+}
+
+.font_info {
+  font-size: 14px;
+  font-weight: 550;
+}
+.profile_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile_info img {
+  width: 120px;
+  height: 120px;
+  border-radius: 120px;
+  border: 1px solid black;
+  margin-bottom: 12px;
+}
+
+.font_bio {
+  font-size: 14px;
+  text-align: center;
+}
+.font_link {
+  color: #246bfd;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.profile_numbers {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.profile_numbers h1 {
+  text-align: center;
+  padding: 5px 30px;
+}
+
+.profile_numberbox {
+  text-align: center;
+  height: 55px;
+}
+.profile_numberborder {
+  border-left: 2px solid rgba(128, 128, 128, 0.299);
+  border-right: 2px solid rgba(128, 128, 128, 0.185);
 }

@@ -1,6 +1,17 @@
+import { useEffect, useState } from "react";
 import "./Profile.css";
 
 const Profile = () => {
+  const formatNumber = (num) => {
+    if (num >= 10000) {
+      return `${Math.floor(num / 1000)}.${String(num).slice(-3)}k`;
+    }
+    return num.toString();
+  };
+
+  const [isUser, setIsUser] = useState(false);
+  const [following, setFollowing] = useState(true);
+
   return (
     <section className="profile">
       <div className="profile_top">
@@ -114,8 +125,55 @@ const Profile = () => {
         <img src="../../../public/img/Setting.svg" alt="profile-image" />
         <h1>Hassan Lahluli</h1>
 
-        <p className="username">Dragqueen she/her LGBTQ++</p>
+        <p className="font_info">Dragqueen she/her LGBTQ++</p>
+        <p className="font_bio"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit, cum.</p>
+        <a className="font_link" href="#">
+          www.exclusice-content.com
+        </a>
       </div>
+      <div className="profile_numbers">
+        <div className="profile_numberbox">
+          <h1>{formatNumber(333)}</h1>
+          <p>Posts</p>
+        </div>
+
+        <div className="profile_numberbox profile_numberborder">
+          <h1>{formatNumber(12399)}</h1>
+          <p>Follower</p>
+        </div>
+        <div className="profile_numberbox">
+          <h1>{formatNumber(323)}</h1>
+          <p>Gefolgt</p>
+        </div>
+      </div>
+
+      {!isUser &&
+        (!following ? (
+          <button className="button_unclicked">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.41663 10.9613C10.7121 10.9613 12.5522 9.09746 12.5522 6.77229C12.5522 4.44711 10.7121 2.58325 8.41663 2.58325C6.12115 2.58325 4.2811 4.44711 4.2811 6.77229C4.2811 9.09746 6.12115 10.9613 8.41663 10.9613ZM8.41663 13.0126C5.04515 13.0126 2.16663 13.5516 2.16663 15.7053C2.16663 17.8581 5.02763 18.4166 8.41663 18.4166C11.7873 18.4166 14.6666 17.8775 14.6666 15.7239C14.6666 13.5702 11.8056 13.0126 8.41663 13.0126ZM17.0816 8.4898H18.0841C18.4968 8.4898 18.8333 8.83101 18.8333 9.24948C18.8333 9.66796 18.4968 10.0092 18.0841 10.0092H17.0816V10.9902C17.0816 11.4087 16.746 11.7499 16.3324 11.7499C15.9198 11.7499 15.5833 11.4087 15.5833 10.9902V10.0092H14.5824C14.1689 10.0092 13.8333 9.66796 13.8333 9.24948C13.8333 8.83101 14.1689 8.4898 14.5824 8.4898H15.5833V7.5096C15.5833 7.09112 15.9198 6.74992 16.3324 6.74992C16.746 6.74992 17.0816 7.09112 17.0816 7.5096V8.4898Z"
+                fill="white"
+              />
+            </svg>
+            Follow
+          </button>
+        ) : (
+          <button className="button_clicked">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12.0522 6.27229C12.0522 8.59746 10.2121 10.4613 7.91663 10.4613C5.62115 10.4613 3.7811 8.59746 3.7811 6.27229C3.7811 3.94711 5.62115 2.08325 7.91663 2.08325C10.2121 2.08325 12.0522 3.94711 12.0522 6.27229ZM1.66663 15.2053C1.66663 13.0516 4.54515 12.5126 7.91663 12.5126C11.3056 12.5126 14.1666 13.0702 14.1666 15.2239C14.1666 17.3775 11.2873 17.9166 7.91663 17.9166C4.52763 17.9166 1.66663 17.3581 1.66663 15.2053Z"
+                fill="white"
+              />
+              <rect x="14.5" y="8" width="5" height="1.5" rx="0.75" fill="white" />
+            </svg>
+            Unfollow
+          </button>
+        ))}
     </section>
   );
 };

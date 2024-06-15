@@ -58,10 +58,29 @@ h1 {
   color: var(--sec-text);
 }
 
-.profilebio {
-  font-size: 14px;
+.button_unclicked {
+  width: 100%;
+  background-color: var(--mid-pink);
+  border: none;
+  font-size: 18px;
+  font-weight: 550;
+  color: white;
+  padding-block: 10px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
-
-.profileinfo {
-  font-size: 14px;
+.button_clicked {
+  width: 100%;
+  background-color: var(--icons-grey);
+  border: none;
+  font-size: 18px;
+  font-weight: 550;
+  color: white;
+  padding-block: 10px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
