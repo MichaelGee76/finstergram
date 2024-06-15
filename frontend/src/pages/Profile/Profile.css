@@ -1,0 +1,17 @@
+.profile_name {
+  display: flex;
+}
+.profile_nav {
+  display: flex;
+}
+.profile_top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+.profile svg {
+  margin-right: 20px;
+}
+.profile svg:nth-of-type(1) {
+  margin-right: 16px;
+}
