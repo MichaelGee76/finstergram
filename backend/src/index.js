@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { connect2DB } from "./utils/connect2DB.js";
 import { userRouter } from "./routes/userRouter.js";
+import { postRouter } from "./routes/postRouter.js";
 import { google } from "googleapis";
 import dotenv from "dotenv";
 
@@ -19,7 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/posts", postRouter);
 
 app.listen(PORT, () => {
-    console.log("Server is listening on port: ", PORT);
+  console.log("Server is listening on port: ", PORT);
 });

@@ -1,11 +1,11 @@
-import { PostServices } from "../services";
+import { PostServices } from "../services/index.js";
 import { sendResponse } from "../helpers/userToView.js";
 
 import asyncHandler from "express-async-handler";
 
 const getUserPostsCtrl = asyncHandler(async (_, res) => {
-  const authenticatedUserId = req.authenticatedUserId;
-  const result = await PostServices.getUserPosts(authenticatedUserId);
+  const userId = req.params.userId;
+  const result = await PostServices.getUserPosts(userId);
   if (!result) {
     res.status(500).json("Could not get all posts");
   }
@@ -41,7 +41,7 @@ const postNewPostCtrl = asyncHandler(async (req, res) => {
 const updatePostCtrl = asyncHandler(async (req, res) => {
   const authenticatedUserId = req.authenticatedUserId;
   const contentToUpdate = req.body;
-  const postId = req.params;
+  const postId = req.params.postId;
   const result = await PostServices.updatePost(
     authenticatedUserId,
     contentToUpdate,
@@ -55,7 +55,7 @@ const updatePostCtrl = asyncHandler(async (req, res) => {
 
 const deletePostCtrl = asyncHandler(async (req, res) => {
   const authenticatedUserId = req.authenticatedUserId;
-  const postId = req.params;
+  const postId = req.params.postId;
 
   const result = await PostServices.deletePost(authenticatedUserId, postId);
 

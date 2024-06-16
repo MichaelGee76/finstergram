@@ -15,7 +15,7 @@ export async function registerUser({
   /*   const { firstName, lastName, userName, email, password } = req.body; */
 
   if (!firstName || !lastName || !userName || !email || !password) {
-    res.status(400);
+    // res.status(400);
     throw new Error("Please provide all informations");
   }
   const userExists = await User.findOne({ email });
