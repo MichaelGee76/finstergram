@@ -73,7 +73,7 @@ h1 {
 }
 .button_clicked {
   width: 100%;
-  background-color: var(--icons-grey);
+  background-color: rgb(201, 197, 197);
   border: none;
   font-size: 18px;
   font-weight: 550;

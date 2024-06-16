@@ -64,6 +64,50 @@
   height: 55px;
 }
 .profile_numberborder {
-  border-left: 2px solid rgba(128, 128, 128, 0.299);
-  border-right: 2px solid rgba(128, 128, 128, 0.185);
+  border-left: 1.6px solid rgba(128, 128, 128, 0.299);
+  border-right: 1.6px solid rgba(128, 128, 128, 0.299);
+}
+.profile_uploud {
+  border-top: 1px solid rgba(128, 128, 128, 0.299);
+  width: 100%;
+  margin-top: 24px;
+}
+
+.profile_tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab {
+  width: 33.33%; /* Ensures all tabs have equal width */
+  text-align: center;
+  padding: 8px 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+
+.tab.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+.profile_content {
+  overflow: hidden;
+  width: 100%;
+}
+
+.sections {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  width: 300%;
+}
+
+.section {
+  width: 100%;
+  flex-shrink: 0;
+  padding: 16px;
+  box-sizing: border-box;
 }
