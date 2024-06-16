@@ -17,3 +17,5 @@ export const UserService = {
     loginUser,
     deleteUser,
 };
+
+export const PostServices = {};
