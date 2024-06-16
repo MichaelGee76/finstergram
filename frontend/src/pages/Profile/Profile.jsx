@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./Profile.css";
 
 const Profile = () => {
+  const [activeSection, setActiveSection] = useState("posts");
+
   const formatNumber = (num) => {
     if (num >= 10000) {
       return `${Math.floor(num / 1000)}.${String(num).slice(-3)}k`;
@@ -10,7 +12,7 @@ const Profile = () => {
   };
 
   const [isUser, setIsUser] = useState(false);
-  const [following, setFollowing] = useState(true);
+  const [following, setFollowing] = useState(false);
 
   return (
     <section className="profile">
@@ -174,6 +176,32 @@ const Profile = () => {
             Unfollow
           </button>
         ))}
+
+<div className="profile_tabs">
+        <div className={`tab ${activeSection === "posts" ? "active" : ""}`} onClick={() => setActiveSection("posts")}>
+          Beiträge
+        </div>
+        <div className={`tab ${activeSection === "reels" ? "active" : ""}`} onClick={() => setActiveSection("reels")}>
+          Reels
+        </div>
+        <div className={`tab ${activeSection === "videos" ? "active" : ""}`} onClick={() => setActiveSection("videos")}>
+          Videos
+        </div>
+      </div>
+
+      <div className="profile_content">
+        <div className="sections" style={{ transform: `translateX(${activeSection === "posts" ? "0%" : activeSection === "reels" ? "-100%" : "-200%"})` }}>
+          <div className="section">
+            <p>Hier sind alle Beiträge.</p>
+          </div>
+          <div className="section">
+            <p>Hier sind alle Reels.</p>
+          </div>
+          <div className="section">
+            <p>Hier sind alle Videos.</p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
