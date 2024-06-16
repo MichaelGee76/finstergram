@@ -7,24 +7,35 @@ import Profile from "./pages/Profile/Profile";
 import SignInUp from "./pages/SignInUp/SignInUp";
 import Upload from "./pages/Upload/Upload";
 import Search from "./pages/Search/Search";
-import Nav from "./components/Nav/Nav";
+import { useState } from "react";
+import {
+  TokenDataContext,
+  UserDataContext,
+} from "./components/context/Context";
+import Layout from "./components/Layout/Layout";
 
 function App() {
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
+
   return (
-    <BrowserRouter>
-      <Nav />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/chatDashboard" element={<ChatDashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/signinup" element={<SignInUp />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/search" element={<Search />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <UserDataContext.Provider value={{ user, setUser }}>
+      <TokenDataContext.Provider value={{ token, setToken }}>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/chatDashboard" element={<ChatDashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/signinup" element={<SignInUp />} />
+              <Route path="/upload" element={<Upload />} />
+              <Route path="/search" element={<Search />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </TokenDataContext.Provider>
+    </UserDataContext.Provider>
   );
 }
 

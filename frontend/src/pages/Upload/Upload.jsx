@@ -4,6 +4,7 @@ import ky from "ky";
 import { useNavigate } from "react-router-dom";
 import AddLocation from "../../components/AddLocation/AddLocation";
 import { backendUrl } from "../../api/api";
+import Resizer from "react-image-file-resizer";
 
 const Upload = () => {
   const [postUpload, setPostUpload] = useState({
@@ -16,8 +17,24 @@ const Upload = () => {
   const [error, setError] = useState();
   const [successMessage, setSuccessMessage] = useState();
 
-  // mit useHistory() lässt sich ein "Auf die vorherige Seite Btn" generieren
   const navigate = useNavigate();
+  
+  // -- Img verkleinern vor dem hochladen
+  // const resizeFile = (file) =>
+  //   new Promise((resolve) => {
+  //     Resizer.imageFileResizer(
+  //       file,
+  //       300, // maximale Breite
+  //       300, // maximale Höhe
+  //       "JPEG", // Ausgabeformat
+  //       70, // Qualitätsstufe
+  //       0, // Drehung
+  //       (uri) => {
+  //         resolve(uri);
+  //       },
+  //       "blob" // Ausgabe-Typ
+  //     );
+  //   });
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -27,9 +44,12 @@ const Upload = () => {
 
     reader.onload = () => {
       const base64 = reader.result;
+      // const resizedBase64 = resizeFile(base64);
       setPostUpload({ ...postUpload, picture: base64 });
     };
   };
+
+
   // Funktion damit das textarea feld automatisch mit dem content mitwächst
   useEffect(() => {
     const textareas = document.querySelectorAll(".auto-resize-textarea");
@@ -81,7 +101,13 @@ const Upload = () => {
 
     try {
       const response = await ky
-        .post(`${backendUrl}/post`, { json: postUpload })
+        .post(`${backendUrl}/posts/newPost`, {
+          json: postUpload,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjZmMzEzOWYxZmY0MDUzZTFkM2IyZWYiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzE4NTYzMTMwLCJleHAiOjE3MTg1NjY3MzB9.ZdtCaj1Z6bjFLlDyRoVjW1nZKoLyiRFuSZHdZiLt8I4`,
+          },
+        })
         .json();
 
       console.log(response);

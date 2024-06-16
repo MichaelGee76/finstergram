@@ -49,7 +49,10 @@ const AddLocation = ({ setPostUpload, postUpload }) => {
       {location && (
         <div className="location_suggestions">
           {places?.map((city) => (
-            <div onClick={() => addLocation(city.name)} key={city.lat}>
+            <div
+              onClick={() => addLocation(`${city.name} ${city.country}`)}
+              key={city.lat}
+            >
               <p className="location_city">{city.name}</p>
               <p className="location_country">{city.country}</p>
               {city.state && <p className="location_state">{city.state}</p>}
