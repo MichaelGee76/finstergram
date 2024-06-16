@@ -10,3 +10,7 @@ export function userToView(user) {
         userBio: user.userBio,
     };
 }
+
+export const sendResponse = (res, result) => {
+    res.status(200).json({ result });
+};
