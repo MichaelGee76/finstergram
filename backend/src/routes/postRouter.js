@@ -4,11 +4,11 @@ import { doJWTAuth } from "../middlewares/doJwtAuth.js";
 
 export const postRouter = express
   .Router()
-  .get("/userPosts", doJWTAuth, PostController.getUserPostsCtrl)
+  .get("/userPosts/:id", doJWTAuth, PostController.getUserPostsCtrl)
   .get("/userFeed", doJWTAuth, PostController.getUserFeedCtrl)
   .post("/newPost", doJWTAuth, PostController.postNewPostCtrl)
-  .patch("/updatePost", doJWTAuth, PostController.updatePostCtrl)
-  .delete("/deletePost", doJWTAuth, PostController.deletePostCtrl)
+  .patch("/updatePost/:postId", doJWTAuth, PostController.updatePostCtrl)
+  .delete("/deletePost/:postId", doJWTAuth, PostController.deletePostCtrl)
   .get(
     "/allPostsWithHashtag",
     // doJWTAuth,
