@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 106px;
 }
 
 .upload_heading {
@@ -96,11 +97,12 @@
   border-radius: 12px;
   padding: 18px 20px;
   height: auto;
+  font-size: 14px;
 }
 
 .upload_text_section textarea::placeholder {
   color: var(--icons-grey);
-  font-size: 14px;
+  font-size: 16px;
   font-family: urbanist;
   letter-spacing: 0.2px;
 }
@@ -139,6 +141,9 @@
 
 .upload_hashtags_section input {
   border: unset;
+  padding-inline: 10px;
+  font-size: 16px;
+  width: 160px;
 }
 
 .upload_hashtags_section input::placeholder {
@@ -157,6 +162,14 @@
 
 .upload_hashtags_section label .hashtag {
   font-size: 22px;
+}
+
+.addbtn {
+  background-color: var(--mid-pink);
+  color: var(--input-grey);
+  padding: 5px 12px;
+  border: unset;
+  border-radius: 60px;
 }
 
 .hashtags_output {
@@ -192,50 +205,18 @@
   opacity: 0.5;
 }
 
-.upload_location_section {
-  padding-bottom: 24px;
-  border-bottom: 1px solid #eeeeee;
-}
-
-.upload_location_section form {
-  display: flex;
-  gap: 16px;
-}
-
-.upload_location_section input {
+.postbtn {
+  background-color: var(--mid-pink);
   border: unset;
-}
-
-.upload_location_section input::placeholder {
+  border-radius: 40px;
+  color: var(--input-grey);
+  padding-block: 6px;
   font-size: 18px;
   font-weight: 600;
-  color: var(--main-text);
 }
 
-.upload_location_section input:focus {
-  outline: 1px solid var(--mid-pink);
-}
-
-.upload_location_section input:focus-visible {
-  outline: 1px solid var(--mid-pink);
-}
-
-.upload_location_section label .hashtag {
-  font-size: 22px;
-}
-
-.location_suggestions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.location_suggestions div {
-  display: flex;
-  gap: 6px;
-}
-
-.location_city {
-  font-size: 16px;
-  font-weight: 500;
+.error {
+  color: var(--mid-pink);
+  font-size: 18px;
+  font-weight: 600;
 }

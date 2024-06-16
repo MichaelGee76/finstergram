@@ -1,0 +1,65 @@
+.upload_location_section {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.upload_location_section form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.upload_location_section form div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.upload_location_section input {
+  border: unset;
+  padding-inline: 10px;
+  padding-block: 4px;
+  font-size: 16px;
+}
+
+.upload_location_section input::placeholder {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--main-text);
+}
+
+.upload_location_section input:focus {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_location_section input:focus-visible {
+  outline: 1px solid var(--mid-pink);
+}
+
+.upload_location_section label .hashtag {
+  font-size: 22px;
+}
+
+.upload_location_section form p {
+  opacity: 0.5;
+  padding-right: 4px;
+}
+
+.location_suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+  margin-left: 54px;
+}
+
+.location_suggestions div {
+  display: flex;
+  gap: 6px;
+}
+
+.location_city {
+  font-size: 16px;
+  font-weight: 500;
+}

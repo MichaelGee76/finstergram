@@ -7,10 +7,12 @@ import Profile from "./pages/Profile/Profile";
 import SignInUp from "./pages/SignInUp/SignInUp";
 import Upload from "./pages/Upload/Upload";
 import Search from "./pages/Search/Search";
+import Nav from "./components/Nav/Nav";
 
 function App() {
   return (
     <BrowserRouter>
+      <Nav />
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />

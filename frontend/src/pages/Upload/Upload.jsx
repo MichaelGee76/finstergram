@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import "./Upload.css";
 import ky from "ky";
+import { useNavigate } from "react-router-dom";
+import AddLocation from "../../components/AddLocation/AddLocation";
+import { backendUrl } from "../../api/api";
 
 const Upload = () => {
   const [postUpload, setPostUpload] = useState({
@@ -10,8 +13,11 @@ const Upload = () => {
     hashtags: [],
   });
   const [hashtag, setHashtag] = useState();
-  const [location, setLocation] = useState();
-  const [places, setPlaces] = useState();
+  const [error, setError] = useState();
+  const [successMessage, setSuccessMessage] = useState();
+
+  // mit useHistory() lässt sich ein "Auf die vorherige Seite Btn" generieren
+  const navigate = useNavigate();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -66,34 +72,37 @@ const Upload = () => {
     });
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!location) return;
-      try {
-        const response = await ky
-          .get(
-            `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=10&appid=e1678d75ce4af9fec1178e60c5f88016&units=metric&lang=de`
-          )
-          .json();
-        setPlaces(response);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, [location]);
-  console.log(places);
-  console.log(postUpload);
+  const postHandler = async (event) => {
+    event.preventDefault();
 
-  const addLocation = (city) => {
-    setPostUpload({ ...postUpload, location: city });
-    setLocation("");
+    if (!postUpload.picture) {
+      setError("Please upload a picture first");
+    }
+
+    try {
+      const response = await ky
+        .post(`${backendUrl}/post`, { json: postUpload })
+        .json();
+
+      console.log(response);
+      setPostUpload({
+        userId: "user._id",
+        picture: null,
+        description: "",
+        hashtags: [],
+      });
+      setSuccessMessage("Upload Successfully");
+      setError("");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <main className="upload_section">
       <div className="upload_heading">
-        <button className="nobtn">
+        <button onClick={() => navigate(-1)} className="nobtn">
           <img src="./img/CloseSquare.svg" alt="" />
         </button>
         <h1>New Post</h1>
@@ -144,7 +153,12 @@ const Upload = () => {
             setPostUpload({ ...postUpload, description: event.target.value })
           }
         />
-        <img className="upload_mini_img" src={postUpload.picture} alt="" />
+        <img
+          style={postUpload.picture ? { opacity: "1" } : { opacity: "0" }}
+          className="upload_mini_img"
+          src={postUpload.picture}
+          alt=""
+        />
       </section>
       <section className="upload_hashtags_section">
         <form className="hashtag_input_wrapper">
@@ -157,7 +171,11 @@ const Upload = () => {
             value={hashtag}
             onChange={(event) => setHashtag(event.target.value)}
           />
-          <button onClick={addHashtag}>Add</button>
+          {hashtag && (
+            <button className="addbtn" onClick={addHashtag}>
+              Add
+            </button>
+          )}
         </form>
         <div className="hashtags_output">
           {postUpload.hashtags?.map((hashtag, index) => (
@@ -168,33 +186,12 @@ const Upload = () => {
           ))}
         </div>
       </section>
-      <section className="upload_location_section">
-        <form action="">
-          <label htmlFor="">
-            <img src="./img/Location.svg" alt="" />
-          </label>
-          <input
-            type="text"
-            placeholder="Add Location"
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
-          />
-          <button onClick={addHashtag}>Add</button>
-        </form>
-        {location && (
-          <div className="location_suggestions">
-            {places?.map((city) => (
-              <div onClick={() => addLocation(city.name)} key={city.lat}>
-                <p className="location_city">{city.name}</p>
-                <p className="location_country">{city.country}</p>
-                {city.state && <p className="location_state">{city.state}</p>}
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <button>Post</button>
+      <AddLocation setPostUpload={setPostUpload} postUpload={postUpload} />
+      {error && <p className="error">{error}</p>}
+      {successMessage && <p className="success">{successMessage}</p>}
+      <button onClick={postHandler} className="postbtn">
+        Post
+      </button>
     </main>
   );
 };

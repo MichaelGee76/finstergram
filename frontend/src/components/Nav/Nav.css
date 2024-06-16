@@ -1,0 +1,67 @@
+nav {
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 58px;
+  padding-block: 13px 6px;
+  background-color: var(--main-background);
+  border-radius: 16px 16px 0 0;
+  border-top: 1px solid #eeeeee;
+}
+
+nav a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+nav a p {
+  font-size: 10px;
+  font-weight: medium;
+  color: var(--icons-grey);
+}
+
+.active svg {
+  fill: var(--mid-pink);
+}
+
+.active svg path {
+  stroke: unset;
+}
+
+.active p {
+  color: var(--mid-pink);
+  font-weight: 700;
+}
+
+.active .search_svg circle {
+  stroke: var(--main-background);
+}
+
+.active .search_svg path {
+  stroke: var(--mid-pink);
+}
+
+nav .upload_link svg {
+  fill: none;
+}
+
+nav .active .upload_svg {
+  fill: none;
+  background-color: var(--mid-pink);
+  border-radius: 100px;
+}
+
+nav .active svg {
+  stroke: var(--main-background);
+}
+
+nav .active svg rect {
+  stroke: var(--mid-pink);
+}
