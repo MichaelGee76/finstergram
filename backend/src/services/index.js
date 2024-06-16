@@ -32,3 +32,5 @@ export const PostServices = {
   deletePost,
   getAllPostsWithHashtags,
 };
+
+export const CommentService = {};
