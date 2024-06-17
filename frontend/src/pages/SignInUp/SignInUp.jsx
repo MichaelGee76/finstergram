@@ -50,7 +50,7 @@ const SignInUp = () => {
 
     const res = await ky
       .post(`${backendUrl}/users/register`, {
-        "Content-Type": "application/json",
+        headers: { "Content-Type": "application/json" },
         json: registerData,
       })
 
