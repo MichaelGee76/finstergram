@@ -1,4 +1,4 @@
-import { Comment } from "../../controllers/commentController.js";
+import { Comment } from "../../models/comment.js";
 
 export async function postComment(authenticatedUserId, commentData) {
     const newComment = await Comment({
