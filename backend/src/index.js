@@ -5,6 +5,7 @@ import { connect2DB } from "./utils/connect2DB.js";
 import { userRouter } from "./routes/userRouter.js";
 import { postRouter } from "./routes/postRouter.js";
 import { likeRouter } from "./routes/likeRouter.js";
+import { followRouter } from "./routes/likeRouter.js";
 import { google } from "googleapis";
 import dotenv from "dotenv";
 import { commentRouter } from "./routes/commentRouter.js";
@@ -45,6 +46,8 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/comments", commentRouter);
 app.use("/api/v1/likes", likeRouter);
+app.use("/api/v1", saveRouter);
+app.use("/api/v1/follow", followRouter);
 
 app.listen(PORT, () => {
     console.log("Server is listening on port: ", PORT);

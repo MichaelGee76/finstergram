@@ -33,7 +33,7 @@ export async function getAllCommentsFromPost(postId, authenticatedUserId) {
     .sort({ createdAt: -1 })
     .populate({
       path: "userId",
-      select: "userName profilePicture",
+      select: "userName profilePicture profession",
     })
     .exec();
 
