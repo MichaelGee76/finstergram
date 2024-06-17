@@ -1,6 +1,7 @@
 import { Follow } from "../../models/follow.js";
 import { User } from "../../models/user.js";
 import { Post } from "../../models/post.js";
+import { Like } from "../../models/like.js";
 
 export async function getUserFeed(authenticatedUserId) {
   // Find the authenticated user
@@ -24,13 +25,18 @@ export async function getUserFeed(authenticatedUserId) {
   })
     .populate({
       path: "userId",
-      select: "firstName lastName profilePicture profession",
+      select: "userName profilePicture profession",
     })
     .sort({ createdAt: -1 });
 
   if (!feed) {
     throw new Error("Oops, something went wrong. We could not load feed.");
   }
+  const postIds = feed.map((post) => post.toObject()._id);
+
+  const likes = await Like.find({
+    postId: { $in: postIds },
+  }).map((like) => like.postId.toString());
 
   return feed;
 }

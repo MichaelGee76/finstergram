@@ -32,7 +32,23 @@ const deleteCommentCtrl = asyncHandler(async (req, res) => {
     sendResponse(res, result);
 });
 
-const updateCommentCtrl = asyncHandler(async () => {});
+const updateCommentCtrl = asyncHandler(async () => {
+    const commentId = req.params.commentId;
+    const authenticatedUserId = req.authenticatedUserId;
+    const updatedContent = req.body;
+
+    const updatedComment = await CommentService.patchComment(
+        commentId,
+        authenticatedUserId,
+        updateContent
+    );
+
+    if (!updatedContent) {
+        res.status(500).json({ message: "Could not update comment" });
+    }
+
+    sendResponse(res, result);
+});
 
 export const CommentController = {
     postCommentCtrl,
