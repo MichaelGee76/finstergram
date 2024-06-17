@@ -13,7 +13,13 @@ const PORT = process.env.PORT || 4420;
 connect2DB();
 
 const app = express();
+// Cors config start
+const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000;
+const isFrontendLocalhost =
+    process.env.FRONTEND_URL.startsWith("http://localhost");
+const cookieSessionSecret = process.env.COOKIE_SESSION_SECRET;
 
+// re-configure cors middleware
 app.use(cors({ origin: [process.env.FRONTEND_URL], credentials: true }));
 /////////// add parser for cookies
 app.set("trust proxy", 1); // trust first proxy
@@ -26,6 +32,8 @@ const cookieSessionOptions = {
     secure: isFrontendLocalhost ? false : true,
 };
 app.use(cookieSession(cookieSessionOptions));
+
+// cors config end
 app.use(morgan("dev"));
 app.use(express.json());
 //Wenn Express.js-Anwendung Formulardaten analysieren werden, die mit dem application/x-www-form-urlencoded MIME-Typ gesendet werden, dann ist diese Zeile notwendig. Andernfalls ist sie nicht erforderlich.
