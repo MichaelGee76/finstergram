@@ -32,15 +32,7 @@ export async function getUserFeed(authenticatedUserId) {
     if (!feed) {
         throw new Error("Oops, something went wrong. We could not load feed.");
     }
-    // Freddys Ansatz
 
-    // const postIds = feed.map((post) => post.toObject()._id);
-
-    // const likes = await Like.find({
-    //     postId: { $in: postIds },
-    // }).map((like) => like.postId.toString());
-
-    // Der Ansatz vom Inder
     // Die IDs der Posts extrahieren
     const postIds = feed.map((post) => post._id);
 
@@ -55,12 +47,54 @@ export async function getUserFeed(authenticatedUserId) {
         likeCounts[like.postId] = (likeCounts[like.postId] || 0) + 1;
     });
 
-    // Die Anzahl der Likes zu den Posts hinzufügen
+    // Likes vom authentifizierten Benutzer für die Posts abrufen
+    const userLikes = await Like.find({
+        postId: { $in: postIds },
+        userId: authenticatedUserId,
+    }).select("postId");
+
+    // Ein Set erstellen, das die IDs der Posts speichert, die vom Benutzer geliked wurden
+    const userLikedPostIds = new Set(
+        userLikes.map((like) => like.postId.toString())
+    );
+
+    // Comments für die Posts abrufen und die Anzahl der Comments zählen
+    const comments = await Comment.find({
+        postId: { $in: postIds },
+    });
+
+    // Ein Objekt erstellen, das die Anzahl der Comments für jeden Post speichert
+    const commentCounts = {};
+    comments.forEach((comment) => {
+        commentCounts[comment.postId] =
+            (commentCounts[comment.postId] || 0) + 1;
+    });
+
+    // Likes vom authentifizierten Benutzer für die Posts abrufen
+    const userSaves = await Save.find({
+        postId: { $in: postIds },
+        userId: authenticatedUserId,
+    }).select("postId");
+
+    // Ein Set erstellen, das die IDs der Posts speichert, die vom Benutzer geliked wurden
+    const userSavedPostIds = new Set(
+        userSaves.map((save) => save.postId.toString())
+    );
+
+    // Die Anzahl der Likes und den "geliked"-Status zu den Posts hinzufügen
     const feedWithLikes = feed.map((post) => {
         const postObject = post.toObject();
         postObject.likes = likeCounts[postObject._id] || 0;
+        postObject.comments = commentCounts[postObject._id] || 0;
+        postObject.likedByUser = userLikedPostIds.has(
+            postObject._id.toString()
+        );
+        postObject.savedByUser = userSavedPostIds.has(
+            postObject._id.toString()
+        );
         return postObject;
     });
+
     return feedWithLikes;
 }
 

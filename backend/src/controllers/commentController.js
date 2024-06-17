@@ -22,28 +22,28 @@ const deleteCommentCtrl = asyncHandler(async (req, res) => {
     const authenticatedUserId = req.authenticatedUserId;
 
     const commentId = req.params.commentId;
-    const deletedComment = await CommentService.deleteComment(
+    const result = await CommentService.deleteComment(
         commentId,
         authenticatedUserId
     );
-    if (!deletedComment) {
+    if (!result) {
         res.status(500).json({ message: "Could not delete post" });
     }
     sendResponse(res, result);
 });
 
-const updateCommentCtrl = asyncHandler(async () => {
+const updateCommentCtrl = asyncHandler(async (req, res) => {
     const commentId = req.params.commentId;
     const authenticatedUserId = req.authenticatedUserId;
     const updatedContent = req.body;
 
-    const updatedComment = await CommentService.patchComment(
+    const result = await CommentService.patchComment(
         commentId,
         authenticatedUserId,
-        updateContent
+        updatedContent
     );
 
-    if (!updatedContent) {
+    if (!result) {
         res.status(500).json({ message: "Could not update comment" });
     }
 
