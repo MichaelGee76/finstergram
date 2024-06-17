@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import { LikeService } from "../services/index.js";
 
 const postLikeCtrl = asyncHandler(async (req, res) => {
-    const userId = req.authentificatedUserId;
+    const userId = req.authenticatedUserId;
     const { postId, commentId } = req.body;
     const result = await LikeService.postLike(userId, postId, commentId);
     if (!result) {
@@ -12,7 +12,7 @@ const postLikeCtrl = asyncHandler(async (req, res) => {
 });
 
 const deleteLikeCtrl = asyncHandler(async (req, res) => {
-    const userId = req.authentificatedUserId;
+    const userId = req.authenticatedUserId;
     const { postId, commentId } = req.body;
     const result = await LikeService.deleteLike(userId, postId, commentId);
     if (!result) {
