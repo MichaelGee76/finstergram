@@ -48,14 +48,15 @@ h1 {
 }
 
 .username_post {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 140%;
 }
 
 .userdescription_post {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--sec-text);
+  font-weight: 500;
 }
 
 .button_unclicked {

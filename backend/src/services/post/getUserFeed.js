@@ -34,7 +34,15 @@ export async function getUserFeed(authenticatedUserId) {
   if (!feed) {
     throw new Error("Oops, something went wrong. We could not load feed.");
   }
+  // Freddys Ansatz
 
+  // const postIds = feed.map((post) => post.toObject()._id);
+
+  // const likes = await Like.find({
+  //     postId: { $in: postIds },
+  // }).map((like) => like.postId.toString());
+
+  // Der Ansatz vom Inder
   // Die IDs der Posts extrahieren
   const postIds = feed.map((post) => post._id);
 

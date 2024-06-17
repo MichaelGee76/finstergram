@@ -10,6 +10,23 @@ import {
   UserDataContext,
 } from "../../components/context/Context";
 
+// -- Img verkleinern vor dem hochladen
+const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      500, // maximale Breite
+      500, // maximale Höhe
+      "JPEG", // Ausgabeformat
+      90, // Qualitätsstufe
+      0, // Drehung
+      (uri) => {
+        resolve(uri);
+      },
+      "base64" // Ausgabe-Typ
+    );
+  });
+
 const Upload = () => {
   const [postUpload, setPostUpload] = useState({
     userId: "user._id",
@@ -25,34 +42,28 @@ const Upload = () => {
 
   const navigate = useNavigate();
 
-  // -- Img verkleinern vor dem hochladen
-  // const resizeFile = (file) =>
-  //   new Promise((resolve) => {
-  //     Resizer.imageFileResizer(
-  //       file,
-  //       300, // maximale Breite
-  //       300, // maximale Höhe
-  //       "JPEG", // Ausgabeformat
-  //       70, // Qualitätsstufe
-  //       0, // Drehung
-  //       (uri) => {
-  //         resolve(uri);
-  //       },
-  //       "blob" // Ausgabe-Typ
-  //     );
-  //   });
+  // const handleImageChange = async (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
 
-  const handleImageChange = (event) => {
+  //   reader.readAsDataURL(file);
+
+  //   reader.onload = async () => {
+  //     const base64 = reader.result;
+  //     const resizedBase64 = await resizeFile(base64);
+  //     setPostUpload({ ...postUpload, picture: resizedBase64 });
+  //   };
+  // };
+
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
 
-    reader.readAsDataURL(file);
-
-    reader.onload = () => {
-      const base64 = reader.result;
-      // const resizedBase64 = resizeFile(base64);
-      setPostUpload({ ...postUpload, picture: base64 });
-    };
+    try {
+      const resizedBase64 = await resizeFile(file);
+      setPostUpload({ ...postUpload, picture: resizedBase64 });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Funktion damit das textarea feld automatisch mit dem content mitwächst
