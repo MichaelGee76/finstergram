@@ -27,7 +27,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/chatDashboard" element={<ChatDashboard />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:id" element={<Profile />} />
               <Route path="/signinup" element={<SignInUp />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/search" element={<Search />} />

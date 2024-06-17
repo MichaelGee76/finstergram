@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import "./Nav.css";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { UserDataContext } from "../context/Context";
 
 const Nav = () => {
+  const { user, setUser } = useContext(UserDataContext);
   const location = useLocation();
 
   // Function to check if the URL contains a certain string
@@ -124,7 +127,7 @@ const Nav = () => {
         </svg>
         <p>Upload</p>
       </NavLink>
-      <NavLink to="/profile">
+      <NavLink to={`/profile/${user}`}>
         <svg
           width="25"
           height="24"

@@ -1,10 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./Upload.css";
 import ky from "ky";
 import { useNavigate } from "react-router-dom";
 import AddLocation from "../../components/AddLocation/AddLocation";
 import { backendUrl } from "../../api/api";
 import Resizer from "react-image-file-resizer";
+import {
+  TokenDataContext,
+  UserDataContext,
+} from "../../components/context/Context";
+
+// -- Img verkleinern vor dem hochladen
+const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      500, // maximale Breite
+      500, // maximale Höhe
+      "JPEG", // Ausgabeformat
+      90, // Qualitätsstufe
+      0, // Drehung
+      (uri) => {
+        resolve(uri);
+      },
+      "base64" // Ausgabe-Typ
+    );
+  });
 
 const Upload = () => {
   const [postUpload, setPostUpload] = useState({
@@ -16,39 +37,34 @@ const Upload = () => {
   const [hashtag, setHashtag] = useState();
   const [error, setError] = useState();
   const [successMessage, setSuccessMessage] = useState();
+  const { user } = useContext(UserDataContext);
+  const { token } = useContext(TokenDataContext);
 
   const navigate = useNavigate();
-  
-  // -- Img verkleinern vor dem hochladen
-  // const resizeFile = (file) =>
-  //   new Promise((resolve) => {
-  //     Resizer.imageFileResizer(
-  //       file,
-  //       300, // maximale Breite
-  //       300, // maximale Höhe
-  //       "JPEG", // Ausgabeformat
-  //       70, // Qualitätsstufe
-  //       0, // Drehung
-  //       (uri) => {
-  //         resolve(uri);
-  //       },
-  //       "blob" // Ausgabe-Typ
-  //     );
-  //   });
 
-  const handleImageChange = (event) => {
+  // const handleImageChange = async (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+
+  //   reader.readAsDataURL(file);
+
+  //   reader.onload = async () => {
+  //     const base64 = reader.result;
+  //     const resizedBase64 = await resizeFile(base64);
+  //     setPostUpload({ ...postUpload, picture: resizedBase64 });
+  //   };
+  // };
+
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
 
-    reader.readAsDataURL(file);
-
-    reader.onload = () => {
-      const base64 = reader.result;
-      // const resizedBase64 = resizeFile(base64);
-      setPostUpload({ ...postUpload, picture: base64 });
-    };
+    try {
+      const resizedBase64 = await resizeFile(file);
+      setPostUpload({ ...postUpload, picture: resizedBase64 });
+    } catch (error) {
+      console.error(error);
+    }
   };
-
 
   // Funktion damit das textarea feld automatisch mit dem content mitwächst
   useEffect(() => {
@@ -105,7 +121,7 @@ const Upload = () => {
           json: postUpload,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjZmMzEzOWYxZmY0MDUzZTFkM2IyZWYiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzE4NTYzMTMwLCJleHAiOjE3MTg1NjY3MzB9.ZdtCaj1Z6bjFLlDyRoVjW1nZKoLyiRFuSZHdZiLt8I4`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .json();
@@ -169,7 +185,7 @@ const Upload = () => {
       />
 
       <section className="upload_text_section">
-        <img className="upload_profile_img" src="./img/test.jpg" alt="" />
+        <img className="upload_profile_img" src={user.profilePicture} alt="" />
         <textarea
           className="auto-resize-textarea"
           type="text"

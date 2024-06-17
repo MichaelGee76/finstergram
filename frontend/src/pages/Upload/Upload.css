@@ -1,5 +1,5 @@
 .upload_section {
-  padding-top: 12px;
+  padding-top: 32px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -10,7 +10,7 @@
   display: flex;
   gap: 16px;
   align-items: center;
-  padding-block: 9.5px;
+  padding-bottom: 9.5px;
 }
 
 .nobtn {

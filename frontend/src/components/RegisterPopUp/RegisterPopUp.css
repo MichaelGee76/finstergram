@@ -1,0 +1,37 @@
+.register_success_section {
+  height: 100svh;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+  text-align: center;
+  padding-top: 6px;
+  background-color: var(--main-background);
+}
+
+.register_success_section h2 {
+  font-size: 30px;
+}
+
+.register_success_section p {
+  font-size: 17px;
+  line-height: 160%;
+}
+
+.register_success_section button {
+  background-color: var(--light-pink);
+  border: unset;
+  padding: 6px 18px;
+  border-radius: 20px;
+  color: var(--input-grey);
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+}
