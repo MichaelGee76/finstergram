@@ -16,6 +16,8 @@ import { postComment } from "./comment/postComment.js";
 import { deleteComment } from "./comment/deleteComment.js";
 import { patchComment } from "./comment/patchComment.js";
 import { getAllCommentsFromPost } from "./comment/getAllCommentsFromPost.js";
+import { postLike } from "./like/postLike.js";
+import { deleteLike } from "./like/deleteLike.js";
 
 export const UserService = {
     registerUser,
@@ -42,4 +44,9 @@ export const CommentService = {
     deleteComment,
     patchComment,
     getAllCommentsFromPost,
+};
+
+export const LikeService = {
+    postLike,
+    deleteLike,
 };

@@ -51,14 +51,12 @@ const updateCommentCtrl = asyncHandler(async (req, res) => {
 });
 
 const getAllCommentsFromPostCtrl = asyncHandler(async (req, res) => {
-    const commentId = req.params.commentId;
     const authenticatedUserId = req.authenticatedUserId;
     const postId = req.params.postId;
 
     const result = await CommentService.getAllCommentsFromPost(
-        commentId,
-        authenticatedUserId,
-        postId
+        postId,
+        authenticatedUserId
     );
     if (!result) {
         res.status(500).json({ message: "Could not get comments" });

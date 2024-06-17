@@ -5,7 +5,7 @@ import { doJWTAuth } from "../middlewares/doJwtAuth.js";
 export const commentRouter = express
     .Router()
     .get(
-        "/allCommentsFromPost",
+        "/allCommentsFromPost/:postId",
         doJWTAuth,
         CommentController.getAllCommentsFromPostCtrl
     )
