@@ -53,8 +53,6 @@ export async function registerUser({
         const accessToken = createToken(user, "access");
         const refresh_token = createToken(user, "refresh");
 
-        return {
-            user: userToView(user),
-        };
+        return userToView(user);
     }
 }
