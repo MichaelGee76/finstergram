@@ -4,13 +4,11 @@ import { doJWTAuth } from "../middlewares/doJwtAuth.js";
 
 export const commentRouter = express
     .Router()
-    // .get(
-    //     "/allCommentsFromPost",
-    //     doJWTAuth,
-    //     CommentController.getAllCommentsFromPostCtrl
-    // )
-
+    .get(
+        "/allCommentsFromPost",
+        doJWTAuth,
+        CommentController.getAllCommentsFromPostCtrl
+    )
     .post("/newComment", doJWTAuth, CommentController.postCommentCtrl)
     .patch("/:commentId", doJWTAuth, CommentController.updateCommentCtrl)
-
     .delete("/:commentId", doJWTAuth, CommentController.deleteCommentCtrl);

@@ -15,6 +15,7 @@ import { getAllPostsWithHashtags } from "./post/getAllPostsWithHashtags.js";
 import { postComment } from "./comment/postComment.js";
 import { deleteComment } from "./comment/deleteComment.js";
 import { patchComment } from "./comment/patchComment.js";
+import { getAllCommentsFromPost } from "./comment/getAllCommentsFromPost.js";
 
 export const UserService = {
     registerUser,
@@ -40,4 +41,5 @@ export const CommentService = {
     postComment,
     deleteComment,
     patchComment,
+    getAllCommentsFromPost,
 };
