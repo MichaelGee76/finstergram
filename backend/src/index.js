@@ -7,6 +7,7 @@ import { postRouter } from "./routes/postRouter.js";
 import { google } from "googleapis";
 import dotenv from "dotenv";
 import { commentRouter } from "./routes/commentRouter.js";
+import cookieSession from "cookie-session";
 
 const PORT = process.env.PORT || 4420;
 
