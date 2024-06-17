@@ -36,7 +36,7 @@ const SignInUp = () => {
       })
       .json();
 
-    setUser(res.result.userData);
+    setUser(res.result.user);
     // console.log(res.result.userData);
     setToken(res.result.tokens.accessToken);
 

@@ -1,0 +1,22 @@
+.dash_section {
+  padding-top: 32px;
+}
+
+.dash_heading_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.dash_heading_div div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.posts_section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

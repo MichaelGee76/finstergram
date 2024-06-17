@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./Upload.css";
 import ky from "ky";
 import { useNavigate } from "react-router-dom";
 import AddLocation from "../../components/AddLocation/AddLocation";
 import { backendUrl } from "../../api/api";
 import Resizer from "react-image-file-resizer";
+import {
+  TokenDataContext,
+  UserDataContext,
+} from "../../components/context/Context";
 
 const Upload = () => {
   const [postUpload, setPostUpload] = useState({
@@ -16,6 +20,8 @@ const Upload = () => {
   const [hashtag, setHashtag] = useState();
   const [error, setError] = useState();
   const [successMessage, setSuccessMessage] = useState();
+  const { user } = useContext(UserDataContext);
+  const { token } = useContext(TokenDataContext);
 
   const navigate = useNavigate();
 
@@ -104,7 +110,7 @@ const Upload = () => {
           json: postUpload,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer `,
+            Authorization: `Bearer ${token}`,
           },
         })
         .json();
@@ -168,7 +174,7 @@ const Upload = () => {
       />
 
       <section className="upload_text_section">
-        <img className="upload_profile_img" src="./img/test.jpg" alt="" />
+        <img className="upload_profile_img" src={user.profilePicture} alt="" />
         <textarea
           className="auto-resize-textarea"
           type="text"
