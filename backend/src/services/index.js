@@ -21,8 +21,8 @@ import { deleteLike } from "./like/deleteLike.js";
 import { postFollow } from "./follow/postFollow.js";
 import { deleteFollow } from "./follow/deleteFollow.js";
 import { savePost } from "./save/savePost.js";
-import { deleteSavePost } from "./save/savePost.js";
-import { getSavedPosts } from "./save/savePost.js";
+import { deleteSavePost } from "./save/deleteSavePost.js";
+import { getSavedPosts } from "./save/getSavedPost.js";
 
 export const UserService = {
     registerUser,

@@ -49,6 +49,7 @@ export async function getUserFeed(authenticatedUserId) {
     // Likes für die Posts abrufen und die Anzahl der Likes zählen
     const likes = await Like.find({
         postId: { $in: postIds },
+        commentId: null,
     });
 
     // Ein Objekt erstellen, das die Anzahl der Likes für jeden Post speichert
@@ -71,7 +72,6 @@ export async function getUserFeed(authenticatedUserId) {
     // Comments für die Posts abrufen und die Anzahl der Comments zählen
     const comments = await Comment.find({
         postId: { $in: postIds },
-        commentId: null,
     });
 
     // Ein Objekt erstellen, das die Anzahl der Comments für jeden Post speichert

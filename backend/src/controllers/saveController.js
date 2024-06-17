@@ -1,7 +1,6 @@
-import { SaveService } from "../services/saveService.js";
+import { SaveService } from "../services/index.js";
 import asyncHandler from "express-async-handler";
 import { sendResponse } from "../helpers/userToView.js";
-import { Save } from "../models/save.js";
 
 const savePostCtrl = asyncHandler(async (req, res) => {
     const userId = req.authenticatedUserId;
@@ -10,7 +9,7 @@ const savePostCtrl = asyncHandler(async (req, res) => {
     if (!result) {
         return res.status(500).json("Could not save post");
     }
-    res.status(201).json({ result });
+    sendResponse(res, result);
 });
 
 const deleteSaveCtrl = asyncHandler(async (req, res) => {
@@ -20,7 +19,7 @@ const deleteSaveCtrl = asyncHandler(async (req, res) => {
     if (!result) {
         return res.status(500).json("Could not delete save");
     }
-    res.status(200).json({ result });
+    sendResponse(res, result);
 });
 
 const getSavedPostsCtrl = asyncHandler(async (req, res) => {
@@ -29,7 +28,7 @@ const getSavedPostsCtrl = asyncHandler(async (req, res) => {
     if (!result) {
         return res.status(500).json("Could not get saved posts");
     }
-    res.status(200).json({ result });
+    sendResponse(res, result);
 });
 
 export const SaveController = {
