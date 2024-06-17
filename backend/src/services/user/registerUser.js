@@ -13,6 +13,7 @@ export async function registerUser({
   userName,
 }) {
   /*   const { firstName, lastName, userName, email, password } = req.body; */
+  console.log(lastName);
 
   if (!firstName || !lastName || !userName || !email || !password) {
     // res.status(400);

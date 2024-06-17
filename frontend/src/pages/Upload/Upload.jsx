@@ -18,7 +18,7 @@ const Upload = () => {
   const [successMessage, setSuccessMessage] = useState();
 
   const navigate = useNavigate();
-  
+
   // -- Img verkleinern vor dem hochladen
   // const resizeFile = (file) =>
   //   new Promise((resolve) => {
@@ -48,7 +48,6 @@ const Upload = () => {
       setPostUpload({ ...postUpload, picture: base64 });
     };
   };
-
 
   // Funktion damit das textarea feld automatisch mit dem content mitwächst
   useEffect(() => {
@@ -105,7 +104,7 @@ const Upload = () => {
           json: postUpload,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjZmMzEzOWYxZmY0MDUzZTFkM2IyZWYiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzE4NTYzMTMwLCJleHAiOjE3MTg1NjY3MzB9.ZdtCaj1Z6bjFLlDyRoVjW1nZKoLyiRFuSZHdZiLt8I4`,
+            Authorization: `Bearer `,
           },
         })
         .json();
