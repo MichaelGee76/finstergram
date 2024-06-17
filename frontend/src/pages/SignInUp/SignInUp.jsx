@@ -54,7 +54,7 @@ const SignInUp = () => {
       })
 
       .json();
-    console.log(res);
+    console.log(res.result);
     setRegisterMessage(res.result);
     setRegisterData({
       firstName: "",
@@ -70,7 +70,7 @@ const SignInUp = () => {
     //   );
   };
 
-  console.log(registerData);
+  // console.log(registerData);
 
   return (
     <main className="sign_section">
