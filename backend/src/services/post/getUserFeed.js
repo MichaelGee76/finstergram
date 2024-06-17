@@ -3,36 +3,36 @@ import { User } from "../../models/user.js";
 import { Post } from "../../models/post.js";
 
 export async function getUserFeed(authenticatedUserId) {
-    // Find the authenticated user
-    const user = await User.findById(authenticatedUserId);
-    if (!user) throw new Error("User not found");
+  // Find the authenticated user
+  const user = await User.findById(authenticatedUserId);
+  if (!user) throw new Error("User not found");
 
-    // Find all users followed by the authenticated user
-    const followedUsers = await Follow.find({
-        userId: authenticatedUserId,
-    }).select("followedId");
+  // Find all users followed by the authenticated user
+  const followedUsers = await Follow.find({
+    userId: authenticatedUserId,
+  }).select("followedId");
 
-    // Extract the followed user IDs
-    // Die followedIds sind die Ids von den Leuten denen wir folgen
-    const followedIds = followedUsers.map((follow) => follow.followedId);
+  // Extract the followed user IDs
+  // Die followedIds sind die Ids von den Leuten denen wir folgen
+  const followedIds = followedUsers.map((follow) => follow.followedId);
 
-    // Find posts from followed users
-    //dekl feed und sagen, gehe in alle posts und gibt uns nur die post zurück vojn den leuten(id)
-    // die wir in followedIDs gespeichert haben
-    const feed = await Post.find({
-        userId: { $in: followedIds, authenticatedUserId },
+  // Find posts from followed users
+  //dekl feed und sagen, gehe in alle posts und gibt uns nur die post zurück vojn den leuten(id)
+  // die wir in followedIDs gespeichert haben
+  const feed = await Post.find({
+    userId: { $in: followedIds, authenticatedUserId },
+  })
+    .populate({
+      path: "userId",
+      select: "firstName lastName profilePicture profession",
     })
-        .populate({
-            path: "userId",
-            select: "firstName lastName profilePicture profession",
-        })
-        .sort({ createdAt: -1 });
+    .sort({ createdAt: -1 });
 
-    if (!feed) {
-        throw new Error("Oops, something went wrong. We could not load feed.");
-    }
+  if (!feed) {
+    throw new Error("Oops, something went wrong. We could not load feed.");
+  }
 
-    return feed;
+  return feed;
 }
 
 // import { Follow } from "../../models/follow.js";
