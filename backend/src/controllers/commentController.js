@@ -32,7 +32,10 @@ const deleteCommentCtrl = asyncHandler(async (req, res) => {
     sendResponse(res, result);
 });
 
-const updateCommentCtrl = asyncHandler(async () => {});
+const updateCommentCtrl = asyncHandler(async () => {
+    const commentId = req.params.commentId;
+    const authenticatedUserId = req.authenticatedUserId;
+});
 
 export const CommentController = {
     postCommentCtrl,
