@@ -1,20 +1,22 @@
 import "./Post.css";
 
 const Post = ({ postData }) => {
+  console.log(postData);
   return (
     <article className="post_wrapper">
-      <div>
+      <div className="post_user_infos">
         <div>
-          <img src="" alt="" />
+          <img src={postData.userId.profilePicture} alt="" />
           <div>
-            <h3></h3>
-            <p></p>
+            <h3>{postData.userId.userName}</h3>
+            <p>{postData.userId.profession}</p>
           </div>
         </div>
         <button>
           <img src="./img/MoreCircle.svg" alt="" />
         </button>
       </div>
+      <img src={postData.picture} alt="" />
     </article>
   );
 };

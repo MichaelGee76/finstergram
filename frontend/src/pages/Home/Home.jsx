@@ -15,12 +15,13 @@ const Home = () => {
       const res = await ky
         .get(`${backendUrl}/posts/userFeed`, {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         })
         .json();
 
-      setFeed(res);
+      setFeed(res.result);
       console.log(feed);
     };
 
@@ -43,11 +44,11 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      {/* <section className="posts_section">
+      <section className="posts_section">
         {feed?.map((post) => (
           <Post key={post._id} postData={post} />
         ))}
-      </section> */}
+      </section>
     </main>
   );
 };
