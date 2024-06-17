@@ -1,0 +1,33 @@
+.post_cmnt_wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  border-radius: 24px 24px 0 0;
+  border-top: 1px solid #eeeeee;
+  background-color: var(--main-background);
+}
+
+.post_cmnt_wrapper img {
+  width: 48px;
+  border-radius: 100px;
+}
+
+.post_cmnt_wrapper input {
+  width: 100%;
+  border: unset;
+  border-radius: 12px;
+  background-color: var(--input-grey);
+}
+
+.post_cmnt_wrapper button {
+  background-color: unset;
+  border: unset;
+  color: var(--light-pink);
+  font-size: 16px;
+  font-weight: 700;
+}

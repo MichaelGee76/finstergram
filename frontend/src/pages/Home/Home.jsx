@@ -9,6 +9,8 @@ import Post from "../../components/Post/Post";
 const Home = () => {
   const { token } = useContext(TokenDataContext);
   const [feed, setFeed] = useState();
+  const [updUserFeed, setUpdUserFeed] = useState(false);
+  const [fixBG, setFixBg] = useState(false);
 
   useEffect(() => {
     const getUserFeed = async () => {
@@ -22,14 +24,13 @@ const Home = () => {
         .json();
 
       setFeed(res.result);
-      console.log(feed);
     };
 
     getUserFeed();
-  }, []);
+  }, [updUserFeed]);
 
   return (
-    <main className="dash_section">
+    <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
       <div className="dash_heading_div">
         <div>
           <img src="./img/LogoSmall.svg" alt="" />
@@ -46,7 +47,12 @@ const Home = () => {
       </div>
       <section className="posts_section">
         {feed?.map((post) => (
-          <Post key={post._id} postData={post} />
+          <Post
+            setFixBg={setFixBg}
+            key={post._id}
+            postData={post}
+            setUpdUserFeed={setUpdUserFeed}
+          />
         ))}
       </section>
     </main>
