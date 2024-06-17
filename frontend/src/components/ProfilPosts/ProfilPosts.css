@@ -1,0 +1,26 @@
+.profile_tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  border-top: 1px solid rgba(128, 128, 128, 0.299);
+  width: 100%;
+  margin-top: 24px;
+}
+
+.tab {
+  width: 33.33%;
+  text-align: center;
+  padding: 20px 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+
+.tab.active {
+  color: var(--mid-pink);
+  border-bottom: 4px solid var(--mid-pink);
+}
+.profile_content {
+  overflow: hidden;
+  width: 100%;
+}

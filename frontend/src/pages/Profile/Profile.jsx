@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Profile.css";
 import EditPopup from "../../components/EditPopup/EditPopup";
+import { Link } from "react-router-dom";
+import ProfilPosts from "../../components/ProfilPosts/ProfilPosts";
 
 const Profile = () => {
   const [activeSection, setActiveSection] = useState("posts");
@@ -8,9 +10,12 @@ const Profile = () => {
 
   const [following, setFollowing] = useState(false);
 
+  // * Toggle PopUp for edit user
   const [editPopup, setEditPopup] = useState(false);
-
-  // * Nummer formatieren
+  const toggleEditPopup = () => {
+    setEditPopup(!editPopup);
+  };
+  // * numbers format change if it is 5 digit
   const formatNumber = (num) => {
     if (num >= 10000) {
       return `${Math.floor(num / 1000)}.${String(num).slice(-3)}k`;
@@ -18,17 +23,12 @@ const Profile = () => {
     return num.toString();
   };
 
-  const toggleEditPopup = () => {
-   
-
-    setEditPopup(!editPopup);
-  };
-  console.log(editPopup);
-
   return (
     <section className="profile">
+      {/*  Logo (Back Arrow), Username */}
+
       <div className="profile_top">
-        <div className="profile_name">
+        <div className="profile_title">
           {isUser ? (
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="32" height="32" rx="12" fill="url(#paint0_linear_3509_1537)" />
@@ -68,34 +68,37 @@ const Profile = () => {
           <h1>h_lahluli007</h1>
         </div>
 
+        {/*  Post, Edit, Settings - (Only Settings) Icon */}
         <div className="profile_nav">
           {isUser ? (
             <div>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M14.043 9.87305V18.2129"
-                  stroke="#212121"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M18.2171 14.043H9.86865"
-                  stroke="#212121"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M2.68335 14.043C2.68335 5.52388 5.52388 2.68335 14.043 2.68335C22.5621 2.68335 25.4026 5.52388 25.4026 14.043C25.4026 22.5621 22.5621 25.4026 14.043 25.4026C5.52388 25.4026 2.68335 22.5621 2.68335 14.043Z"
-                  stroke="#212121"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+              <Link to={"/upload"}>
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M14.043 9.87305V18.2129"
+                    stroke="#212121"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M18.2171 14.043H9.86865"
+                    stroke="#212121"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M2.68335 14.043C2.68335 5.52388 5.52388 2.68335 14.043 2.68335C22.5621 2.68335 25.4026 5.52388 25.4026 14.043C25.4026 22.5621 22.5621 25.4026 14.043 25.4026C5.52388 25.4026 2.68335 22.5621 2.68335 14.043Z"
+                    stroke="#212121"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </Link>
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M16.0386 23.8501H24.5"
@@ -190,7 +193,7 @@ const Profile = () => {
           )}
         </div>
       </div>
-
+      {/* Profile image, edit only on auth User */}
       <div className="profile_info">
         <div className="profile_img">
           <img src="../../../public/img/Setting.svg" alt="profile-image" />
@@ -214,7 +217,10 @@ const Profile = () => {
             </svg>
           )}
         </div>
+        {/* PopUp component */}
         {editPopup && <EditPopup togglePopup={toggleEditPopup} />}
+
+        {/* name, titel, bio, link */}
         <h1>Hassan Lahluli</h1>
 
         <p className="font_info">Dragqueen she/her LGBTQ++</p>
@@ -223,6 +229,8 @@ const Profile = () => {
           www.exclusice-content.com
         </a>
       </div>
+
+      {/* posts, follower, following */}
       <div className="profile_numbers">
         <div className="profile_numberbox">
           <h1>{formatNumber(333)}</h1>
@@ -239,6 +247,7 @@ const Profile = () => {
         </div>
       </div>
 
+      {/* Follow button only for visitors and change color  */}
       {!isUser &&
         (!following ? (
           <button className="button_unclicked">
@@ -267,47 +276,7 @@ const Profile = () => {
           </button>
         ))}
 
-      <div className="profile_tabs">
-        <div
-          className={`tab ${activeSection === "posts" ? "active" : ""}`}
-          onClick={() => setActiveSection("posts")}
-        >
-          Beiträge
-        </div>
-        <div
-          className={`tab ${activeSection === "reels" ? "active" : ""}`}
-          onClick={() => setActiveSection("reels")}
-        >
-          Videos
-        </div>
-        <div
-          className={`tab ${activeSection === "videos" ? "active" : ""}`}
-          onClick={() => setActiveSection("videos")}
-        >
-          Markierungen
-        </div>
-      </div>
-
-      <div className="profile_content">
-        <div
-          className="sections"
-          style={{
-            transform: `translateX(${
-              activeSection === "posts" ? "0%" : activeSection === "reels" ? "-100%" : "-200%"
-            })`,
-          }}
-        >
-          <div className="section">
-            {/* {userState ? userState.map((item)=>) <img src={item.img} alt="Beiträge" /> : <p>Hier sind alle Beiträge.</p>} */}
-          </div>
-          <div className="section">
-            {/* {userState ? <img src={item} alt="Videos" /> : <p>Hier sind alle Videos.</p>} */}
-          </div>
-          <div className="section">
-            {/* {userState ? <img src={item} alt="Markierungen" /> : <p>Hier sind alle Markierungen.</p>} */}
-          </div>
-        </div>
-      </div>
+      <ProfilPosts activeSection={activeSection} setActiveSection={setActiveSection} />
     </section>
   );
 };

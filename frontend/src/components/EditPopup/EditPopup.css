@@ -1,4 +1,4 @@
-.edit-popup {
+.edit_popup {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -10,6 +10,8 @@
   border-top-right-radius: 10px;
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
   animation: slide-up 0.3s ease forwards;
+  padding: 32px 32px 100px 32px;
+  overflow: auto;
 }
 
 @keyframes slide-up {
@@ -19,4 +21,44 @@
   to {
     transform: translateY(0);
   }
+}
+.edit_inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.edit_img {
+  margin-top: 27px;
+  margin-bottom: 24px;
+  display: flex;
+
+  justify-content: center;
+}
+.edit_img_svg {
+  position: absolute;
+  top: 90px;
+  right: 118px;
+}
+.edit_inputs input,
+select {
+  width: 100%;
+  height: 56px;
+  background-color: var(--input-grey);
+  border: none;
+  border-radius: 10px;
+  padding-inline: 20px;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  font-weight: 550;
+}
+:focus {
+  outline: none;
+}
+.calendar {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  background-color: var(--input-grey);
+  border-radius: 10px;
+  padding-right: 30px;
 }
