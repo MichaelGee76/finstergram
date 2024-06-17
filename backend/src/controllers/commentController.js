@@ -18,6 +18,24 @@ const postCommentCtrl = asyncHandler(async (req, res) => {
     sendResponse(res, result);
 });
 
+const deleteCommentCtrl = asyncHandler(async (req, res) => {
+    const authenticatedUserId = req.authenticatedUserId;
+
+    const commentId = req.params.commentId;
+    const deletedComment = await CommentService.deleteComment(
+        commentId,
+        authenticatedUserId
+    );
+    if (!deletedComment) {
+        res.status(500).json({ message: "Could not delete post" });
+    }
+    sendResponse(res, result);
+});
+
+const updateCommentCtrl = asyncHandler(async () => {});
+
 export const CommentController = {
     postCommentCtrl,
+    deleteCommentCtrl,
+    updateCommentCtrl,
 };

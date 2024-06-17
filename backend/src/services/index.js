@@ -13,6 +13,7 @@ import { updatePost } from "./post/updatePost.js";
 import { deletePost } from "./post/deletePost.js";
 import { getAllPostsWithHashtags } from "./post/getAllPostsWithHashtags.js";
 import { postComment } from "./comment/postComment.js";
+import { deleteComment } from "./comment/deleteComment.js";
 
 export const UserService = {
     registerUser,
@@ -36,4 +37,5 @@ export const PostServices = {
 
 export const CommentService = {
     postComment,
+    deleteComment,
 };

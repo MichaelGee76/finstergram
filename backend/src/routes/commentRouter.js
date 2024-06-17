@@ -10,14 +10,7 @@ export const commentRouter = express
     //     CommentController.getAllCommentsFromPostCtrl
     // )
 
-    .post("/newComment", doJWTAuth, CommentController.postCommentCtrl);
-// .patch(
-//     "/updateComment/:commentId",
-//     doJWTAuth,
-//     CommentController.updateCommentCtrl
-// )
-// .delete(
-//     "/deleteComment/:commentId",
-//     doJWTAuth,
-//     CommentController.deleteCommentCtrl
-// );
+    .post("/newComment", doJWTAuth, CommentController.postCommentCtrl)
+    .patch("/:commentId", doJWTAuth, CommentController.updateCommentCtrl)
+
+    .delete("/:commentId", doJWTAuth, CommentController.deleteCommentCtrl);
