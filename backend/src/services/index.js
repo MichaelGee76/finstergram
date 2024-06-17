@@ -18,6 +18,11 @@ import { patchComment } from "./comment/patchComment.js";
 import { getAllCommentsFromPost } from "./comment/getAllCommentsFromPost.js";
 import { postLike } from "./like/postLike.js";
 import { deleteLike } from "./like/deleteLike.js";
+import { postFollow } from "./follow/postFollow.js";
+import { deleteFollow } from "./follow/deleteFollow.js";
+import { savePost } from "./save/savePost.js";
+import { deleteSavePost } from "./save/savePost.js";
+import { getSavedPosts } from "./save/savePost.js";
 
 export const UserService = {
     registerUser,
@@ -49,4 +54,15 @@ export const CommentService = {
 export const LikeService = {
     postLike,
     deleteLike,
+};
+
+export const FollowService = {
+    postFollow,
+    deleteFollow,
+};
+
+export const SaveService = {
+    savePost,
+    deleteSavePost,
+    getSavedPosts,
 };
