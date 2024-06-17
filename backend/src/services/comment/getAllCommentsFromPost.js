@@ -37,8 +37,6 @@ export async function getAllCommentsFromPost(postId, authenticatedUserId) {
         })
         .exec();
 
-    console.log(comments);
-
     const commentArr = await Promise.all(
         comments.map(async (comment) => {
             const likes = await Like.find({ commentId: comment._id });
