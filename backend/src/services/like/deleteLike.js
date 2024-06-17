@@ -5,7 +5,7 @@ export async function deleteLike(userId, postId, commentId) {
     if (!existingLike) {
         throw new Error("Cannot like");
     }
-    const deletedLike = await Like.findOneAndDelete(userId, postId, commentId);
+    const deletedLike = await Like.findOneAndDelete(userId, postId);
 
     if (!deletedLike) {
         throw new Error("Cannot delete like  ");
