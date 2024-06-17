@@ -20,7 +20,7 @@ export async function getUserFeed(authenticatedUserId) {
   //dekl feed und sagen, gehe in alle posts und gibt uns nur die post zurück vojn den leuten(id)
   // die wir in followedIDs gespeichert haben
   const feed = await Post.find({
-    userId: { $in: followedIds, authenticatedUserId },
+    userId: { $in: [...followedIds, authenticatedUserId] },
   })
     .populate({
       path: "userId",
