@@ -6,32 +6,6 @@ import { sendEmail } from "../../utils/verifyEmail.js";
 import { createToken } from "../../utils/createToken.js";
 
 export async function registerUser({
-<<<<<<< HEAD
-  firstName,
-  lastName,
-  email,
-  password,
-  userName,
-}) {
-  /*   const { firstName, lastName, userName, email, password } = req.body; */
-  console.log(lastName);
-
-  if (!firstName || !lastName || !userName || !email || !password) {
-    // res.status(400);
-    throw new Error("Please provide all informations");
-  }
-  const userExists = await User.findOne({ email });
-  if (userExists) {
-    //res.status(400);
-    throw new Error("User already exists");
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const user = await User.create({
-=======
->>>>>>> 9157806e783ffab71aec0b1977a3faf5c8d1c09e
     firstName,
     lastName,
     email,
