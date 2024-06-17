@@ -12,25 +12,28 @@ import { postNewPost } from "./post/postNewPost.js";
 import { updatePost } from "./post/updatePost.js";
 import { deletePost } from "./post/deletePost.js";
 import { getAllPostsWithHashtags } from "./post/getAllPostsWithHashtags.js";
+import { postComment } from "./comment/postComment.js";
 
 export const UserService = {
-  registerUser,
-  verifyEmailUser,
-  showAllUsers,
-  showOneUser,
-  refreshAccessToken,
-  updateUser,
-  loginUser,
-  deleteUser,
+    registerUser,
+    verifyEmailUser,
+    showAllUsers,
+    showOneUser,
+    refreshAccessToken,
+    updateUser,
+    loginUser,
+    deleteUser,
 };
 
 export const PostServices = {
-  getUserPosts,
-  getUserFeed,
-  postNewPost,
-  updatePost,
-  deletePost,
-  getAllPostsWithHashtags,
+    getUserPosts,
+    getUserFeed,
+    postNewPost,
+    updatePost,
+    deletePost,
+    getAllPostsWithHashtags,
 };
 
-export const CommentService = {};
+export const CommentService = {
+    postComment,
+};

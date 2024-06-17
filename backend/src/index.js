@@ -6,6 +6,7 @@ import { userRouter } from "./routes/userRouter.js";
 import { postRouter } from "./routes/postRouter.js";
 import { google } from "googleapis";
 import dotenv from "dotenv";
+import { commentRouter } from "./routes/commentRouter.js";
 
 const PORT = process.env.PORT || 4420;
 
@@ -21,7 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/posts", postRouter);
+app.use("/api/v1/comments", commentRouter);
 
 app.listen(PORT, () => {
-  console.log("Server is listening on port: ", PORT);
+    console.log("Server is listening on port: ", PORT);
 });

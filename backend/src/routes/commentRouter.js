@@ -1,23 +1,23 @@
 import express from "express";
-import { commentController } from "../controllers/commentController.js";
+import { CommentController } from "../controllers/commentController.js";
 import { doJWTAuth } from "../middlewares/doJwtAuth.js";
 
 export const commentRouter = express
-  .Router()
-  .get(
-    "/allCommentsFromPost",
-    doJWTAuth,
-    commentController.getAllCommentsFromPostCtrl
-  )
+    .Router()
+    .get(
+        "/allCommentsFromPost",
+        doJWTAuth,
+        CommentController.getAllCommentsFromPostCtrl
+    )
 
-  .post("/newComment", doJWTAuth, commentController.postNewCommentCtrl)
-  .patch(
-    "/updateComment/:commentId",
-    doJWTAuth,
-    commentController.updateCommentCtrl
-  )
-  .delete(
-    "/deleteComment/:commentId",
-    doJWTAuth,
-    commentController.deleteCommentCtrl
-  );
+    .post("/newComment", doJWTAuth, CommentController.postCommentCtrl)
+    .patch(
+        "/updateComment/:commentId",
+        doJWTAuth,
+        CommentController.updateCommentCtrl
+    )
+    .delete(
+        "/deleteComment/:commentId",
+        doJWTAuth,
+        CommentController.deleteCommentCtrl
+    );
