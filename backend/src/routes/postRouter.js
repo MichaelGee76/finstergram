@@ -11,7 +11,7 @@ export const postRouter = express
     .delete("/:postId", doJWTAuth, PostController.deletePostCtrl)
     .get("/hashtags", doJWTAuth, PostController.getAllHashtagsCtrl)
     .get(
-        "/allPostsWithHashtag",
+        "/allPostsWithHashtag/:hashtag",
         // doJWTAuth,
         PostController.getAllPostsWithHashtagsCtrl
     );
