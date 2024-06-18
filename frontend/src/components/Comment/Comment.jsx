@@ -5,6 +5,7 @@ import { TokenDataContext, UserDataContext } from "../context/Context";
 import ky from "ky";
 import { backendUrl } from "../../api/api";
 import PostComment from "../PostComment/PostComment";
+import MetaComment from "../MetaComment/MetaComment";
 
 const calculateCommentAge = (createdAt) => {
   const commentDate = new Date(createdAt); // Tue May 28 2024 14:10:39 GMT+0200 (Mitteleuropäische Sommerzeit)
@@ -103,63 +104,25 @@ const Comment = ({ comment, postData, setReplyMessage }) => {
       {comment.replies[0] ? (
         <div className="comment_meta_wrapper">
           {comment.replies.slice(0, showMetaComments)?.map((reply) => (
-            <div key={reply._id} className="cmnt_wrapper">
-              <div>
-                <div className="post_upper">
-                  <Link
-                    to={`/profile/${reply.userId._id}`}
-                    className="post_user_infos"
-                  >
-                    <img src={reply.userId.profilePicture} alt="" />
-                    <div>
-                      <h3 className="username_post">{reply.userId.userName}</h3>
-                      <p className="userdescription_post">
-                        {reply.userId.profession}
-                      </p>
-                    </div>
-                  </Link>
-                  {user._id === reply.userId._id && (
-                    <button>
-                      <img src="./img/MoreCircle.svg" alt="" />
-                    </button>
-                  )}
-                </div>
-                <p>{reply.content}</p>
-                <div className="cmnt_bottom">
-                  <div>
-                    <img
-                      onClick={likeToggleHandler}
-                      src={
-                        likeToggle ? "./img/HeartFilled.svg" : "./img/Heart.svg"
-                      }
-                      alt=""
-                    />
-                    <p>{crementLike}</p>
-                  </div>
-                  <label
-                    onClick={() =>
-                      setReplyMessage({
-                        userName: comment.userId.userName,
-                        commentId: comment._id,
-                      })
-                    }
-                    htmlFor="postcomment"
-                  >
-                    Reply
-                  </label>
-                  <p>{newcommentAge.showCommentAge}</p>
-                </div>
-              </div>
-            </div>
+            <MetaComment
+              key={reply._id}
+              comment={comment}
+              reply={reply}
+              newcommentAge={newcommentAge}
+              setReplyMessage={setReplyMessage}
+              postData={postData}
+            />
           ))}
-          <button
-            className="show_answers"
-            onClick={() =>
-              setShowMetaComments((showMetaComments) => showMetaComments + 5)
-            }
-          >
-            more answers
-          </button>
+          {comment.replies.length > showMetaComments && (
+            <button
+              className="show_answers"
+              onClick={() =>
+                setShowMetaComments((showMetaComments) => showMetaComments + 5)
+              }
+            >
+              more answers
+            </button>
+          )}
         </div>
       ) : (
         ""

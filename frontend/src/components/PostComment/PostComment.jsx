@@ -13,7 +13,6 @@ const PostComment = ({
   const [comment, setComment] = useState("");
   const { user } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
-  console.log(replyMessage);
 
   const postCommentHandler = async (event) => {
     event.preventDefault();
