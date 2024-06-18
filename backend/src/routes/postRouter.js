@@ -9,6 +9,7 @@ export const postRouter = express
     .post("/newPost", doJWTAuth, PostController.postNewPostCtrl)
     .patch("/:postId", doJWTAuth, PostController.updatePostCtrl)
     .delete("/:postId", doJWTAuth, PostController.deletePostCtrl)
+    .get("/hashtags", doJWTAuth, PostController.getAllHashtagsCtrl)
     .get(
         "/allPostsWithHashtag",
         // doJWTAuth,
