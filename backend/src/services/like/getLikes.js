@@ -2,14 +2,15 @@ import { Save } from "../../models/save.js";
 import { Like } from "../../models/like.js";
 import { Comment } from "../../models/comment.js";
 
-export async function getSavedPost(authenticatedUserId) {
-    const savedPosts = await Save.find({
+export async function getLikes(authenticatedUserId) {
+    const likedPosts = await Like.find({
         userId: authenticatedUserId,
+        commentId: null,
     }).select("postId");
 
-    const postIds = savedPosts.map((post) => post.postId);
+    const postIds = likedPosts.map((post) => post.postId);
 
-    const savedFeed = await Post.find({
+    const likeFeed = await Post.find({
         _id: { $in: postIds },
     })
         .populate({
@@ -18,7 +19,7 @@ export async function getSavedPost(authenticatedUserId) {
         })
         .sort({ createdAt: -1 });
 
-    if (!savedFeed) {
+    if (!likeFeed) {
         throw new Error("Oops, something went wrong. We could not load feed.");
     }
 
@@ -69,7 +70,7 @@ export async function getSavedPost(authenticatedUserId) {
     );
 
     // Die Anzahl der Likes und den "geliked"-Status zu den Posts hinzufügen
-    const feedWithLikes = savedFeed.map((post) => {
+    const feedWithLikes = likeFeed.map((post) => {
         const postObject = post.toObject();
         postObject.likes = likeCounts[postObject._id] || 0;
         postObject.comments = commentCounts[postObject._id] || 0;
