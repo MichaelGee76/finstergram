@@ -4,7 +4,7 @@ import { Comment } from "../../models/comment.js";
 import { Save } from "../../models/save.js";
 
 export async function getAllPostsWithHashtags(hashtag) {
-    const posts = await Post.find({ hashtag: { $in: hashtag } })
+    const posts = await Post.find({ hashtag: hashtag })
         .populate("userId", "username profilePicture profession")
         .sort({ createdAt: -1 });
 
