@@ -127,7 +127,7 @@ const Nav = () => {
         </svg>
         <p>Upload</p>
       </NavLink>
-      <NavLink to={`/profile/${user}`}>
+      <NavLink to={`/profile/${user._id}`}>
         <svg
           width="25"
           height="24"

@@ -33,7 +33,7 @@ const PostComment = ({ setCommentUpd, postId, setUpdUserFeed }) => {
       <input
         type="text"
         name=""
-        id=""
+        id="postcomment"
         placeholder="Your comment..."
         value={comment}
         onChange={(event) => setComment(event.target.value)}
