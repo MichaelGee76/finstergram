@@ -2,7 +2,7 @@ import { Save } from "../../models/save.js";
 import { Like } from "../../models/like.js";
 import { Comment } from "../../models/comment.js";
 
-export async function getSavedPost(authenticatedUserId) {
+export async function getSavedPosts(authenticatedUserId) {
     const savedPosts = await Save.find({
         userId: authenticatedUserId,
     }).select("postId");
