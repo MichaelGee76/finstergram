@@ -23,46 +23,51 @@ import { deleteFollow } from "./follow/deleteFollow.js";
 import { savePost } from "./save/savePost.js";
 import { deleteSavePost } from "./save/deleteSavePost.js";
 import { getSavedPosts } from "./save/getSavedPost.js";
+import { postMessage } from "./messages/postMessage.js";
 
 export const UserService = {
-  registerUser,
-  verifyEmailUser,
-  showAllUsers,
-  showOneUser,
-  refreshAccessToken,
-  updateUser,
-  loginUser,
-  deleteUser,
+    registerUser,
+    verifyEmailUser,
+    showAllUsers,
+    showOneUser,
+    refreshAccessToken,
+    updateUser,
+    loginUser,
+    deleteUser,
 };
 
 export const PostServices = {
-  getUserPosts,
-  getUserFeed,
-  postNewPost,
-  updatePost,
-  deletePost,
-  getAllPostsWithHashtags,
+    getUserPosts,
+    getUserFeed,
+    postNewPost,
+    updatePost,
+    deletePost,
+    getAllPostsWithHashtags,
 };
 
 export const CommentService = {
-  postComment,
-  deleteComment,
-  patchComment,
-  getAllCommentsFromPost,
+    postComment,
+    deleteComment,
+    patchComment,
+    getAllCommentsFromPost,
 };
 
 export const LikeService = {
-  postLike,
-  deleteLike,
+    postLike,
+    deleteLike,
 };
 
 export const FollowService = {
-  postFollow,
-  deleteFollow,
+    postFollow,
+    deleteFollow,
 };
 
 export const SaveService = {
-  savePost,
-  deleteSavePost,
-  getSavedPosts,
+    savePost,
+    deleteSavePost,
+    getSavedPosts,
+};
+
+export const MessageService = {
+    postMessage,
 };
