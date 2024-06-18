@@ -24,6 +24,7 @@ import { savePost } from "./save/savePost.js";
 import { deleteSavePost } from "./save/deleteSavePost.js";
 import { getSavedPosts } from "./save/getSavedPost.js";
 import { postMessage } from "./messages/postMessage.js";
+import { getHashtag } from "./post/getHashtag.js";
 
 export const UserService = {
     registerUser,
@@ -43,6 +44,7 @@ export const PostServices = {
     updatePost,
     deletePost,
     getAllPostsWithHashtags,
+    getHashtag,
 };
 
 export const CommentService = {
