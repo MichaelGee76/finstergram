@@ -1,8 +1,12 @@
-import { Like } from "../../models/like.js";
-import { User } from "../../models/user.js";
+import { Save } from "../../models/save.js";
+export async function getLikes(userId) {
+    const savedLikes = await Save.find({ userId }).populate({
+        path: "postId",
+        select: "userId location picture description hashtags",
+    });
+    if (!savedLikes) {
+        throw new Error("No saved post");
+    }
 
-export async function getLikes(userId, postId, commentId) {
-    const likes = await Like.find({ postId }).populate("userId", "userName");
-    const likeCount = await Like.countDocuments({ postId });
-    return { likes, likeCount };
+    return savedLikes;
 }

@@ -4,7 +4,7 @@ import { doJWTAuth } from "../middlewares/doJwtAuth.js";
 
 export const postRouter = express
     .Router()
-    .get("/userPosts/:id", doJWTAuth, PostController.getUserPostsCtrl)
+    .get("/userPosts/:userId", doJWTAuth, PostController.getUserPostsCtrl)
     .get("/userFeed", doJWTAuth, PostController.getUserFeedCtrl)
     .post("/newPost", doJWTAuth, PostController.postNewPostCtrl)
     .patch("/:postId", doJWTAuth, PostController.updatePostCtrl)
