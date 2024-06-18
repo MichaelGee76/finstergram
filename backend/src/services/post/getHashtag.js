@@ -9,5 +9,9 @@ export async function getHashtag() {
     //duplikate removen beim convertieren des Arrays
     const uniqueHashtags = [...new Set(hashtags)];
 
-    return uniqueHashtags.sort();
+    //sortieren von hashtags
+
+    const hashtagsorted = uniqueHashtags.sort((a, b) => a.localeCompare(b));
+
+    return hashtagsorted;
 }
