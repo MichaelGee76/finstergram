@@ -18,7 +18,7 @@ export async function getUserPosts(userId) {
     const followedNumber = await Follow.find({ follwedId: userId });
 
     const posts = await Post.find({ userId }).sort({ createdAt: -1 });
-    if (!feed) {
+    if (!posts) {
         throw new Error("Oops, something went wrong. We could not load posts.");
     }
 
