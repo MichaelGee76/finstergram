@@ -17,7 +17,7 @@ export async function showAllUsers(authenticatedUserId) {
 
     //loop users and set isFollwed
     for (let user of users) {
-        user.isFollowed = await checkIfFollwed(authenticatedUserId, user._Id);
+        user.isFollowed = await checkIfFollwed(authenticatedUserId, user._id);
     }
 
     return users;
