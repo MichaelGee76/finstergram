@@ -1,7 +1,7 @@
 import { Follow } from "../../models/follow.js";
 import { User } from "../../models/user.js";
 
-async function checkIfFollwed(authenticatedUserId, userId) {
+async function checkIfFollowed(authenticatedUserId, userId) {
     const follow = await Follow.findOne({
         userId: authenticatedUserId,
         followedId: userId,
@@ -10,14 +10,17 @@ async function checkIfFollwed(authenticatedUserId, userId) {
 }
 
 export async function showAllUsers(authenticatedUserId) {
-    const users = await User.find({}, "userName _id profession profilePicture");
+    const users = await User.find(
+        {},
+        "userName _id profession profilePicture isFollowed"
+    );
     if (!users) {
         throw new Error("No user found");
     }
 
     //loop users and set isFollwed
     for (let user of users) {
-        user.isFollowed = await checkIfFollwed(authenticatedUserId, user._id);
+        user.isFollowed = await checkIfFollowed(authenticatedUserId, user._id);
     }
 
     return users;

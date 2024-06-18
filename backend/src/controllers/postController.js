@@ -81,6 +81,17 @@ const getAllPostsWithHashtagsCtrl = asyncHandler(async (req, res) => {
     sendResponse(res, result);
 });
 
+const getAllHashtagsCtrl = asyncHandler(async (req, res) => {
+    const postId = req.body;
+    const hashtag = req.body;
+    const result = await PostServices.getHashtag(postId, hashtag);
+
+    if (!result) {
+        res.status(500).json("Could not get hashtag ");
+    }
+    sendResponse(res, result);
+});
+
 export const PostController = {
     getUserPostsCtrl,
     getUserFeedCtrl,
@@ -88,4 +99,5 @@ export const PostController = {
     updatePostCtrl,
     deletePostCtrl,
     getAllPostsWithHashtagsCtrl,
+    getAllHashtagsCtrl,
 };
