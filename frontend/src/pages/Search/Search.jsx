@@ -1,21 +1,43 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Search.css";
 import ky from "ky";
 import { backendUrl } from "../../api/api";
+import { TokenDataContext } from "../../components/context/Context";
 const Search = () => {
   const [searchToggle, setSearchToggle] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
+  const { token } = useContext(TokenDataContext);
 
   useEffect(() => {
     const searchHandler = async () => {
       if (searchToggle) {
-        const res = await ky.get(`${backendUrl}/users`).json();
+        const res = await ky
+          .get(`${backendUrl}/users`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .json();
+
+        setSearchResults(res.result);
+      } else {
+        const res = await ky
+          .get(`${backendUrl}/posts/hashtags`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .json();
 
         setSearchResults(res.result);
       }
     };
     searchHandler();
   }, []);
+
+  console.log(searchResults);
 
   return (
     <main className="search_site">
@@ -53,7 +75,9 @@ const Search = () => {
         </button>
         <div className="red_line"></div>
       </div>
-      <section className="search_resuls"></section>
+      <section className="search_resuls">
+        
+      </section>
     </main>
   );
 };
