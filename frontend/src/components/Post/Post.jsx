@@ -31,7 +31,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
   const { token } = useContext(TokenDataContext);
 
   const saveToggleHandler = async () => {
-    if (postData.savedByUser) {
+    if (!saveToggle) {
       const res = await ky
         .post(`${backendUrl}/save/${postData._id}`, {
           headers: {
@@ -55,6 +55,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
       setSaveToggle((saveToggle) => !saveToggle);
     }
   };
+
   const likeToggleHandler = async () => {
     if (!likeToggle) {
       const res = await ky
