@@ -13,6 +13,7 @@ import {
   UserDataContext,
 } from "./components/context/Context";
 import Layout from "./components/Layout/Layout";
+import HashtagPosts from "./pages/HashtagPosts/HashtagPosts";
 
 function App() {
   const [user, setUser] = useState();
@@ -31,6 +32,7 @@ function App() {
               <Route path="/signinup" element={<SignInUp />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/hashtagposts/:hashtag" element={<HashtagPosts />} />
             </Routes>
           </Layout>
         </BrowserRouter>
