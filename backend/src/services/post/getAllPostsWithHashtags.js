@@ -3,7 +3,7 @@ import { Like } from "../../models/like.js";
 import { Comment } from "../../models/comment.js";
 import { Save } from "../../models/save.js";
 
-export async function getAllPostsWithHashtags(hashtag) {
+export async function getAllPostsWithHashtags(authenticatedUserId, hashtag) {
     const posts = await Post.find({ hashtag: hashtag })
         .populate("userId", "username profilePicture profession")
         .sort({ createdAt: -1 });
