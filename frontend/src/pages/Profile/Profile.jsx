@@ -3,6 +3,7 @@ import "./Profile.css";
 import EditPopup from "../../components/EditPopup/EditPopup";
 import { Link, useParams } from "react-router-dom";
 import ProfilPosts from "../../components/ProfilPosts/ProfilPosts";
+import ky from "ky";
 import { TokenDataContext, UserDataContext } from "../../components/context/Context";
 import { backendUrl } from "../../api/api";
 
@@ -16,9 +17,10 @@ const Profile = () => {
 
   const [activeSection, setActiveSection] = useState("posts");
   const [isUser, setIsUser] = useState(true);
-  const { userId } = useParams();
+  const [posts, setPosts] = useState();
+  const { id } = useParams();
   const [following, setFollowing] = useState(false);
-
+  console.log(id);
   // * Toggle PopUp for edit user
   const [editPopup, setEditPopup] = useState(false);
   const toggleEditPopup = () => {
@@ -34,8 +36,19 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserPosts = async () => {
-      const res = await ky.get(`${backendUrl}/userPosts/${params}`);
+      const res = await ky
+        .get(`${backendUrl}/posts/userPosts/${id}`, {
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        })
+        .json();
+      setPosts(res.result);
     };
+    if (user === id) {
+      setIsUser(true);
+    } else {
+      setIsUser(false);
+    }
+    getUserPosts();
   }, []);
 
   return (
