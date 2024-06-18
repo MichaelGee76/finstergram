@@ -1,4 +1,9 @@
+import { Follow } from "../../models/follow.js";
 import { User } from "../../models/user.js";
+
+// async function checkIfFolled(authenticatedUserId, userId){
+//   const follwo = await Follow.findOne({userId: authenticatedUserId})
+// }
 
 // username _id profession profilePicture, isFollowed true oder false
 
