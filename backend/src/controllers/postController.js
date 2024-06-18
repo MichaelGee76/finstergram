@@ -68,7 +68,7 @@ const deletePostCtrl = asyncHandler(async (req, res) => {
 const getAllPostsWithHashtagsCtrl = asyncHandler(async (req, res) => {
     // brauchen wir eigentlich nicht schützen, oder?
     // const authenticatedUserId = req.authenticatedUserId;
-    const hashtag = req.body;
+    const hashtag = req.params.hashtag;
 
     const result = await PostServices.getAllPostsWithHashtags(
         // authenticatedUserId

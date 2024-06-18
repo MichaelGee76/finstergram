@@ -8,7 +8,7 @@ export async function patchComment(
 ) {
     const user = await User.findById(authenticatedUserId);
     if (!user) {
-        throw new Error("user dont exist");
+        throw new Error("user don't exist");
     }
 
     const comment = await Comment.findById(commentId);
@@ -19,7 +19,8 @@ export async function patchComment(
         throw new Error("No permission to update comment");
     }
     const updateComment = await Comment.findByIdAndUpdate(
-        postId,
+        /*  postId, */
+        commentId,
         updatedContent,
         {
             new: true,

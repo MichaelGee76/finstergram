@@ -4,5 +4,12 @@ import { MessageController } from "../controllers/messageController.js";
 
 export const messageRouter = express
     .Router()
-    .post("/newMessage", doJWTAuth, MessageController.postMessageCtrl);
-// .patch("message/:id", doJWTAuth, MessageController.updateMessage);
+    .post("/newMessage", doJWTAuth, MessageController.postMessageCtrl)
+    .delete("/:id", doJWTAuth, MessageController.deleteMessageCtrl)
+    .patch("/:id", doJWTAuth, MessageController.updateMessageCtrl)
+    .get(
+        "/chat/:userId/:messageId",
+        doJWTAuth,
+        MessageController.getOneChatCtrl
+    )
+    .get("chats/:userId", doJWTAuth, MessageController.getAllChatsCtrl);
