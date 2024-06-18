@@ -22,7 +22,7 @@ const calculateCommentAge = (createdAt) => {
   return { showCommentAge, commentAgeInHours };
 };
 
-const Comment = ({ comment, postData }) => {
+const Comment = ({ comment, postData, setReplyMessage }) => {
   // liked by user? einfügen
   const [likeToggle, setLikeToggle] = useState();
   // like anzahl einfügen
@@ -87,7 +87,17 @@ const Comment = ({ comment, postData }) => {
           />
           <p>{crementLike}</p>
         </div>
-        <label htmlFor="postcomment">Reply</label>
+        <label
+          onClick={() =>
+            setReplyMessage({
+              userName: comment.userId.userName,
+              commentId: comment._id,
+            })
+          }
+          htmlFor="postcomment"
+        >
+          Reply
+        </label>
         <p>{newcommentAge.showCommentAge}</p>
       </div>
       {comment.replies[0] ? (
@@ -126,23 +136,30 @@ const Comment = ({ comment, postData }) => {
                     />
                     <p>{crementLike}</p>
                   </div>
-                  <label htmlFor="postcomment">Reply</label>
+                  <label
+                    onClick={() =>
+                      setReplyMessage({
+                        userName: comment.userId.userName,
+                        commentId: comment._id,
+                      })
+                    }
+                    htmlFor="postcomment"
+                  >
+                    Reply
+                  </label>
                   <p>{newcommentAge.showCommentAge}</p>
                 </div>
               </div>
-
-              <button
-                className="show_answers"
-                onClick={() =>
-                  setShowMetaComments(
-                    (showMetaComments) => showMetaComments + 5
-                  )
-                }
-              >
-                more answers
-              </button>
             </div>
           ))}
+          <button
+            className="show_answers"
+            onClick={() =>
+              setShowMetaComments((showMetaComments) => showMetaComments + 5)
+            }
+          >
+            more answers
+          </button>
         </div>
       ) : (
         ""

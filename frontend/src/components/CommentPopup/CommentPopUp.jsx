@@ -39,7 +39,7 @@ const CommentPopUp = ({
 
     getCommentsFromPost();
   }, [commentUpd]);
-  console.log(comments);
+  console.log(replyMessage);
   return (
     <section className="cmnt_popup">
       <div className="cmt_upper">

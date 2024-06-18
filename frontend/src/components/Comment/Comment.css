@@ -37,4 +37,5 @@
   width: max-content;
   background-color: unset;
   border: unset;
+  cursor: pointer;
 }
