@@ -6,4 +6,6 @@ export async function showAllUsers(authenticatedUserId) {
     if (!user) {
         throw new Error("user not found");
     }
+
+    return user;
 }
