@@ -17,11 +17,12 @@
   gap: 8px;
 }
 
-.cmnt_bottom button {
+.cmnt_bottom label {
   background-color: unset;
   border: unset;
   font-weight: 500;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .cmnt_bottom p {

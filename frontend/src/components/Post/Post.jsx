@@ -33,7 +33,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
   const saveToggleHandler = async () => {
     if (postData.savedByUser) {
       const res = await ky
-        .post(`${backendUrl}/savepost`, {
+        .post(`${backendUrl}/save/${postData._id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -41,10 +41,10 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
         })
         .json();
 
-      setSaveToggle(true);
+      setSaveToggle((saveToggle) => !saveToggle);
     } else {
       const res = await ky
-        .post(`${backendUrl}/unsavepost`, {
+        .delete(`${backendUrl}/save/${postData._id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
         })
         .json();
 
-      setSaveToggle(false);
+      setSaveToggle((saveToggle) => !saveToggle);
     }
   };
   const likeToggleHandler = async () => {
