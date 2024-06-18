@@ -4,6 +4,6 @@ import { SaveController } from "../controllers/saveController.js";
 export const saveRouter = express
     .Router()
 
-    .post("/save", SaveController.savePostCtrl)
-    .delete("/:id", SaveController.deleteSaveCtrl)
+    .post("/:postId", SaveController.savePostCtrl)
+    .delete("/:postId", SaveController.deleteSaveCtrl)
     .get("/savedPosts", SaveController.getSavedPostsCtrl);

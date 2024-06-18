@@ -4,7 +4,7 @@ import { sendResponse } from "../helpers/userToView.js";
 
 const savePostCtrl = asyncHandler(async (req, res) => {
     const userId = req.authenticatedUserId;
-    const { postId } = req.body;
+    const { postId } = req.params.postId;
     const result = await SaveService.savePost(userId, postId);
     if (!result) {
         return res.status(500).json("Could not save post");
@@ -14,7 +14,7 @@ const savePostCtrl = asyncHandler(async (req, res) => {
 
 const deleteSaveCtrl = asyncHandler(async (req, res) => {
     const userId = req.authenticatedUserId;
-    const { postId } = req.body;
+    const { postId } = req.params.postId;
     const result = await SaveService.deleteSavePost(userId, postId);
     if (!result) {
         return res.status(500).json("Could not delete save");
