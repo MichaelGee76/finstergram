@@ -4,7 +4,7 @@ import { MessageService } from "../services/index.js";
 
 const postMessageCtrl = asyncHandler(async (req, res) => {
     const userId = req.params.userId;
-    const messageContent = req.body;
+    const { messageContent, messageId } = req.body;
     const result = await MessageService.postMessage(
         userId,
         messageContent,
