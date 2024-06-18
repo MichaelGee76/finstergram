@@ -52,8 +52,6 @@ export async function getUserFeed(authenticatedUserId) {
     commentId: null,
   });
 
-  console.log(likes);
-
   // Ein Objekt erstellen, das die Anzahl der Likes für jeden Post speichert
   const likeCounts = {};
   likes.forEach((like) => {
