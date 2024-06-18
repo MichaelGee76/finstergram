@@ -27,3 +27,13 @@
 .cmnt_bottom p {
   font-size: 12px;
 }
+
+.comment_meta_wrapper {
+  margin-left: 24px;
+}
+
+.show_answers {
+  width: max-content;
+  background-color: unset;
+  border: unset;
+}

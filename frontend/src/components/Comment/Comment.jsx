@@ -27,6 +27,7 @@ const Comment = ({ comment, postData }) => {
   const [likeToggle, setLikeToggle] = useState();
   // like anzahl einfügen
   const [crementLike, setCrementLike] = useState(comment.likesCount);
+  const [showMetaComments, setShowMetaComments] = useState(1);
   const { user } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
 
@@ -60,6 +61,7 @@ const Comment = ({ comment, postData }) => {
     }
   };
 
+
   return (
     <div className="cmnt_wrapper">
       <div className="post_upper">
@@ -89,7 +91,64 @@ const Comment = ({ comment, postData }) => {
         <button>Reply</button>
         <p>{newcommentAge.showCommentAge}</p>
       </div>
-      </div>
+      {comment.replies[0] ? (
+        <div className="comment_meta_wrapper">
+          {comment.replies.slice(0, showMetaComments)?.map((reply) => (
+            <div key={reply._id} className="cmnt_wrapper">
+              <div>
+                <div className="post_upper">
+                  <Link
+                    to={`/profile/${reply.userId._id}`}
+                    className="post_user_infos"
+                  >
+                    <img src={reply.userId.profilePicture} alt="" />
+                    <div>
+                      <h3 className="username_post">{reply.userId.userName}</h3>
+                      <p className="userdescription_post">
+                        {reply.userId.profession}
+                      </p>
+                    </div>
+                  </Link>
+                  {user._id === reply.userId._id && (
+                    <button>
+                      <img src="./img/MoreCircle.svg" alt="" />
+                    </button>
+                  )}
+                </div>
+                <p>{reply.content}</p>
+                <div className="cmnt_bottom">
+                  <div>
+                    <img
+                      onClick={likeToggleHandler}
+                      src={
+                        likeToggle ? "./img/HeartFilled.svg" : "./img/Heart.svg"
+                      }
+                      alt=""
+                    />
+                    <p>{crementLike}</p>
+                  </div>
+                  <button>Reply</button>
+                  <p>{newcommentAge.showCommentAge}</p>
+                </div>
+              </div>
+
+              <button
+                className="show_answers"
+                onClick={() =>
+                  setShowMetaComments(
+                    (showMetaComments) => showMetaComments + 5
+                  )
+                }
+              >
+                more answers
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
 

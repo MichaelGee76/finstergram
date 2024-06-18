@@ -19,7 +19,7 @@ const app = express();
 // Cors config start
 const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000;
 const isFrontendLocalhost =
-    process.env.FRONTEND_URL.startsWith("http://localhost");
+  process.env.FRONTEND_URL.startsWith("http://localhost");
 const cookieSessionSecret = process.env.COOKIE_SESSION_SECRET;
 
 // re-configure cors middleware
@@ -27,12 +27,12 @@ app.use(cors({ origin: [process.env.FRONTEND_URL], credentials: true }));
 /////////// add parser for cookies
 app.set("trust proxy", 1); // trust first proxy
 const cookieSessionOptions = {
-    name: "session",
-    secret: cookieSessionSecret, // frei wählbar
-    httpOnly: true,
-    expires: new Date(Date.now() + twoWeeksInMs),
-    sameSite: isFrontendLocalhost ? "lax" : "none",
-    secure: isFrontendLocalhost ? false : true,
+  name: "session",
+  secret: cookieSessionSecret, // frei wählbar
+  httpOnly: true,
+  expires: new Date(Date.now() + twoWeeksInMs),
+  sameSite: isFrontendLocalhost ? "lax" : "none",
+  secure: isFrontendLocalhost ? false : true,
 };
 app.use(cookieSession(cookieSessionOptions));
 
@@ -50,5 +50,5 @@ app.use("/api/v1", saveRouter);
 app.use("/api/v1/follow", followRouter);
 
 app.listen(PORT, () => {
-    console.log("Server is listening on port: ", PORT);
+  console.log("Server is listening on port: ", PORT);
 });

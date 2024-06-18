@@ -18,51 +18,51 @@ import { patchComment } from "./comment/patchComment.js";
 import { getAllCommentsFromPost } from "./comment/getAllCommentsFromPost.js";
 import { postLike } from "./like/postLike.js";
 import { deleteLike } from "./like/deleteLike.js";
-import { postFollow } from "./follow/postFollow.js";
-import { deleteFollow } from "./follow/deleteFollow.js";
-import { savePost } from "./save/savePost.js";
-import { deleteSavePost } from "./save/savePost.js";
-import { getSavedPosts } from "./save/savePost.js";
+// import { postFollow } from "./follow/postFollow.js";
+// import { deleteFollow } from "./follow/deleteFollow.js";
+// import { savePost } from "./save/savePost.js";
+// import { deleteSavePost } from "./save/savePost.js";
+// import { getSavedPosts } from "./save/savePost.js";
 
 export const UserService = {
-    registerUser,
-    verifyEmailUser,
-    showAllUsers,
-    showOneUser,
-    refreshAccessToken,
-    updateUser,
-    loginUser,
-    deleteUser,
+  registerUser,
+  verifyEmailUser,
+  showAllUsers,
+  showOneUser,
+  refreshAccessToken,
+  updateUser,
+  loginUser,
+  deleteUser,
 };
 
 export const PostServices = {
-    getUserPosts,
-    getUserFeed,
-    postNewPost,
-    updatePost,
-    deletePost,
-    getAllPostsWithHashtags,
+  getUserPosts,
+  getUserFeed,
+  postNewPost,
+  updatePost,
+  deletePost,
+  getAllPostsWithHashtags,
 };
 
 export const CommentService = {
-    postComment,
-    deleteComment,
-    patchComment,
-    getAllCommentsFromPost,
+  postComment,
+  deleteComment,
+  patchComment,
+  getAllCommentsFromPost,
 };
 
 export const LikeService = {
-    postLike,
-    deleteLike,
+  postLike,
+  deleteLike,
 };
 
-export const FollowService = {
-    postFollow,
-    deleteFollow,
-};
+// export const FollowService = {
+//   postFollow,
+//   deleteFollow,
+// };
 
-export const SaveService = {
-    savePost,
-    deleteSavePost,
-    getSavedPosts,
-};
+// export const SaveService = {
+//   savePost,
+//   deleteSavePost,
+//   getSavedPosts,
+// };
