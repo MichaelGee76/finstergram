@@ -7,7 +7,7 @@ export async function getHashtag() {
     const hashtags = posts.flatMap((post) => post.hashtags);
 
     //duplikate removen beim convertieren des Arrays
-    const uniqueHashtags = [...new Set(hashtags)];
+    const uniqueHashtags = [...new Set(hashtags)].sort();
 
     return uniqueHashtags;
 }
