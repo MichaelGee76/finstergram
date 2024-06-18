@@ -82,9 +82,7 @@ const getAllPostsWithHashtagsCtrl = asyncHandler(async (req, res) => {
 });
 
 const getAllHashtagsCtrl = asyncHandler(async (req, res) => {
-    const postId = req.body;
-    const hashtag = req.body;
-    const result = await PostServices.getHashtag(postId, hashtag);
+    const result = await PostServices.getHashtag();
 
     if (!result) {
         res.status(500).json("Could not get hashtag ");
