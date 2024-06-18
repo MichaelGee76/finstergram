@@ -56,13 +56,13 @@ export const LikeService = {
   deleteLike,
 };
 
-// export const FollowService = {
-//   postFollow,
-//   deleteFollow,
-// };
+export const FollowService = {
+  postFollow,
+  deleteFollow,
+};
 
-// export const SaveService = {
-//   savePost,
-//   deleteSavePost,
-//   getSavedPosts,
-// };
+export const SaveService = {
+  savePost,
+  deleteSavePost,
+  getSavedPosts,
+};

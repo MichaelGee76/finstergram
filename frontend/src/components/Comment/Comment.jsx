@@ -61,7 +61,6 @@ const Comment = ({ comment, postData }) => {
     }
   };
 
-
   return (
     <div className="cmnt_wrapper">
       <div className="post_upper">
@@ -88,7 +87,7 @@ const Comment = ({ comment, postData }) => {
           />
           <p>{crementLike}</p>
         </div>
-        <button>Reply</button>
+        <label htmlFor="postcomment">Reply</label>
         <p>{newcommentAge.showCommentAge}</p>
       </div>
       {comment.replies[0] ? (
@@ -127,7 +126,7 @@ const Comment = ({ comment, postData }) => {
                     />
                     <p>{crementLike}</p>
                   </div>
-                  <button>Reply</button>
+                  <label htmlFor="postcomment">Reply</label>
                   <p>{newcommentAge.showCommentAge}</p>
                 </div>
               </div>
