@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import EditPopup from "../../components/EditPopup/EditPopup";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProfilPosts from "../../components/ProfilPosts/ProfilPosts";
+import { TokenDataContext, UserDataContext } from "../../components/context/Context";
+import { backendUrl } from "../../api/api";
 
 const Profile = () => {
+  const { token } = useContext(TokenDataContext);
+  const { user } = useContext(UserDataContext);
+
+  console.log(user);
+
+  // http://localhost:4420/userPosts/:id
+
   const [activeSection, setActiveSection] = useState("posts");
   const [isUser, setIsUser] = useState(true);
-
+  const { userId } = useParams();
   const [following, setFollowing] = useState(false);
 
   // * Toggle PopUp for edit user
@@ -22,6 +31,12 @@ const Profile = () => {
     }
     return num.toString();
   };
+
+  useEffect(() => {
+    const getUserPosts = async () => {
+      const res = await ky.get(`${backendUrl}/userPosts/${params}`);
+    };
+  }, []);
 
   return (
     <section className="profile">
@@ -65,7 +80,7 @@ const Profile = () => {
             </svg>
           )}
 
-          <h1>h_lahluli007</h1>
+          <h1>{user.userName}</h1>
         </div>
 
         {/*  Post, Edit, Settings - (Only Settings) Icon */}
@@ -196,7 +211,7 @@ const Profile = () => {
       {/* Profile image, edit only on auth User */}
       <div className="profile_info">
         <div className="profile_img">
-          <img src="../../../public/img/Setting.svg" alt="profile-image" />
+          <img src={user.profilePicture} alt="profile-image" />
 
           {isUser && (
             <svg
@@ -221,13 +236,11 @@ const Profile = () => {
         {editPopup && <EditPopup togglePopup={toggleEditPopup} />}
 
         {/* name, titel, bio, link */}
-        <h1>Hassan Lahluli</h1>
+        <h1>{`${user.firstName} ${user.lastName}`}</h1>
 
-        <p className="font_info">Dragqueen she/her LGBTQ++</p>
-        <p className="font_bio"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit, cum.</p>
-        <a className="font_link" href="#">
-          www.exclusice-content.com
-        </a>
+        <p className="font_info"></p>
+        <p className="font_bio"> {user.userBio}</p>
+        <a className="font_link" href="#"></a>
       </div>
 
       {/* posts, follower, following */}
