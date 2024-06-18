@@ -28,14 +28,14 @@ import { User } from "../../models/user.js";
 
 //username _id profession profilePicture, isFollowed true oder false
 
-export async function showAllUsers(authenticatedUserId) {
-    const user = await User.find({}, "userName _id profession profilePicture ");
-    if (!user) {
-        throw new Error("user not found");
-    }
+// export async function showAllUsers(authenticatedUserId) {
+//     const user = await User.find({}, "userName _id profession profilePicture ");
+//     if (!user) {
+//         throw new Error("user not found");
+//     }
 
-    return user;
-}
+//     return user;
+// }
 
 export const showAllUsers = async (currentUserId) => {
     //Fetche alle users mit selected fields
