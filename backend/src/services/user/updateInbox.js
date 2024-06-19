@@ -5,6 +5,9 @@ import { Follow } from "../../models/follow.js";
 export async function updateInbox(authenticatedUserId) {
   // abfrage ob comment, like oder follow nicht nötig, da mongoose nur update
   // macht wenn entsprechendes dokumente zum updaten verfügbar sind
+
+  const postIds = posts.map((post) => post._id);
+
   await Comment.updateMany(
     { userId: authenticatedUserId },
     { $set: { inboxSeen: true } }
