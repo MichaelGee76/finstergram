@@ -17,8 +17,10 @@ export async function getUserPosts(userId) {
     gender: user.gender,
   };
   // folge ich:
+  // alter code nur die länge const followingNumber = await Follow.countDocuments({ userId });
   const followingNumber = await Follow.find({ userId });
   // folgen mir:
+  // alter code const followedNumber = await Follow.countDocuments({ followedId: userId });
   const followedNumber = await Follow.find({ followedId: userId });
 
   const posts = await Post.find({ userId }).sort({ createdAt: -1 });
