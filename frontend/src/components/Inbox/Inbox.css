@@ -1,0 +1,63 @@
+/* .inbox_sec {
+
+} */
+
+.inbox_sec article {
+  position: absolute;
+  top: 70px;
+  right: 24px;
+  background-color: var(--main-background);
+  border: 2px solid var(--light-pink);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.inbox_sec article div {
+  padding-block: 6px;
+  border-bottom: 1px solid var(--input-grey);
+  display: flex;
+  justify-content: space-between;
+}
+
+.inbox_profileimg {
+  width: 48px;
+  height: 48px;
+  border-radius: 100px;
+}
+
+.inbox_postimg {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+}
+
+.inbox_sec article .inbox_follow_wrapper {
+  justify-content: flex-start;
+}
+
+.inbox_sec .new_inbox_wrapper {
+  position: absolute;
+  top: 43px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inbox_dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 10px;
+  background-color: var(--mid-pink);
+}
+
+.new_inbox_wrapper p {
+  color: var(--mid-pink);
+  font-weight: 900;
+  font-size: 16px;
+}
