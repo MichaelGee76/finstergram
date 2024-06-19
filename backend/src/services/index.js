@@ -8,6 +8,8 @@ import { updateUser } from "../services/user/updateUser.js";
 import { loginUser } from "../services/user/loginUser.js";
 import { deleteUser } from "../services/user/deleteUser.js";
 import { logoutUser } from "../services/user/logoutUser.js";
+import { getInbox } from "./user/getInbox.js";
+import { updateInbox } from "./user/updateInbox.js";
 //Posts
 import { getUserPosts } from "./post/getUserPosts.js";
 import { getUserFeed } from "./post/getUserFeed.js";
@@ -37,7 +39,6 @@ import { updateMessage } from "./messages/updateMessage.js";
 import { deleteMessage } from "./messages/deleteMessage.js";
 import { getOneChat } from "./messages/getOneChat.js";
 import { getAllChats } from "./messages/getAllChats.js";
-import { getInbox } from "./user/getInbox.js";
 
 export const UserService = {
   registerUser,
@@ -50,6 +51,7 @@ export const UserService = {
   deleteUser,
   logoutUser,
   getInbox,
+  updateInbox,
 };
 
 export const PostServices = {

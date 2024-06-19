@@ -7,6 +7,7 @@ export const userRouter = express
   .Router()
   .get("/", doJWTAuth, UserController.getAllUsersCtrl)
   .get("/inbox", doJWTAuth, UserController.getInboxCtrl)
+  .patch("/inbox/updateInbox", doJWTAuth, UserController.updateInboxCtrl)
   .get("/:userId", doJWTAuth, UserController.getOneUserCtrl)
   .post("/login", UserController.postLoginUserCtrl)
   .post("/register", UserController.postRegisterUserCtrl)

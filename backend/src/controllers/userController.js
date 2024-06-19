@@ -128,6 +128,16 @@ const getInboxCtrl = asyncHandler(async (req, res) => {
   sendResponse(res, result);
 });
 
+const updateInboxCtrl = asyncHandler(async (req, res) => {
+  const authenticatedUserId = req.authenticatedUserId;
+  const result = await UserService.updateInbox(authenticatedUserId);
+
+  if (!result) {
+    res.status(500).json("Could not send email");
+  }
+  sendResponse(res, result);
+});
+
 export const UserController = {
   postRegisterUserCtrl,
   postVerifyEmailUserCtrl,
@@ -140,4 +150,5 @@ export const UserController = {
   postLogoutUserCtrl,
   getResendVerifyEmailCtrl,
   getInboxCtrl,
+  updateInboxCtrl,
 };

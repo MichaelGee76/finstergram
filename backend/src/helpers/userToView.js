@@ -13,6 +13,7 @@ export function userToView(user) {
     phone: user.phone,
     profession: user.profession,
     isOnline: user.isOnline,
+    followedId: user.followedId,
   };
 }
 
