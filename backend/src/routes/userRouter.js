@@ -1,5 +1,5 @@
 import { UserController } from "../controllers/userController.js";
-import { validateRefreshToken } from "../middlewares/doJwtAuth.js";
+import { validateRefreshTokenInCookieSession } from "../middlewares/doJwtAuth.js";
 import { doJWTAuth } from "../middlewares/doJwtAuth.js";
 import express from "express";
 
@@ -14,7 +14,7 @@ export const userRouter = express
   .delete("/:userId", doJWTAuth, UserController.deleteUserCtrl)
   .post(
     "/refresh-token",
-    validateRefreshToken,
+    validateRefreshTokenInCookieSession,
     UserController.postRefreshAccessTokenCtrl
   )
   .post("/logout", doJWTAuth, UserController.postLogoutUserCtrl);

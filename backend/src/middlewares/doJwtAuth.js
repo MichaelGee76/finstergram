@@ -1,56 +1,39 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+
 dotenv.config();
+const jwtSecret = process.env.JWT_SECRET;
 
-const secret = process.env.JWT_SECRET;
+const _invalidAuth = (res, message) =>
+  res.status(401).json({ message: message || "Invalid auth" });
 
-// ! Validierung Access-Token
+export const doJWTAuth = async (req, res, next) => {
+  if (!req.headers.authorization) return _invalidAuth(res);
 
-export async function doJWTAuth(req, res, next) {
-    const bearerToken = req.headers.authorization;
-    if (!bearerToken) return res.status(401).json({ message: "unauthorized" });
-    // * ⬇ deconstruction ⬇
-    const [authType, tokenString] = bearerToken.split(" ");
+  const [authType, tokenString] = req.headers.authorization.split(" ");
+  if (authType !== "Bearer" || !tokenString) return _invalidAuth(res);
 
-    if (authType !== "Bearer" || !tokenString)
-        return res.status(401).json({ message: "unauthorized" });
+  const verifyToken = createTokenVerifier(req, res, next);
+  verifyToken(tokenString, "access");
+};
 
+export const validateRefreshTokenInCookieSession = (req, res, next) => {
+  if (!req.session.refreshToken) return _invalidAuth(res);
+  const verifyToken = createTokenVerifier(req, res, next);
+  verifyToken(req.session.refreshToken, "refresh");
+};
+
+const createTokenVerifier = (req, res, next) => {
+  return function (token, expectType = "access") {
     try {
-        const verifiedClaims = jwt.verify(tokenString, secret);
-        // *  ⬇ access ⬇
-        if (verifiedClaims.type !== "access")
-            return res.status(401).json({ message: "unauthorized" });
+      const verifiedTokenClaims = jwt.verify(token, jwtSecret);
 
-        req.authenticatedUserId = verifiedClaims.sub;
-
-        next();
+      if (verifiedTokenClaims.type !== expectType) return _invalidAuth(res);
+      req.authenticatedUserId = verifiedTokenClaims.sub;
+      next();
     } catch (err) {
-        console.log(err);
-        return res.status(401).json({ message: "unauthorized" });
+      console.log(err);
+      return _invalidAuth(res);
     }
-}
-// ! Validierung Refresh-Token
-
-export async function validateRefreshToken(req, res, next) {
-    if (!req.session.refreshToken)
-        return res.status(401).json({ message: "unauthorized" });
-    const bearerToken = req.headers.authorization;
-    if (!bearerToken) return res.status(401).json({ message: "unauthorized" });
-    // * ⬇ deconstruction ⬇
-    const [authType, tokenString] = bearerToken.split(" ");
-
-    if (authType !== "Bearer" || !tokenString)
-        return res.status(401).json({ message: "unauthorized" });
-
-    try {
-        const verifiedClaims = jwt.verify(tokenString, secret);
-        // *  ⬇ refresh ⬇
-        if (verifiedClaims.type !== "refresh")
-            return res.status(401).json({ message: "unauthorized" });
-        req.authenticatedUserId = verifiedClaims.sub;
-        next();
-    } catch (err) {
-        console.log(err);
-        return res.status(401).json({ message: "unauthorized" });
-    }
-}
+  };
+};

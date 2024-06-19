@@ -37,10 +37,12 @@ const SignInUp = () => {
       .json();
 
     setUser(res.result.user);
-    // console.log(res.result.userData);
+    console.log(res.result.userData);
     setToken(res.result.tokens.accessToken);
 
     navigate("/");
+
+    e.preventDefault();
 
     // save token --> "logged in"
   };
