@@ -6,10 +6,13 @@ import ProfilPosts from "../../components/ProfilPosts/ProfilPosts";
 import ky from "ky";
 import { TokenDataContext, UserDataContext } from "../../components/context/Context";
 import { backendUrl } from "../../api/api";
+import ProfilPostsList from "../../components/ProfilPostsList/ProfilPostsList";
 
 const Profile = () => {
   const { token } = useContext(TokenDataContext);
   const { user } = useContext(UserDataContext);
+
+  console.log(user);
 
   const [activeSection, setActiveSection] = useState("posts");
   const [isUser, setIsUser] = useState(false);
@@ -20,12 +23,17 @@ const Profile = () => {
 
   const [following, setFollowing] = useState(false);
   const { id } = useParams();
+
   // * Toggle PopUp for edit user
   const [editPopup, setEditPopup] = useState(false);
   const toggleEditPopup = () => {
     setEditPopup(!editPopup);
   };
-  // * numbers format change if it is 5 digit
+  // * Toggle PopUp for post list
+  const [popupList, setPopupList] = useState(false);
+  const [updProfilFeed, setUpdProfilFeed] = useState(false);
+
+  // * numbers format change if it is 5 digit - for follower number
   const formatNumber = (num) => {
     if (num >= 10000) {
       return `${Math.floor(num / 1000)}.${String(num).slice(-3)}k`;
@@ -33,6 +41,7 @@ const Profile = () => {
     return num.toString();
   };
 
+  // * fetch for posts which contains also user datas
   useEffect(() => {
     const getUserPosts = async () => {
       const res = await ky
@@ -49,11 +58,13 @@ const Profile = () => {
       setIsUser(false);
     }
     getUserPosts();
-  }, []);
+  }, [setUpdProfilFeed]);
+
+  console.log(userProfile);
 
   return userProfile ? (
     <section className="profile">
-      {/*  Logo (Back Arrow), Username */}
+      {/*//! (Logo TOGGLE -> Back Arrow), Username */}
 
       <div className="profile_top">
         <div className="profile_title">
@@ -96,7 +107,7 @@ const Profile = () => {
           <h1>{userProfile.userData.userName}</h1>
         </div>
 
-        {/*  Post, Edit, Settings - (Only Settings) Icon */}
+        {/*//!  Post, Edit, (Settings TOGGLE -> Only Settings) */}
         <div className="profile_nav">
           {isUser ? (
             <div>
@@ -221,7 +232,7 @@ const Profile = () => {
           )}
         </div>
       </div>
-      {/* Profile image, edit only on auth User */}
+      {/* //! Profile image, edit only on auth User */}
       <div className="profile_info">
         <div className="profile_img">
           <img src={userProfile.userData.profilePicture} alt="profile-image" />
@@ -245,7 +256,7 @@ const Profile = () => {
             </svg>
           )}
         </div>
-        {/* PopUp component */}
+        {/* //# pop-up component */}
         {editPopup && (
           <EditPopup
             togglePopup={toggleEditPopup}
@@ -256,32 +267,35 @@ const Profile = () => {
           />
         )}
 
-        {/* name, titel, bio, link */}
+        {/* //! name, permission, bio, link */}
         <h1>{`${userProfile.userData.firstName} ${userProfile.userData.lastName}`}</h1>
 
         <p className="font_info">{userProfile.userData.profession}</p>
-        <p className="font_bio"> {userProfile.userData.bio}</p>
-        <a className="font_link" href="#"></a>
+        <p className="font_bio"> {userProfile.userData.userBio}</p>
+        <a className="font_link" href="#">
+          {userProfile.userData.website}
+        </a>
       </div>
 
-      {/* posts, follower, following */}
+      {/* //! posts, follower, following - number */}
       <div className="profile_numbers">
         <div className="profile_numberbox">
-          <h1>{formatNumber(333)}</h1>
+          <h1>{formatNumber(posts.length)}</h1>
           <p>Posts</p>
         </div>
 
         <div className="profile_numberbox profile_numberborder">
-          <h1>{userProfile.followedNumber}</h1>
+          <h1>{userProfile.followedNumber.length}</h1>
           <p>Follower</p>
         </div>
         <div className="profile_numberbox">
-          <h1>{userProfile.followingNumber}</h1>
+          <h1>{userProfile.followingNumber.length}</h1>
           <p>Gefolgt</p>
         </div>
       </div>
 
-      {/* Follow button only for visitors and change color  */}
+      {/* //! Follow button only for visitors and TOGGLE color  */}
+
       {!isUser &&
         (!following ? (
           <button className="button_unclicked">
@@ -309,8 +323,16 @@ const Profile = () => {
             Unfollow
           </button>
         ))}
-
-      <ProfilPosts posts={posts} activeSection={activeSection} setActiveSection={setActiveSection} />
+      {/* //# profilpost section component */}
+      <ProfilPosts
+        posts={posts}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+        setPopupList={setPopupList}
+      />
+      {popupList && (
+        <ProfilPostsList posts={userProfile} setPopupList={setPopupList} setUpdProfilFeed={setUpdProfilFeed} />
+      )}
     </section>
   ) : (
     <p>loading..</p>
@@ -318,3 +340,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+// posts.followednumber.map->item. if(item) ist in userfollowed , dann

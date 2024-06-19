@@ -1,6 +1,6 @@
 import "./ProfilPosts.css";
 
-const ProfilPosts = ({ activeSection, setActiveSection, posts }) => {
+const ProfilPosts = ({ activeSection, setActiveSection, posts, setPopupList }) => {
   return (
     <section className="profile_posts">
       {/* tabs for allposts, videos, tagged posts */}
@@ -35,7 +35,14 @@ const ProfilPosts = ({ activeSection, setActiveSection, posts }) => {
         >
           <div className="section">
             {posts && posts.length > 0 ? (
-              posts.map((item) => <img src={item.picture} alt="Beiträge" key={item._id} />)
+              posts.map((item) => (
+                <img
+                  src={item.picture}
+                  alt="Beiträge"
+                  key={item._id}
+                  onClick={() => setPopupList((popupList) => !popupList)}
+                />
+              ))
             ) : (
               <p>Hier sind alle Beiträge.</p>
             )}

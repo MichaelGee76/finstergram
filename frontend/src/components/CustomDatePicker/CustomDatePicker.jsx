@@ -92,7 +92,7 @@ const CustomDatePicker = ({ selected, onDateChange }) => {
 
   return (
     <DatePicker
-      selected={selected}
+      // selected={selected}
       onChange={handleDateChange}
       dateFormat="dd/MM/yyyy"
       showMonthDropdown

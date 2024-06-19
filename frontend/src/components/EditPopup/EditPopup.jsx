@@ -1,28 +1,60 @@
 import { useContext, useState } from "react";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import { TokenDataContext } from "../../components/context/Context";
+import Resizer from "react-image-file-resizer";
 
 import "./EditPopup.css";
 import ky from "ky";
 import { backendUrl } from "../../api/api";
 
+const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      500, // maximale Breite
+      500, // maximale Höhe
+      "JPEG", // Ausgabeformat
+      90, // Qualitätsstufe
+      0, // Drehung
+      (uri) => {
+        resolve(uri);
+      },
+      "base64" // Ausgabe-Typ
+    );
+  });
+
 const EditPopup = ({ togglePopup, userProfile, setUserProfile, id, setEditPopup }) => {
   const { token } = useContext(TokenDataContext);
   const userData = userProfile.userData;
+  const [newPicture, setNewPicture] = useState(false);
+
   const [userEdit, setUserEdit] = useState({
+    profilePicture: userData.profilePicture,
     firstName: userData.firstName,
     lastName: userData.lastName,
     userName: userData.userName,
     birthday: userData.birthday,
-    bio: userData.bio,
+    userBio: userData.userBio,
     phone: userData.phone,
     website: userData.website,
     profession: userData.profession,
     gender: userData.gender,
   });
 
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+
+    try {
+      const resizedBase64 = await resizeFile(file);
+      setUserEdit({ ...userEdit, profilePicture: resizedBase64 });
+      setNewPicture(resizedBase64);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [date, setDate] = useState("");
-  console.log(userData);
+
   const handleDateChange = (date) => {
     const options = {
       year: "numeric",
@@ -32,10 +64,9 @@ const EditPopup = ({ togglePopup, userProfile, setUserProfile, id, setEditPopup 
 
     const formattedDate = date.toLocaleDateString("de-DE", options);
     setDate(formattedDate);
-    setBirthEdit(date);
+    setUserEdit({ ...userEdit, birthday: formattedDate });
   };
 
-  console.log(userEdit);
   const editProfileSave = async () => {
     const res = await ky
       .patch(`${backendUrl}/users/${id}`, {
@@ -43,11 +74,12 @@ const EditPopup = ({ togglePopup, userProfile, setUserProfile, id, setEditPopup 
         json: userEdit,
       })
       .json();
-    console.log(res.result);
+
     setUserEdit(res.result);
     setUserProfile({ ...userProfile, userData: res.result });
     setEditPopup(false);
   };
+  console.log(userEdit);
 
   return (
     <section className="profile_edit">
@@ -74,60 +106,76 @@ const EditPopup = ({ togglePopup, userProfile, setUserProfile, id, setEditPopup 
         </div>
 
         <div className="profile_img edit_img">
-          <img src="../../../public/img/Setting.svg" alt="profile-image" />
-          <svg
-            className="edit_img_svg"
-            width="30"
-            height="30"
-            viewBox="0 0 30 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M20.8316 2.51292C22.6298 2.40054 24.4029 3.02489 25.7391 4.24862C26.9628 5.58474 27.5872 7.35791 27.4873 9.16853V20.8315C27.5997 22.6421 26.9628 24.4153 25.7516 25.7514C24.4154 26.9751 22.6298 27.5995 20.8316 27.4871H9.16859C7.35795 27.5995 5.58477 26.9751 4.24864 25.7514C3.02489 24.4153 2.40053 22.6421 2.51292 20.8315V9.16853C2.40053 7.35791 3.02489 5.58474 4.24864 4.24862C5.58477 3.02489 7.35795 2.40054 9.16859 2.51292H20.8316ZM13.7264 21.0562L22.1303 12.6275C22.892 11.8533 22.892 10.6045 22.1303 9.84283L20.5069 8.21951C19.7327 7.44532 18.484 7.44532 17.7098 8.21951L16.8732 9.06864C16.7483 9.19351 16.7483 9.40579 16.8732 9.53066C16.8732 9.53066 18.8586 11.5036 18.8961 11.5536C19.0335 11.7034 19.1209 11.9032 19.1209 12.128C19.1209 12.5775 18.7587 12.9521 18.2967 12.9521C18.0844 12.9521 17.8846 12.8647 17.7473 12.7274L15.6619 10.6545C15.562 10.5546 15.3872 10.5546 15.2873 10.6545L9.33092 16.6108C8.91884 17.0229 8.68159 17.5723 8.6691 18.1592L8.59418 21.1187C8.59418 21.281 8.64413 21.4308 8.75651 21.5432C8.8689 21.6556 9.01874 21.718 9.18107 21.718H12.1156C12.7149 21.718 13.2894 21.4808 13.7264 21.0562Z"
-              fill="#FF4D67"
-            />
-          </svg>
+          <img src={newPicture ? newPicture : userData.profilePicture} style={{ objectFit: "cover" }} />
+          <input
+            type="file"
+            id="edit_profilePicture"
+            style={{ display: "none" }}
+            accept=".jpg, .png, .jpeg"
+            onChange={handleImageChange}
+          />
+          <label htmlFor="edit_profilePicture">
+            <svg
+              className="edit_img_svg"
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M20.8316 2.51292C22.6298 2.40054 24.4029 3.02489 25.7391 4.24862C26.9628 5.58474 27.5872 7.35791 27.4873 9.16853V20.8315C27.5997 22.6421 26.9628 24.4153 25.7516 25.7514C24.4154 26.9751 22.6298 27.5995 20.8316 27.4871H9.16859C7.35795 27.5995 5.58477 26.9751 4.24864 25.7514C3.02489 24.4153 2.40053 22.6421 2.51292 20.8315V9.16853C2.40053 7.35791 3.02489 5.58474 4.24864 4.24862C5.58477 3.02489 7.35795 2.40054 9.16859 2.51292H20.8316ZM13.7264 21.0562L22.1303 12.6275C22.892 11.8533 22.892 10.6045 22.1303 9.84283L20.5069 8.21951C19.7327 7.44532 18.484 7.44532 17.7098 8.21951L16.8732 9.06864C16.7483 9.19351 16.7483 9.40579 16.8732 9.53066C16.8732 9.53066 18.8586 11.5036 18.8961 11.5536C19.0335 11.7034 19.1209 11.9032 19.1209 12.128C19.1209 12.5775 18.7587 12.9521 18.2967 12.9521C18.0844 12.9521 17.8846 12.8647 17.7473 12.7274L15.6619 10.6545C15.562 10.5546 15.3872 10.5546 15.2873 10.6545L9.33092 16.6108C8.91884 17.0229 8.68159 17.5723 8.6691 18.1592L8.59418 21.1187C8.59418 21.281 8.64413 21.4308 8.75651 21.5432C8.8689 21.6556 9.01874 21.718 9.18107 21.718H12.1156C12.7149 21.718 13.2894 21.4808 13.7264 21.0562Z"
+                fill="#FF4D67"
+              />
+            </svg>
+          </label>
         </div>
         <div className="edit_inputs">
           <input
+            placeholder="firstname"
             type="text"
             value={userEdit.firstName}
             onChange={(e) => setUserEdit({ ...userEdit, firstName: e.target.value })}
           />
           <input
+            placeholder="lastname"
             type="text"
             value={userEdit.lastName}
             onChange={(e) => setUserEdit({ ...userEdit, lastName: e.target.value })}
           />
           <input
+            placeholder="username"
             type="text"
             value={userEdit.userName}
             onChange={(e) => setUserEdit({ ...userEdit, userName: e.target.value })}
           />
           <div className="calendar">
-            <CustomDatePicker selected={userEdit.birthday} onDateChange={handleDateChange} />
-            <input type="text" value={userEdit.birthday} readOnly />
+            <CustomDatePicker onDateChange={handleDateChange} />
+            <input placeholder="birthday" type="text" value={userEdit.birthday} readOnly />
           </div>
           <input
+            placeholder="biography"
             type="text"
-            value={userEdit.bio}
-            onChange={(e) => setUserEdit({ ...userEdit, bio: e.target.value })}
+            value={userEdit.userBio}
+            onChange={(e) => setUserEdit({ ...userEdit, userBio: e.target.value })}
           />
           <input
+            placeholder="phone"
             type="tel"
             value={userEdit.phone}
             onChange={(e) => setUserEdit({ ...userEdit, phone: e.target.value })}
           />
 
           <input
+            placeholder="website"
             type="text"
             value={userEdit.website}
             onChange={(e) => setUserEdit({ ...userEdit, website: e.target.value })}
           />
           <input
+            placeholder="profession"
             type="text"
             value={userEdit.profession}
             onChange={(e) => setUserEdit({ ...userEdit, profession: e.target.value })}

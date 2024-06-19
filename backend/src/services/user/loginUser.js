@@ -6,8 +6,7 @@ import bcrypt from "bcryptjs";
 export async function loginUser({ email, password }, res) {
   const user = await User.findOne({ email });
   if (!user) throw new Error("Invalid login");
-  if (!user.isEmailVerified)
-    throw new Error("Email not verified,login aborted");
+  if (!user.isEmailVerified) throw new Error("Email not verified,login aborted");
 
   const isPasswordMatch = await bcrypt.compare(password, user.password);
   if (!isPasswordMatch) {
