@@ -2,7 +2,6 @@ import { Comment } from "../../models/comment.js";
 import { Like } from "../../models/like.js";
 import { Follow } from "../../models/follow.js";
 import { Post } from "../../models/post.js";
-import { FollowService } from "../index.js";
 
 export async function getInbox(authenticatedUserId) {
   const posts = await Post.find({ userId: authenticatedUserId });
