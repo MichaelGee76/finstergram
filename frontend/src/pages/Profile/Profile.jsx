@@ -21,7 +21,6 @@ const Profile = () => {
   const [posts, setPosts] = useState();
   const [userProfile, setUserProfile] = useState();
 
-  const [following, setFollowing] = useState(false);
   const { id } = useParams();
 
   // * Toggle PopUp for edit user
@@ -288,11 +287,11 @@ const Profile = () => {
         </div>
 
         <div className="profile_numberbox profile_numberborder">
-          <h1>{userProfile.followedNumber.length}</h1>
+          <h1>{userProfile.followedNumber}</h1>
           <p>Follower</p>
         </div>
         <div className="profile_numberbox">
-          <h1>{userProfile.followingNumber.length}</h1>
+          <h1>{userProfile.followingNumber}</h1>
           <p>Gefolgt</p>
         </div>
       </div>
@@ -300,7 +299,7 @@ const Profile = () => {
       {/* //! Follow button only for visitors and TOGGLE color  */}
 
       {!isUser &&
-        (!following ? (
+        (!userProfile.isFollowed ? (
           <button className="button_unclicked">
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
