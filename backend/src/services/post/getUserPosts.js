@@ -17,9 +17,9 @@ export async function getUserPosts(userId) {
     gender: user.gender,
   };
   // folge ich:
-  const followingNumber = await Follow.countDocuments({ userId });
+  const followingNumber = await Follow.find({ userId });
   // folgen mir:
-  const followedNumber = await Follow.countDocuments({ followedId: userId });
+  const followedNumber = await Follow.find({ followedId: userId });
 
   const posts = await Post.find({ userId }).sort({ createdAt: -1 });
   if (!posts) {
