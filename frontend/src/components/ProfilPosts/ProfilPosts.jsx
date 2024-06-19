@@ -1,8 +1,9 @@
-import "./ProfilPosts.css"
+import "./ProfilPosts.css";
 
-const ProfilPosts = ({ activeSection, setActiveSection }) => {
-    return ( <section className="profile_posts">
-        {/* tabs for allposts, videos, tagged posts */}
+const ProfilPosts = ({ activeSection, setActiveSection, posts }) => {
+  return (
+    <section className="profile_posts">
+      {/* tabs for allposts, videos, tagged posts */}
       <div className="profile_tabs">
         <div
           className={`tab ${activeSection === "posts" ? "active" : ""}`}
@@ -33,17 +34,18 @@ const ProfilPosts = ({ activeSection, setActiveSection }) => {
           }}
         >
           <div className="section">
-            {/* {userState ? userState.map((item)=>) <img src={item.img} alt="Beiträge" /> : <p>Hier sind alle Beiträge.</p>} */}
+            {posts && posts.length > 0 ? (
+              posts.map((item) => <img src={item.picture} alt="Beiträge" key={item._id} />)
+            ) : (
+              <p>Hier sind alle Beiträge.</p>
+            )}
           </div>
-          <div className="section">
-            {/* {userState ? <img src={item} alt="Videos" /> : <p>Hier sind alle Videos.</p>} */}
-          </div>
-          <div className="section">
-            {/* {userState ? <img src={item} alt="Markierungen" /> : <p>Hier sind alle Markierungen.</p>} */}
-          </div>
+          <div className="section"></div>
+          <div className="section"></div>
         </div>
       </div>
-    </section> );
-}
- 
+    </section>
+  );
+};
+
 export default ProfilPosts;
