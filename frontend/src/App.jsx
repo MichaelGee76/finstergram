@@ -14,6 +14,7 @@ import {
 } from "./components/context/Context";
 import Layout from "./components/Layout/Layout";
 import HashtagPosts from "./pages/HashtagPosts/HashtagPosts";
+import AuthRequired from "./components/Authrequired";
 
 function App() {
   const [user, setUser] = useState();
@@ -25,14 +26,63 @@ function App() {
         <BrowserRouter>
           <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/chat" element={<Chat />} />
-              <Route path="/chatDashboard" element={<ChatDashboard />} />
-              <Route path="/profile/:id" element={<Profile />} />
+              <Route
+                path="/"
+                element={
+                  <AuthRequired>
+                    <Home />
+                  </AuthRequired>
+                }
+              />
+              <Route
+                path="/chat"
+                element={
+                  <AuthRequired>
+                    <Chat />
+                  </AuthRequired>
+                }
+              />
+              <Route
+                path="/chatDashboard"
+                element={
+                  <AuthRequired>
+                    <ChatDashboard />
+                  </AuthRequired>
+                }
+              />
+              <Route
+                path="/profile/:id"
+                element={
+                  <AuthRequired>
+                    <Profile />
+                  </AuthRequired>
+                }
+              />
               <Route path="/signinup" element={<SignInUp />} />
-              <Route path="/upload" element={<Upload />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/hashtagposts/:hashtag" element={<HashtagPosts />} />
+              <Route
+                path="/upload"
+                element={
+                  <AuthRequired>
+                    <Upload />
+                  </AuthRequired>
+                }
+              />
+              <Route
+                path="/search"
+                element={
+                  <AuthRequired>
+                    <Search />
+                  </AuthRequired>
+                }
+              />
+              <Route
+                path="/hashtagposts/:hashtag"
+                element={
+                  <AuthRequired>
+                    <HashtagPosts />
+                  </AuthRequired>
+                }
+              />
             </Routes>
           </Layout>
         </BrowserRouter>
