@@ -9,7 +9,7 @@ const Inbox = () => {
   const [inbox, setInbox] = useState([]);
   useEffect(() => {
     const inboxHandler = async () => {
-      const res = ky
+      const res = await ky
         .get(`${backendUrl}/users/inbox`, {
           headers: {
             "Content-Type": "application/json",

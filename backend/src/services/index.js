@@ -37,6 +37,7 @@ import { updateMessage } from "./messages/updateMessage.js";
 import { deleteMessage } from "./messages/deleteMessage.js";
 import { getOneChat } from "./messages/getOneChat.js";
 import { getAllChats } from "./messages/getAllChats.js";
+import { getInbox } from "./user/getInbox.js";
 
 export const UserService = {
   registerUser,
@@ -48,6 +49,7 @@ export const UserService = {
   loginUser,
   deleteUser,
   logoutUser,
+  getInbox,
 };
 
 export const PostServices = {

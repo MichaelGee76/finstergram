@@ -120,7 +120,7 @@ const getResendVerifyEmailCtrl = asyncHandler(async (req, res) => {
 
 const getInboxCtrl = asyncHandler(async (req, res) => {
   const authenticatedUserId = req.authenticatedUserId;
-  const result = await UserService.getInBox(authenticatedUserId);
+  const result = await UserService.getInbox(authenticatedUserId);
 
   if (!result) {
     res.status(500).json("Could not send email");

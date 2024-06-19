@@ -6,6 +6,7 @@ import express from "express";
 export const userRouter = express
   .Router()
   .get("/", doJWTAuth, UserController.getAllUsersCtrl)
+  .get("/inbox", doJWTAuth, UserController.getInboxCtrl)
   .get("/:userId", doJWTAuth, UserController.getOneUserCtrl)
   .post("/login", UserController.postLoginUserCtrl)
   .post("/register", UserController.postRegisterUserCtrl)
@@ -13,7 +14,6 @@ export const userRouter = express
   .get("/resend-VerifyEmail/:id", UserController.getResendVerifyEmailCtrl)
   .patch("/:userId", doJWTAuth, UserController.updateUserCtrl)
   .delete("/:userId", doJWTAuth, UserController.deleteUserCtrl)
-  .get("/inbox", doJWTAuth, UserController.getInboxCtrl)
   .post(
     "/refresh-token",
     validateRefreshTokenInCookieSession,
