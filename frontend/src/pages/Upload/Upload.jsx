@@ -9,6 +9,7 @@ import {
   TokenDataContext,
   UserDataContext,
 } from "../../components/context/Context";
+import UploadImgFilter from "../../components/UploadImgFilter/UploadImgFilter";
 
 // -- Img verkleinern vor dem hochladen
 const resizeFile = (file) =>
@@ -27,6 +28,15 @@ const resizeFile = (file) =>
     );
   });
 
+const filterMethods = [
+  "blur",
+  "brightness",
+  "contrast",
+  "saturation",
+  "grayscale",
+  "sepia",
+];
+
 const Upload = () => {
   const [postUpload, setPostUpload] = useState({
     userId: "user._id",
@@ -37,23 +47,11 @@ const Upload = () => {
   const [hashtag, setHashtag] = useState();
   const [error, setError] = useState();
   const [successMessage, setSuccessMessage] = useState();
+  const [filterSlider, setFilterSlider] = useState(50);
   const { user } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
 
   const navigate = useNavigate();
-
-  // const handleImageChange = async (event) => {
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
-
-  //   reader.readAsDataURL(file);
-
-  //   reader.onload = async () => {
-  //     const base64 = reader.result;
-  //     const resizedBase64 = await resizeFile(base64);
-  //     setPostUpload({ ...postUpload, picture: resizedBase64 });
-  //   };
-  // };
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
@@ -169,6 +167,17 @@ const Upload = () => {
           </label>
         )}
       </div>
+      <section className="img_filter_sec">
+        <article>
+          {filterMethods.map((filter) => (
+            <UploadImgFilter
+              key={filter}
+              img={postUpload.picture}
+              filter={filter}
+            />
+          ))}
+        </article>
+      </section>
       {postUpload.picture && (
         <label htmlFor="img_upload" className="change_img">
           <img src="./img/ChangeImg.svg" alt="" />

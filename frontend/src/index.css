@@ -10,7 +10,10 @@
   font-family: urbanist;
   color: var(--main-text);
 }
-
+/* body {
+  overflow-x: hidden;
+  max-width: 100vw;
+} */
 img {
   max-width: 100%;
 }

@@ -5,6 +5,7 @@ import { backendUrl } from "../../api/api";
 import { TokenDataContext } from "../../components/context/Context";
 import ky from "ky";
 import Post from "../../components/Post/Post";
+import Inbox from "../../components/Inbox/Inbox";
 
 const Home = () => {
   const { token } = useContext(TokenDataContext);
@@ -31,6 +32,7 @@ const Home = () => {
 
   return (
     <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
+      <Inbox />
       <div className="dash_heading_div">
         <div>
           <img src="/img/LogoSmall.svg" alt="" />

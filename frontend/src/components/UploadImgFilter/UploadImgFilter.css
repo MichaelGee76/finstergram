@@ -1,0 +1,21 @@
+.img_filter_sec div {
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.img_filter_sec div:last-of-type {
+  padding-right: 26px;
+}
+
+.img_filter_sec div img {
+  height: 80px;
+  min-width: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.img_filter_sec div p {
+  font-weight: 600;
+}

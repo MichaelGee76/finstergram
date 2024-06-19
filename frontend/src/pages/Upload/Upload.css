@@ -4,6 +4,8 @@
   flex-direction: column;
   gap: 24px;
   margin-bottom: 106px;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .upload_heading {
@@ -219,4 +221,16 @@
   color: var(--mid-pink);
   font-size: 18px;
   font-weight: 600;
+}
+
+.img_filter_sec {
+  overflow: scroll;
+  white-space: nowrap;
+  /* width: 200%; */
+  margin-right: -24px;
+}
+
+.img_filter_sec article {
+  gap: 12px;
+  display: flex;
 }
