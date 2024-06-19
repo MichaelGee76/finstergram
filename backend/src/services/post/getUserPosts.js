@@ -10,7 +10,7 @@ export async function getUserPosts(userId) {
     profilePicture: user.profilePicture,
     userName: user.userName,
     profession: user.profession,
-    userbio: user.userBio,
+    userBio: user.userBio,
     website: user.website,
     birthday: user.birthday,
     phone: user.phone,

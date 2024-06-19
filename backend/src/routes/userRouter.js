@@ -10,8 +10,10 @@ export const userRouter = express
   .post("/login", UserController.postLoginUserCtrl)
   .post("/register", UserController.postRegisterUserCtrl)
   .get("/verifyEmail/:id", UserController.postVerifyEmailUserCtrl)
+  .get("/resend-VerifyEmail/:id", UserController.getResendVerifyEmailCtrl)
   .patch("/:userId", doJWTAuth, UserController.updateUserCtrl)
   .delete("/:userId", doJWTAuth, UserController.deleteUserCtrl)
+  .get("/inbox", doJWTAuth, UserController.getInboxCtrl)
   .post(
     "/refresh-token",
     validateRefreshTokenInCookieSession,
