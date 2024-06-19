@@ -28,20 +28,31 @@ export async function getUserPosts(userId, authenticatedUserId) {
     throw new Error("Oops, something went wrong. We could not load posts.");
   }
 
+  let isFollowed = false;
+
+  // if (userId !== authenticatedUserId) {
+  //   const following = await Follow.find({
+  //     userId: authenticatedUserId,
+  //     followedId: userId,
+  //   });
+  //   isFollowed = following ? true : false;
+  //   return isFollowed;
+  // }
+
   if (userId !== authenticatedUserId) {
-    const following = await Follow.find({
+    const following = await Follow.findOne({
       userId: authenticatedUserId,
       followedId: userId,
     });
-    const isFollowed = following ? true : false;
-    return isFollowed;
+    isFollowed = !!following; // Convert to boolean
   }
 
+  console.log(isFollowed);
   return {
     posts,
     userData,
-    followingNumber,
-    followedNumber,
+    followingNumber: followingNumber.length,
+    followedNumber: followedNumber.length,
     isFollowed: isFollowed,
   };
 }

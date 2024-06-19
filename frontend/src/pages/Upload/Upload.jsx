@@ -253,7 +253,8 @@ const Upload = () => {
           </label>
         )}
       </div>
-      <input className="filter_range" type="range" />
+      {filterValues.property && <input className="filter_range" type="range" />}
+
       {postUpload.picture && (
         <section className="img_filter_sec">
           <article>

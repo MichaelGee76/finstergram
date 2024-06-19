@@ -4,7 +4,10 @@ import EditPopup from "../../components/EditPopup/EditPopup";
 import { Link, useParams } from "react-router-dom";
 import ProfilPosts from "../../components/ProfilPosts/ProfilPosts";
 import ky from "ky";
-import { TokenDataContext, UserDataContext } from "../../components/context/Context";
+import {
+  TokenDataContext,
+  UserDataContext,
+} from "../../components/context/Context";
 import { backendUrl } from "../../api/api";
 
 const Profile = () => {
@@ -37,7 +40,10 @@ const Profile = () => {
     const getUserPosts = async () => {
       const res = await ky
         .get(`${backendUrl}/posts/userPosts/${id}`, {
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         })
         .json();
       setPosts(res.result.posts);
@@ -51,6 +57,8 @@ const Profile = () => {
     getUserPosts();
   }, []);
 
+  console.log(userProfile);
+
   return userProfile ? (
     <section className="profile">
       {/*  Logo (Back Arrow), Username */}
@@ -58,8 +66,19 @@ const Profile = () => {
       <div className="profile_top">
         <div className="profile_title">
           {isUser ? (
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="32" height="32" rx="12" fill="url(#paint0_linear_3509_1537)" />
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                width="32"
+                height="32"
+                rx="12"
+                fill="url(#paint0_linear_3509_1537)"
+              />
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -81,7 +100,13 @@ const Profile = () => {
               </defs>
             </svg>
           ) : (
-            <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="20"
+              height="17"
+              viewBox="0 0 20 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M19.3333 8.32007C19.3333 8.76305 19.0042 9.12914 18.5771 9.18708L18.4583 9.19507L0.958342 9.19507C0.475093 9.19507 0.0833422 8.80332 0.0833422 8.32007C0.0833422 7.87709 0.412522 7.511 0.83961 7.45306L0.958342 7.44507L18.4583 7.44507C18.9416 7.44507 19.3333 7.83682 19.3333 8.32007Z"
                 fill="#212121"
@@ -101,7 +126,13 @@ const Profile = () => {
           {isUser ? (
             <div>
               <Link to={"/upload"}>
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M14.043 9.87305V18.2129"
                     stroke="#212121"
@@ -127,7 +158,13 @@ const Profile = () => {
                   />
                 </svg>
               </Link>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M16.0386 23.8501H24.5"
                   stroke="#212121"
@@ -152,7 +189,13 @@ const Profile = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -186,7 +229,13 @@ const Profile = () => {
               </svg>
             </div>
           ) : (
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -285,7 +334,13 @@ const Profile = () => {
       {!isUser &&
         (!following ? (
           <button className="button_unclicked">
-            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 21 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -297,20 +352,37 @@ const Profile = () => {
           </button>
         ) : (
           <button className="button_clicked">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M12.0522 6.27229C12.0522 8.59746 10.2121 10.4613 7.91663 10.4613C5.62115 10.4613 3.7811 8.59746 3.7811 6.27229C3.7811 3.94711 5.62115 2.08325 7.91663 2.08325C10.2121 2.08325 12.0522 3.94711 12.0522 6.27229ZM1.66663 15.2053C1.66663 13.0516 4.54515 12.5126 7.91663 12.5126C11.3056 12.5126 14.1666 13.0702 14.1666 15.2239C14.1666 17.3775 11.2873 17.9166 7.91663 17.9166C4.52763 17.9166 1.66663 17.3581 1.66663 15.2053Z"
                 fill="white"
               />
-              <rect x="14.5" y="8" width="5" height="1.5" rx="0.75" fill="white" />
+              <rect
+                x="14.5"
+                y="8"
+                width="5"
+                height="1.5"
+                rx="0.75"
+                fill="white"
+              />
             </svg>
             Unfollow
           </button>
         ))}
 
-      <ProfilPosts posts={posts} activeSection={activeSection} setActiveSection={setActiveSection} />
+      <ProfilPosts
+        posts={posts}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
     </section>
   ) : (
     <p>loading..</p>

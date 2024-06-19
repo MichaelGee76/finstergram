@@ -12,20 +12,20 @@ export async function getInbox(authenticatedUserId) {
     postId: { $in: postIds },
     inboxSeen: false,
   })
-    .populate("userId userName profilePicture")
-    .populate("postId picture");
+    .populate({ path: "userId", select: " userName profilePicture" })
+    .populate({ path: "postId", select: "postId picture" });
 
   const comments = await Comment.find({
     postId: { $in: postIds },
     inboxSeen: false,
   })
-    .populate("userId userName profilePicture")
-    .populate("postId picture");
+    .populate({ path: "userId", select: " userName profilePicture" })
+    .populate({ path: "postId", select: "postId picture" });
 
   const follows = await Follow.find({
     followedId: authenticatedUserId,
     inboxSeen: false,
-  }).populate("userId userName profilePicture");
+  }).populate({ path: "userId", select: " userName profilePicture" });
 
   //alle items kombiniert in einem Array und  nach datum sortiert
   const boxArr = [
