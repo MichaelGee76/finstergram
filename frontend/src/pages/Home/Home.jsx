@@ -30,6 +30,8 @@ const Home = () => {
     getUserFeed();
   }, [updUserFeed]);
 
+  console.log(feed[0]);
+
   return (
     <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
       <Inbox />

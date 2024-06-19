@@ -37,6 +37,16 @@
   align-items: center;
 }
 
+.upload_img {
+  border-radius: 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .img_upload_wrapper label {
   position: absolute;
   top: 50%;
@@ -233,4 +243,28 @@
 .img_filter_sec article {
   gap: 12px;
   display: flex;
+  padding: 4px;
 }
+
+.filter_range {
+  margin-block: -6px -12px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 15rem;
+}
+
+.filter_range::-webkit-slider-runnable-track {
+  background: #053a5f;
+  height: 0.5rem;
+}
+
+/******** Firefox ********/
+.filter_range::-moz-range-track {
+  background: #053a5f;
+  height: 0.5rem;
+}
+
+.filter_range::-webkit-slider-thumb{}
+.filter_range::-moz-range-thumb{}

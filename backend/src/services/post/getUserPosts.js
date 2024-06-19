@@ -2,7 +2,7 @@ import { Post } from "../../models/post.js";
 import { User } from "../../models/user.js";
 import { Follow } from "../../models/follow.js";
 
-export async function getUserPosts(userId) {
+export async function getUserPosts(userId, authenticatedUserId) {
   const user = await User.findById(userId);
   const userData = {
     firstName: user.firstName,
@@ -26,10 +26,20 @@ export async function getUserPosts(userId) {
     throw new Error("Oops, something went wrong. We could not load posts.");
   }
 
+  if (userId !== authenticatedUserId) {
+    const following = await Follow.find({
+      userId: authenticatedUserId,
+      followedId: userId,
+    });
+    const isFollowed = following ? true : false;
+    return isFollowed;
+  }
+
   return {
     posts,
     userData,
     followingNumber,
     followedNumber,
+    isFollowed: isFollowed,
   };
 }

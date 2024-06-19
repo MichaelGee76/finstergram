@@ -29,12 +29,76 @@ const resizeFile = (file) =>
   });
 
 const filterMethods = [
-  "blur",
-  "brightness",
-  "contrast",
-  "saturation",
-  "grayscale",
-  "sepia",
+  {
+    name: "Brightness",
+    property: "brightness",
+    value: 100,
+    range: {
+      min: 0,
+      max: 200,
+    },
+    unit: "%",
+  },
+  {
+    name: "Contrast",
+    property: "contrast",
+    value: 100,
+    range: {
+      min: 0,
+      max: 200,
+    },
+    unit: "%",
+  },
+  {
+    name: "Saturation",
+    property: "saturate",
+    value: 100,
+    range: {
+      min: 0,
+      max: 200,
+    },
+    unit: "%",
+  },
+  {
+    name: "Grayscale",
+    property: "grayscale",
+    value: 50,
+    range: {
+      min: 0,
+      max: 100,
+    },
+    unit: "%",
+  },
+  {
+    name: "Sepia",
+    property: "sepia",
+    value: 50,
+    range: {
+      min: 0,
+      max: 100,
+    },
+    unit: "%",
+  },
+  {
+    name: "Hue Rotate",
+    property: "hue-rotate",
+    value: 180,
+    range: {
+      min: 0,
+      max: 360,
+    },
+    unit: "deg",
+  },
+  {
+    name: "Blur",
+    property: "blur",
+    value: 0.7,
+    range: {
+      min: 0,
+      max: 20,
+    },
+    unit: "px",
+  },
 ];
 
 const Upload = () => {
@@ -47,10 +111,19 @@ const Upload = () => {
   const [hashtag, setHashtag] = useState();
   const [error, setError] = useState();
   const [successMessage, setSuccessMessage] = useState();
-  const [filterSlider, setFilterSlider] = useState(50);
+  const [filterScale, setFilterScale] = useState(50);
+  const [filterValues, setFilterValues] = useState({
+    property: "",
+    value: "",
+    range: {
+      min: 0,
+      max: 0,
+    },
+    unit: "",
+  });
   const { user } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
-
+  console.log(filterValues);
   const navigate = useNavigate();
 
   const handleImageChange = async (event) => {
@@ -138,7 +211,9 @@ const Upload = () => {
       console.log(err);
     }
   };
+  console.log(filterMethods);
 
+  const filterMainImg = () => {};
   return (
     <main className="upload_section">
       <div className="upload_heading">
@@ -147,6 +222,7 @@ const Upload = () => {
         </button>
         <h1>New Post</h1>
       </div>
+
       <div
         className="img_upload_wrapper"
         style={
@@ -160,24 +236,40 @@ const Upload = () => {
               }
         }
       >
-        {!postUpload.picture && (
+        {" "}
+        {postUpload.picture ? (
+          <img
+            className="upload_img"
+            src={postUpload.picture}
+            style={{
+              filter: `${filterValues.property}(${filterValues.value}${filterValues.unit})`,
+              WebkitFilterVfilterValues: `${filterValues.property}(${filterValues.value}${filterValues.unit})`,
+            }}
+          />
+        ) : (
           <label htmlFor="img_upload">
             <img src="./img/CameraBright.svg" alt="" />
             <p>Upload</p>
           </label>
         )}
       </div>
-      <section className="img_filter_sec">
-        <article>
-          {filterMethods.map((filter) => (
-            <UploadImgFilter
-              key={filter}
-              img={postUpload.picture}
-              filter={filter}
-            />
-          ))}
-        </article>
-      </section>
+      <input className="filter_range" type="range" />
+      {postUpload.picture && (
+        <section className="img_filter_sec">
+          <article>
+            {filterMethods.map((filter) => (
+              <UploadImgFilter
+                setFilterValues={setFilterValues}
+                key={filter.property}
+                img={postUpload.picture}
+                filter={filter}
+                scale={filterScale}
+              />
+            ))}
+          </article>
+        </section>
+      )}
+
       {postUpload.picture && (
         <label htmlFor="img_upload" className="change_img">
           <img src="./img/ChangeImg.svg" alt="" />

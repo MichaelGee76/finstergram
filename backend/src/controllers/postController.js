@@ -4,8 +4,9 @@ import { sendResponse } from "../helpers/userToView.js";
 import asyncHandler from "express-async-handler";
 
 const getUserPostsCtrl = asyncHandler(async (req, res) => {
+  const authenticatedUserId = req.authenticatedUserId;
   const userId = req.params.userId;
-  const result = await PostServices.getUserPosts(userId);
+  const result = await PostServices.getUserPosts(userId, authenticatedUserId);
   if (!result) {
     res.status(500).json("Could not get all posts");
   }
@@ -25,7 +26,13 @@ const postNewPostCtrl = asyncHandler(async (req, res) => {
   const authenticatedUserId = req.authenticatedUserId;
   const { location, picture, description, hashtags } = req.body;
 
-  const result = await PostServices.postNewPost(authenticatedUserId, location, picture, description, hashtags);
+  const result = await PostServices.postNewPost(
+    authenticatedUserId,
+    location,
+    picture,
+    description,
+    hashtags
+  );
   if (!result) {
     res.status(500).json({ message: "Could not create post" });
   }
@@ -36,7 +43,11 @@ const updatePostCtrl = asyncHandler(async (req, res) => {
   const authenticatedUserId = req.authenticatedUserId;
   const contentToUpdate = req.body;
   const postId = req.params.postId;
-  const result = await PostServices.updatePost(authenticatedUserId, contentToUpdate, postId);
+  const result = await PostServices.updatePost(
+    authenticatedUserId,
+    contentToUpdate,
+    postId
+  );
   if (!result) {
     res.status(500).json({ message: "Could not update post" });
   }
@@ -60,7 +71,10 @@ const getAllPostsWithHashtagsCtrl = asyncHandler(async (req, res) => {
   const authenticatedUserId = req.authenticatedUserId;
   const hashtag = req.params.hashtag;
 
-  const result = await PostServices.getAllPostsWithHashtags(authenticatedUserId, hashtag);
+  const result = await PostServices.getAllPostsWithHashtags(
+    authenticatedUserId,
+    hashtag
+  );
 
   if (!result) {
     res.status(500).json("Could find what you are looking for");
