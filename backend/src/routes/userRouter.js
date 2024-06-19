@@ -13,7 +13,7 @@ export const userRouter = express
   .get("/resend-VerifyEmail/:id", UserController.getResendVerifyEmailCtrl)
   .patch("/:userId", doJWTAuth, UserController.updateUserCtrl)
   .delete("/:userId", doJWTAuth, UserController.deleteUserCtrl)
-  .get("/inBox/:id", doJWTAuth, UserController.getInboxCtrl)
+  .get("/inbox", doJWTAuth, UserController.getInboxCtrl)
   .post(
     "/refresh-token",
     validateRefreshTokenInCookieSession,
