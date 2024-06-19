@@ -24,3 +24,20 @@
   overflow: hidden;
   width: 100%;
 }
+.sections {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  width: 300%;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.section img {
+  width: 115px;
+  height: 115px;
+  object-fit: cover;
+}
