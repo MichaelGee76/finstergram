@@ -123,7 +123,6 @@ const Upload = () => {
   });
   const { user } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
-  console.log(filterValues);
   const navigate = useNavigate();
 
   const handleImageChange = async (event) => {
@@ -211,9 +210,8 @@ const Upload = () => {
       console.log(err);
     }
   };
-  console.log(filterMethods);
 
-  const filterMainImg = () => {};
+  // console.log(filterValues.range.min? filterValues.range.min);
   return (
     <main className="upload_section">
       <div className="upload_heading">
@@ -236,7 +234,6 @@ const Upload = () => {
               }
         }
       >
-        {" "}
         {postUpload.picture ? (
           <img
             className="upload_img"
@@ -253,7 +250,18 @@ const Upload = () => {
           </label>
         )}
       </div>
-      {filterValues.property && <input className="filter_range" type="range" />}
+      {filterValues.property && (
+        <input
+          className="filter_range"
+          type="range"
+          min={filterValues.range.min}
+          max={filterValues.range.max}
+          value={filterValues.value}
+          onChange={(event) =>
+            setFilterValues({ ...filterValues, value: event.target.value })
+          }
+        />
+      )}
 
       {postUpload.picture && (
         <section className="img_filter_sec">

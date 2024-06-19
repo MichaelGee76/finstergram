@@ -24,7 +24,11 @@ const Inbox = () => {
   }, []);
 
   console.log(inbox);
-  return <div></div>;
+  return (
+    <div>
+      <img src="/img/Heart.svg" alt="" />
+    </div>
+  );
 };
 
 export default Inbox;

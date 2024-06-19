@@ -250,21 +250,40 @@
   margin-block: -6px -12px;
   -webkit-appearance: none;
   appearance: none;
-  background: transparent;
+  background: var(--input-grey);
   cursor: pointer;
-  width: 15rem;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .filter_range::-webkit-slider-runnable-track {
-  background: #053a5f;
+  background: var(--light-pink);
   height: 0.5rem;
+  border-radius: 20px;
 }
 
 /******** Firefox ********/
 .filter_range::-moz-range-track {
-  background: #053a5f;
+  background: var(--light-pink);
   height: 0.5rem;
+  border-radius: 20px;
 }
 
-.filter_range::-webkit-slider-thumb{}
-.filter_range::-moz-range-thumb{}
+.filter_range::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -4px; /* Centers thumb on the track */
+  width: 1rem;
+  height: 1rem;
+  border-radius: 20px;
+  background-color: var(--mid-pink);
+}
+.filter_range::-moz-range-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -4px; /* Centers thumb on the track */
+  width: 1rem;
+  height: 1rem;
+  border-radius: 20px;
+  background-color: var(--mid-pink);
+}

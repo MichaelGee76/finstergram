@@ -30,15 +30,6 @@ export async function getUserPosts(userId, authenticatedUserId) {
 
   let isFollowed = false;
 
-  // if (userId !== authenticatedUserId) {
-  //   const following = await Follow.find({
-  //     userId: authenticatedUserId,
-  //     followedId: userId,
-  //   });
-  //   isFollowed = following ? true : false;
-  //   return isFollowed;
-  // }
-
   if (userId !== authenticatedUserId) {
     const following = await Follow.findOne({
       userId: authenticatedUserId,

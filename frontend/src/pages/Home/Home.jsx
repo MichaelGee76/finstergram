@@ -32,7 +32,6 @@ const Home = () => {
 
   return (
     <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
-      <Inbox />
       <div className="dash_heading_div">
         <div>
           <img src="/img/LogoSmall.svg" alt="" />
@@ -42,9 +41,7 @@ const Home = () => {
           <Link to="/chatDashboard">
             <img src="/img/Messanger.svg" alt="" />
           </Link>
-          <Link>
-            <img src="/img/Heart.svg" alt="" />
-          </Link>
+          <Inbox />
         </div>
       </div>
 
