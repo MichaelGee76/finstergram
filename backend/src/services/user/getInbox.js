@@ -5,7 +5,7 @@ import { Post } from "../../models/post.js";
 import { FollowService } from "../index.js";
 
 export async function getInbox(authenticatedUserId) {
-  const posts = await Post.find(authenticatedUserId);
+  const posts = await Post.find({ userId: authenticatedUserId });
 
   const postIds = posts.map((post) => post._id);
 
@@ -16,7 +16,10 @@ export async function getInbox(authenticatedUserId) {
     inboxSeen: false,
   });
 
-  const follows = await Follow.find({ followedId: userId, inboxSeen: false });
+  const follows = await Follow.find({
+    followedId: authenticatedUserId,
+    inboxSeen: false,
+  });
 
   //alle items kombiniert in einem Array und  nach datum sortiert
   const boxArr = [
