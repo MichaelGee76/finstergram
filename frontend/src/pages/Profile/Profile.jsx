@@ -46,7 +46,10 @@ const Profile = () => {
     const getUserPosts = async () => {
       const res = await ky
         .get(`${backendUrl}/posts/userPosts/${id}`, {
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         })
         .json();
       setPosts(res.result.posts);
