@@ -1,4 +1,6 @@
+import { userToView } from "../../helpers/userToView.js";
 import { User } from "../../models/user.js";
+import { createToken } from "../../utils/createToken.js";
 
 export async function refreshAccessToken(authenticatedUserId) {
   const user = await User.findById(authenticatedUserId);
@@ -7,6 +9,10 @@ export async function refreshAccessToken(authenticatedUserId) {
   if (!user.isEmailVerified)
     throw new Error("User is not verified, check ur mails");
 
-  const getToken = createToken(user, "access");
-  return getToken;
+  const newAccessToken = createToken(user, "access");
+  const currentUser = userToView(user);
+  return {
+    newAccessToken,
+    user: currentUser,
+  };
 }

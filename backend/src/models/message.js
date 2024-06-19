@@ -8,6 +8,7 @@ const messageSchema = new mongoose.Schema(
             required: true,
         },
         text: { type: String, required: true, trim: true },
+        wasRead: { type: Boolean, default: true },
     },
     { collection: "message", timestamps: true }
 );

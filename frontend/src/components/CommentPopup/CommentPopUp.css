@@ -65,3 +65,17 @@
 .cmnt_popup .post_reactions {
   margin: unset;
 }
+
+.cmnt_section {
+  margin-bottom: 40px;
+}
+
+.more_cmnts_btn {
+  background-color: unset;
+  border: unset;
+  margin-left: 36%;
+  color: var(--light-pink);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}

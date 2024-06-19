@@ -31,7 +31,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
   const { token } = useContext(TokenDataContext);
 
   const saveToggleHandler = async () => {
-    if (postData.savedByUser) {
+    if (!saveToggle) {
       const res = await ky
         .post(`${backendUrl}/save/${postData._id}`, {
           headers: {
@@ -55,6 +55,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
       setSaveToggle((saveToggle) => !saveToggle);
     }
   };
+
   const likeToggleHandler = async () => {
     if (!likeToggle) {
       const res = await ky
@@ -121,7 +122,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
           </Link>
           {user._id === postData.userId._id && (
             <button>
-              <img src="./img/MoreCircle.svg" alt="" />
+              <img src="/img/MoreCircle.svg" alt="" />
             </button>
           )}
         </div>
@@ -130,21 +131,21 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
           <div>
             <img
               onClick={saveToggleHandler}
-              src={saveToggle ? "./img/SaveClicked.svg" : "./img/Save.svg"}
+              src={saveToggle ? "/img/SaveClicked.svg" : "/img/Save.svg"}
               alt=""
             />
           </div>
           <div>
             <img
               onClick={likeToggleHandler}
-              src={likeToggle ? "./img/HeartFilled.svg" : "./img/Heart.svg"}
+              src={likeToggle ? "/img/HeartFilled.svg" : "/img/Heart.svg"}
               alt=""
             />
 
             <p>{Number(crementLike)}</p>
           </div>
           <div onClick={openPopUpHandler}>
-            <img src="./img/Comments.svg" alt="" />
+            <img src="/img/Comments.svg" alt="" />
 
             <p>{postData.comments}</p>
           </div>

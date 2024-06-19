@@ -57,16 +57,22 @@ const deletePostCtrl = asyncHandler(async (req, res) => {
 
 const getAllPostsWithHashtagsCtrl = asyncHandler(async (req, res) => {
   // brauchen wir eigentlich nicht schützen, oder?
-  // const authenticatedUserId = req.authenticatedUserId;
-  const hashtag = req.body;
+  const authenticatedUserId = req.authenticatedUserId;
+  const hashtag = req.params.hashtag;
 
-  const result = await PostServices.getAllPostsWithHashtags(
-    // authenticatedUserId
-    hashtag
-  );
+  const result = await PostServices.getAllPostsWithHashtags(authenticatedUserId, hashtag);
 
   if (!result) {
     res.status(500).json("Could find what you are looking for");
+  }
+  sendResponse(res, result);
+});
+
+const getAllHashtagsCtrl = asyncHandler(async (req, res) => {
+  const result = await PostServices.getHashtag();
+
+  if (!result) {
+    res.status(500).json("Could not get hashtag ");
   }
   sendResponse(res, result);
 });
@@ -78,4 +84,5 @@ export const PostController = {
   updatePostCtrl,
   deletePostCtrl,
   getAllPostsWithHashtagsCtrl,
+  getAllHashtagsCtrl,
 };

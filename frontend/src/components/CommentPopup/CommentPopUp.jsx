@@ -19,10 +19,10 @@ const CommentPopUp = ({
 }) => {
   const [comments, setComments] = useState([]);
   const [commentUpd, setCommentUpd] = useState(false);
+  const [loadMoreComments, setLoadMoreComments] = useState(6);
   const [replyMessage, setReplyMessage] = useState("");
   const { user, setUser } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
-  console.log(postData);
 
   useEffect(() => {
     const getCommentsFromPost = async () => {
@@ -39,7 +39,7 @@ const CommentPopUp = ({
 
     getCommentsFromPost();
   }, [commentUpd]);
-  console.log(comments);
+
   return (
     <section className="cmnt_popup">
       <div className="cmt_upper">
@@ -110,16 +110,28 @@ const CommentPopUp = ({
       </article>
       <section className="cmnt_section">
         {comments.length > 0 ? (
-          comments?.map((comment) => (
-            <Comment
-              key={comment._id}
-              comment={comment}
-              postData={postData}
-              setReplyMessage={setReplyMessage}
-            />
-          ))
+          comments
+            .slice(0, loadMoreComments)
+            ?.map((comment) => (
+              <Comment
+                key={comment._id}
+                comment={comment}
+                postData={postData}
+                setReplyMessage={setReplyMessage}
+              />
+            ))
         ) : (
           <p>No comments yet. Be the first one to leave a comment!</p>
+        )}
+        {comments.length >= loadMoreComments && (
+          <button
+            onClick={() =>
+              setLoadMoreComments((loadMoreComments) => loadMoreComments + 5)
+            }
+            className="more_cmnts_btn"
+          >
+            more comments
+          </button>
         )}
       </section>
       <PostComment

@@ -1,21 +1,26 @@
+import { Link, useParams } from "react-router-dom";
+import "./HashtagPosts.css";
 import { useContext, useEffect, useState } from "react";
-import "./Home.css";
-import { Link } from "react-router-dom";
-import { backendUrl } from "../../api/api";
-import { TokenDataContext } from "../../components/context/Context";
+import {
+  TokenDataContext,
+  UserDataContext,
+} from "../../components/context/Context";
 import ky from "ky";
+import { backendUrl } from "../../api/api";
 import Post from "../../components/Post/Post";
 
-const Home = () => {
+const HashtagPosts = () => {
   const { token } = useContext(TokenDataContext);
-  const [feed, setFeed] = useState();
-  const [updUserFeed, setUpdUserFeed] = useState(false);
+  const { user } = useContext(UserDataContext);
+  const [hashtagFeed, setHashtagFeed] = useState();
+  const [updHashtagFeed, setUpdHashtagFeed] = useState(false);
   const [fixBG, setFixBg] = useState(false);
+  const { hashtag } = useParams();
 
   useEffect(() => {
-    const getUserFeed = async () => {
+    const getHashtagFeed = async () => {
       const res = await ky
-        .get(`${backendUrl}/posts/userFeed`, {
+        .get(`${backendUrl}/posts/allPostsWithHashtag/${hashtag}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -23,14 +28,19 @@ const Home = () => {
         })
         .json();
 
-      setFeed(res.result);
+      setHashtagFeed(res.result);
     };
 
-    getUserFeed();
-  }, [updUserFeed]);
+    getHashtagFeed();
+  }, [updHashtagFeed]);
+
+  console.log(hashtagFeed);
 
   return (
-    <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
+    <main
+      className="dash_section hashtag_posts_sec"
+      style={fixBG ? { overflow: "hidden" } : {}}
+    >
       <div className="dash_heading_div">
         <div>
           <img src="/img/LogoSmall.svg" alt="" />
@@ -45,14 +55,13 @@ const Home = () => {
           </Link>
         </div>
       </div>
-
       <section className="posts_section">
-        {feed?.map((post) => (
+        {hashtagFeed?.map((post) => (
           <Post
             setFixBg={setFixBg}
             key={post._id}
             postData={post}
-            setUpdUserFeed={setUpdUserFeed}
+            setUpdUserFeed={setUpdHashtagFeed}
           />
         ))}
       </section>
@@ -60,4 +69,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HashtagPosts;
