@@ -45,6 +45,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
+
       <section className="posts_section">
         {feed?.map((post) => (
           <Post
