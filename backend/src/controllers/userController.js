@@ -89,10 +89,22 @@ const deleteUserCtrl = asyncHandler(async (req, res) => {
   res.status(200).json({ result });
 });
 
+//*brauchen hier unten keinen service extra schreiben, du seckel!!!!!!
+
 const postLogoutUserCtrl = asyncHandler(async (req, res) => {
   req.session.refreshToken = null;
   const result = "You are now logged out";
   sendResponse(res, result);
+});
+
+const getResendVerifyEmailCtrl = asyncHandler(async (req, res) => {
+  const userId = req.params.id;
+
+  const result = await UserService.resendVerifyEmail(userId);
+  if (!result) {
+    res.status(500).json("Could not send email");
+  }
+  res.status(200).json({ result });
 });
 
 export const UserController = {
@@ -105,4 +117,5 @@ export const UserController = {
   postLoginUserCtrl,
   deleteUserCtrl,
   postLogoutUserCtrl,
+  getResendVerifyEmailCtrl,
 };
