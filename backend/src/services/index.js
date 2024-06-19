@@ -7,6 +7,7 @@ import { refreshAccessToken } from "../services/user/refreshAccessToken.js";
 import { updateUser } from "../services/user/updateUser.js";
 import { loginUser } from "../services/user/loginUser.js";
 import { deleteUser } from "../services/user/deleteUser.js";
+import { logoutUser } from "../services/user/logoutUser.js";
 //Posts
 import { getUserPosts } from "./post/getUserPosts.js";
 import { getUserFeed } from "./post/getUserFeed.js";
@@ -38,53 +39,54 @@ import { getOneChat } from "./messages/getOneChat.js";
 import { getAllChats } from "./messages/getAllChats.js";
 
 export const UserService = {
-    registerUser,
-    verifyEmailUser,
-    showAllUsers,
-    showOneUser,
-    refreshAccessToken,
-    updateUser,
-    loginUser,
-    deleteUser,
+  registerUser,
+  verifyEmailUser,
+  showAllUsers,
+  showOneUser,
+  refreshAccessToken,
+  updateUser,
+  loginUser,
+  deleteUser,
+  logoutUser,
 };
 
 export const PostServices = {
-    getUserPosts,
-    getUserFeed,
-    postNewPost,
-    updatePost,
-    deletePost,
-    getAllPostsWithHashtags,
-    getHashtag,
+  getUserPosts,
+  getUserFeed,
+  postNewPost,
+  updatePost,
+  deletePost,
+  getAllPostsWithHashtags,
+  getHashtag,
 };
 
 export const CommentService = {
-    postComment,
-    deleteComment,
-    patchComment,
-    getAllCommentsFromPost,
+  postComment,
+  deleteComment,
+  patchComment,
+  getAllCommentsFromPost,
 };
 
 export const LikeService = {
-    postLike,
-    deleteLike,
+  postLike,
+  deleteLike,
 };
 
 export const FollowService = {
-    postFollow,
-    deleteFollow,
+  postFollow,
+  deleteFollow,
 };
 
 export const SaveService = {
-    savePost,
-    deleteSavePost,
-    getSavedPosts,
+  savePost,
+  deleteSavePost,
+  getSavedPosts,
 };
 
 export const MessageService = {
-    postMessage,
-    deleteMessage,
-    updateMessage,
-    getOneChat,
-    getAllChats,
+  postMessage,
+  deleteMessage,
+  updateMessage,
+  getOneChat,
+  getAllChats,
 };

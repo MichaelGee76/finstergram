@@ -17,6 +17,7 @@ export async function loginUser({ email, password }, res) {
 
   const accessToken = createToken(user, "access");
   const refreshToken = createToken(user, "refresh");
+  user.isOnline = true;
   return {
     user: userToView(user),
     tokens: { accessToken, refreshToken },

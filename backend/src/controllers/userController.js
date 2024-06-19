@@ -90,21 +90,42 @@ const deleteUserCtrl = asyncHandler(async (req, res) => {
 });
 
 //*brauchen hier unten keinen service extra schreiben, du seckel!!!!!!
+// ! mist, jetzt haben wir doch einen service gebraucht!
 
 const postLogoutUserCtrl = asyncHandler(async (req, res) => {
-  req.session.refreshToken = null;
-  const result = "You are now logged out";
+  const userId = req.params.userId;
+  const result = await UserService.logoutUser(userId, req);
+  if (!result) {
+    res.status(500).json({ result });
+  }
+
   sendResponse(res, result);
 });
 
 const getResendVerifyEmailCtrl = asyncHandler(async (req, res) => {
-  const userId = req.params.id;
+  const userId = req.params.userId;
 
   const result = await UserService.resendVerifyEmail(userId);
   if (!result) {
     res.status(500).json("Could not send email");
   }
   res.status(200).json({ result });
+});
+
+//in like follow und comment model inboxSeen: default false setzen
+//alle kommentare und likes meiner posts holen
+//alle follows holen
+//alle in einem arrary nach datum sortiert ausgeben
+//die neusten 15 elemente des objekts ins frontend schicken
+
+const getInboxCtrl = asyncHandler(async (req, res) => {
+  const authenticatedUserId = req.authenticatedUserId;
+  const result = await UserService.getInBox(authenticatedUserId);
+
+  if (!result) {
+    res.status(500).json("Could not send email");
+  }
+  sendResponse(res, result);
 });
 
 export const UserController = {
@@ -118,4 +139,5 @@ export const UserController = {
   deleteUserCtrl,
   postLogoutUserCtrl,
   getResendVerifyEmailCtrl,
+  getInboxCtrl,
 };
