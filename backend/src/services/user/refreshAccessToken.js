@@ -1,5 +1,6 @@
 import { userToView } from "../../helpers/userToView.js";
 import { User } from "../../models/user.js";
+import { createToken } from "../../utils/createToken.js";
 
 export async function refreshAccessToken(authenticatedUserId) {
   const user = await User.findById(authenticatedUserId);
