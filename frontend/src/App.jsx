@@ -15,6 +15,7 @@ import {
 import Layout from "./components/Layout/Layout";
 import HashtagPosts from "./pages/HashtagPosts/HashtagPosts";
 import AuthRequired from "./components/Authrequired";
+import SinglePost from "./pages/SinglePost/SinglePost";
 
 function App() {
   const [user, setUser] = useState();
@@ -80,6 +81,15 @@ function App() {
                 element={
                   <AuthRequired>
                     <HashtagPosts />
+                  </AuthRequired>
+                }
+              />
+
+              <Route
+                path="/singlepost/:postId"
+                element={
+                  <AuthRequired>
+                    <SinglePost />
                   </AuthRequired>
                 }
               />

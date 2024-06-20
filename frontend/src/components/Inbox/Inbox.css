@@ -3,47 +3,59 @@
 } */
 
 .inbox_sec article {
-  position: absolute;
-  top: 70px;
-  right: 24px;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
   background-color: var(--main-background);
-  border: 2px solid var(--light-pink);
   border-radius: 12px;
-  padding: 12px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 400px;
+  height: 100svh;
+  width: 100%;
   overflow: scroll;
 }
 
-.inbox_sec article div {
+.inbox_sec article .inbox_upper {
+  padding-block: 20px;
+  justify-content: flex-start;
+}
+
+.single_inbox_element {
   padding-block: 6px;
-  border-bottom: 1px solid var(--input-grey);
+  border-bottom: 2px solid var(--input-grey);
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .inbox_profileimg {
   width: 48px;
   height: 48px;
   border-radius: 100px;
+  object-fit: cover;
 }
 
 .inbox_postimg {
-  width: 58px;
-  height: 58px;
+  width: 55px;
+  height: 55px;
   border-radius: 12px;
+  object-fit: cover;
 }
 
 .inbox_sec article .inbox_follow_wrapper {
   justify-content: flex-start;
+  position: relative;
+  min-height: 73px;
+  border-bottom: 2px solid var(--input-grey);
 }
 
 .inbox_sec .new_inbox_wrapper {
   position: absolute;
-  top: 43px;
-  right: 10px;
+  top: 44px;
+  right: 21px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -56,8 +68,36 @@
   background-color: var(--mid-pink);
 }
 
-.new_inbox_wrapper p {
-  color: var(--mid-pink);
-  font-weight: 900;
-  font-size: 16px;
+.inbox_sec article div .inbox_dot {
+  position: absolute;
+  top: 0;
+}
+
+.single_inbox_element .inbox_user_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.inbox_follow_wrapper .inbox_user_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.inbox_username {
+  font-weight: 700;
+}
+
+.inbox_post_date {
+  font-size: 12px;
+  color: var(--sec-text);
+}
+
+article .newfollow_btn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }

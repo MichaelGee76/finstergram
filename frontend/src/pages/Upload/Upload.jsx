@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import "./Upload.css";
 import ky from "ky";
 import { useNavigate } from "react-router-dom";
@@ -12,20 +12,61 @@ import {
 import UploadImgFilter from "../../components/UploadImgFilter/UploadImgFilter";
 
 // -- Img verkleinern vor dem hochladen
-const resizeFile = (file) =>
+// const resizeFile = (file) =>
+//   new Promise((resolve) => {
+//     Resizer.imageFileResizer(
+//       file,
+//       1000, // maximale Breite
+//       500, // maximale Höhe
+//       "JPEG", // Ausgabeformat
+//       90, // Qualitätsstufe
+//       0, // Drehung
+//       (uri) => {
+//         resolve(uri);
+//       },
+//       "base64" // Ausgabe-Typ
+//     );
+//   });
+
+const resizeFile = (base64Str) =>
   new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      500, // maximale Breite
-      500, // maximale Höhe
-      "JPEG", // Ausgabeformat
-      90, // Qualitätsstufe
-      0, // Drehung
-      (uri) => {
-        resolve(uri);
-      },
-      "base64" // Ausgabe-Typ
-    );
+    const img = new Image();
+    img.src = base64Str;
+
+    img.onload = () => {
+      const originalWidth = img.width;
+      const originalHeight = img.height;
+      const maxWidth = 600; // Maximal zulässige Breite
+      let newWidth = originalWidth;
+      let newHeight = originalHeight;
+
+      // Skaliere das Bild proportional, wenn die Breite größer als maxWidth ist
+      if (newWidth > maxWidth) {
+        const scaleFactor = maxWidth / newWidth;
+        newWidth = maxWidth;
+        newHeight = newHeight * scaleFactor;
+      }
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+
+      // Zeichne das Bild auf das Canvas, skaliert auf die neue Größe
+      ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+      let resizedBase64 = canvas.toDataURL("image/jpeg");
+
+      // Sicherstellen, dass das Bild nicht kleiner als 50 KB ist
+      let quality = 0.9;
+      while (resizedBase64.length / 1024 > 50 && quality > 0.1) {
+        resizedBase64 = canvas.toDataURL("image/jpeg", quality);
+        quality -= 0.1;
+      }
+
+      resolve(resizedBase64);
+    };
   });
 
 const filterMethods = [
@@ -112,6 +153,7 @@ const Upload = () => {
   const [error, setError] = useState();
   const [successMessage, setSuccessMessage] = useState();
   const [filterScale, setFilterScale] = useState(50);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [filterValues, setFilterValues] = useState({
     property: "",
     value: "",
@@ -123,14 +165,43 @@ const Upload = () => {
   });
   const { user } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
+  const imgRef = useRef(null);
+  const canvasRef = useRef(null);
   const navigate = useNavigate();
+
+  console.log(isLoaded);
+
+  // img mit filtern abspeichern
+  useEffect(() => {
+    if (postUpload.picture) {
+      const img = new Image();
+      img.src = postUpload.picture;
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.filter = `${filterValues.property}(${filterValues.value}${filterValues.unit})`;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        setIsLoaded(true);
+      };
+    }
+  }, [postUpload.picture, filterValues]);
+
+  const readFileAsDataURL = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
 
     try {
-      const resizedBase64 = await resizeFile(file);
-      setPostUpload({ ...postUpload, picture: resizedBase64 });
+      const base64 = await readFileAsDataURL(file);
+      setPostUpload({ ...postUpload, picture: base64 });
     } catch (error) {
       console.error(error);
     }
@@ -180,37 +251,39 @@ const Upload = () => {
 
   const postHandler = async (event) => {
     event.preventDefault();
+    if (isLoaded) {
+      const canvas = canvasRef.current;
+      const dataURL = canvas.toDataURL("image/png");
 
-    if (!postUpload.picture) {
+      try {
+        const resizedBase64 = await resizeFile(dataURL, 60); // Verkleinern um 50%
+        const response = await ky
+          .post(`${backendUrl}/posts/newPost`, {
+            json: { ...postUpload, picture: resizedBase64 },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .json();
+
+        console.log(response);
+        setPostUpload({
+          userId: "user._id",
+          picture: null,
+          description: "",
+          hashtags: [],
+        });
+        setSuccessMessage("Upload Successfully");
+        setError("");
+        navigate("/");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
       setError("Please upload a picture first");
     }
-
-    try {
-      const response = await ky
-        .post(`${backendUrl}/posts/newPost`, {
-          json: postUpload,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .json();
-
-      console.log(response);
-      setPostUpload({
-        userId: "user._id",
-        picture: null,
-        description: "",
-        hashtags: [],
-      });
-      setSuccessMessage("Upload Successfully");
-      setError("");
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-    }
   };
-
   // console.log(filterValues.range.min? filterValues.range.min);
   return (
     <main className="upload_section">
@@ -236,6 +309,7 @@ const Upload = () => {
       >
         {postUpload.picture ? (
           <img
+            ref={imgRef}
             className="upload_img"
             src={postUpload.picture}
             style={{
@@ -250,6 +324,7 @@ const Upload = () => {
           </label>
         )}
       </div>
+      <canvas ref={canvasRef} style={{ display: "none" }} />
       {filterValues.property && (
         <input
           className="filter_range"

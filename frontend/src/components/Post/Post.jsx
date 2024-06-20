@@ -5,6 +5,7 @@ import { TokenDataContext, UserDataContext } from "../context/Context";
 import { backendUrl } from "../../api/api";
 import ky from "ky";
 import CommentPopUp from "../CommentPopup/CommentPopUp";
+import PostSettings from "../PostSettings/PostSettings";
 
 const calculatePostAge = (createdAt) => {
   const postDate = new Date(createdAt); // Tue May 28 2024 14:10:39 GMT+0200 (Mitteleuropäische Sommerzeit)
@@ -121,9 +122,7 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
             </div>
           </Link>
           {user._id === postData.userId._id && (
-            <button>
-              <img src="/img/MoreCircle.svg" alt="" />
-            </button>
+            <PostSettings postData={postData} setUpdUserFeed={setUpdUserFeed} />
           )}
         </div>
         <img className="post_img" src={postData.picture} alt="" />

@@ -1,5 +1,6 @@
 .search_site {
   margin-top: 210px;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -10,6 +11,7 @@
   flex-direction: column;
   gap: 24px;
   position: fixed;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;

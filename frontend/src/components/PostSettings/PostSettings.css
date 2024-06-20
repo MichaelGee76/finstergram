@@ -1,0 +1,59 @@
+.post_settings_popup {
+  position: fixed;
+  z-index: 99;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  height: 100svh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 12px 6px;
+}
+
+.post_settings_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 12px;
+  border-radius: 16px;
+  background-color: var(--main-background);
+}
+.post_settings_btn {
+  /* background-color: var(--main-background); */
+  border: unset;
+  border-bottom: 1px solid var(--input-grey);
+  background-color: unset;
+  height: 60px;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--mid-pink);
+  font-weight: 500;
+  width: 100%;
+}
+
+.post_settings_link {
+  /* background-color: var(--main-background); */
+  height: 60px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: unset;
+  font-weight: 500;
+}
+
+.post_settings_popup .close_settings_popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-background);
+  width: 100%;
+  border-radius: 16px;
+  margin-top: 6px;
+  height: 60px;
+  font-size: 20px;
+  font-weight: 600;
+  border: unset;
+}

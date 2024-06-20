@@ -1,0 +1,32 @@
+.delete_popup {
+  width: 91.5%;
+  background-color: var(--main-background);
+  padding: 24px;
+  text-align: center;
+  border-radius: 16px;
+  margin: auto;
+}
+
+.delete_popup article div {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.delete_popup p {
+  margin-block: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  /* max-width: 20ch;
+  margin-inline: auto; */
+}
+
+.delete_popup .post_settings_btn {
+  width: max-content;
+}
+
+.cancel_delete_btn {
+  height: 60px;
+  font-size: 20px;
+  font-weight: 500;
+}

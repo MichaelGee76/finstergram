@@ -21,3 +21,12 @@
   gap: 24px;
   margin-bottom: 80px;
 }
+
+.more_posts_btn {
+  background-color: unset;
+  border: unset;
+  color: var(--light-pink);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+}

@@ -12,6 +12,7 @@ const Home = () => {
   const [feed, setFeed] = useState();
   const [updUserFeed, setUpdUserFeed] = useState(false);
   const [fixBG, setFixBg] = useState(false);
+  const [loadMorePosts, setLoadMorePosts] = useState(6);
 
   useEffect(() => {
     const getUserFeed = async () => {
@@ -46,7 +47,7 @@ const Home = () => {
       </div>
 
       <section className="posts_section">
-        {feed?.map((post) => (
+        {feed?.slice(0, loadMorePosts)?.map((post) => (
           <Post
             setFixBg={setFixBg}
             key={post._id}
@@ -54,6 +55,16 @@ const Home = () => {
             setUpdUserFeed={setUpdUserFeed}
           />
         ))}
+        {feed?.length >= loadMorePosts && (
+          <button
+            onClick={() =>
+              setLoadMorePosts((loadMorePosts) => loadMorePosts + 5)
+            }
+            className="more_posts_btn"
+          >
+            more posts
+          </button>
+        )}
       </section>
     </main>
   );
