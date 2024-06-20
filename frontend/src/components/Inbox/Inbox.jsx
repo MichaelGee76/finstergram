@@ -9,7 +9,7 @@ const Inbox = () => {
   const { token } = useContext(TokenDataContext);
   const [inbox, setInbox] = useState([]);
   const [showInbox, setShowInbox] = useState(false);
-  const [newInboxElements, setNewInboxElements] = useState();
+  const [newInboxElements, setNewInboxElements] = useState(false);
 
   useEffect(() => {
     const inboxHandler = async () => {
@@ -24,11 +24,12 @@ const Inbox = () => {
       // setNewInboxElements(() =>
       //   inbox.filter((element) => element.inboxSeen == false)
       // );
-      setNewInboxElements(inbox.filter((element) => !element.inboxSeen));
+
       setInbox(res.result);
+      setNewInboxElements(res.result.filter((element) => !element.inboxSeen));
     };
     inboxHandler();
-  }, []);
+  }, [showInbox]);
 
   const inboxToggleHandler = async () => {
     setShowInbox((showInbox) => !showInbox);
@@ -41,9 +42,6 @@ const Inbox = () => {
       })
       .json();
   };
-
-  console.log(newInboxElements);
-
   return (
     <section className="inbox_sec">
       <div onClick={inboxToggleHandler} className="inbox_icon_wrapper">

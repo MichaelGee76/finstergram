@@ -8,7 +8,6 @@ const PostSettings = ({ postData, setUpdUserFeed }) => {
   const [settingOptionsPopup, setSettingOptionsPopUp] = useState(false);
   const [postSettings, setPostSettings] = useState(false);
 
-  console.log(deletePostPopup);
   return !postSettings ? (
     <img
       onClick={() => {
