@@ -99,5 +99,14 @@ export async function getDiscoverFeed(authenticatedUserId) {
         return postObject;
     });
 
+    // Fisher-Yates shuffle zum randomisieren der reihenfolge
+    for (let i = feedWithLikes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [feedWithLikes[i], feedWithLikes[j]] = [
+            feedWithLikes[j],
+            feedWithLikes[i],
+        ];
+    }
+
     return feedWithLikes;
 }
