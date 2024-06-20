@@ -18,6 +18,9 @@ import { updatePost } from "./post/updatePost.js";
 import { getHashtag } from "./post/getHashtag.js";
 import { deletePost } from "./post/deletePost.js";
 import { getAllPostsWithHashtags } from "./post/getAllPostsWithHashtags.js";
+import { getOnePost } from "./post/getOnePost.js";
+import { getDiscoverFeed } from "./post/getDiscoverFeed.js";
+
 //Comments
 import { postComment } from "./comment/postComment.js";
 import { deleteComment } from "./comment/deleteComment.js";
@@ -41,56 +44,58 @@ import { getOneChat } from "./messages/getOneChat.js";
 import { getAllChats } from "./messages/getAllChats.js";
 
 export const UserService = {
-  registerUser,
-  verifyEmailUser,
-  showAllUsers,
-  showOneUser,
-  refreshAccessToken,
-  updateUser,
-  loginUser,
-  deleteUser,
-  logoutUser,
-  getInbox,
-  updateInbox,
+    registerUser,
+    verifyEmailUser,
+    showAllUsers,
+    showOneUser,
+    refreshAccessToken,
+    updateUser,
+    loginUser,
+    deleteUser,
+    logoutUser,
+    getInbox,
+    updateInbox,
 };
 
 export const PostServices = {
-  getUserPosts,
-  getUserFeed,
-  postNewPost,
-  updatePost,
-  deletePost,
-  getAllPostsWithHashtags,
-  getHashtag,
+    getUserPosts,
+    getUserFeed,
+    postNewPost,
+    updatePost,
+    deletePost,
+    getAllPostsWithHashtags,
+    getHashtag,
+    getOnePost,
+    getDiscoverFeed,
 };
 
 export const CommentService = {
-  postComment,
-  deleteComment,
-  patchComment,
-  getAllCommentsFromPost,
+    postComment,
+    deleteComment,
+    patchComment,
+    getAllCommentsFromPost,
 };
 
 export const LikeService = {
-  postLike,
-  deleteLike,
+    postLike,
+    deleteLike,
 };
 
 export const FollowService = {
-  postFollow,
-  deleteFollow,
+    postFollow,
+    deleteFollow,
 };
 
 export const SaveService = {
-  savePost,
-  deleteSavePost,
-  getSavedPosts,
+    savePost,
+    deleteSavePost,
+    getSavedPosts,
 };
 
 export const MessageService = {
-  postMessage,
-  deleteMessage,
-  updateMessage,
-  getOneChat,
-  getAllChats,
+    postMessage,
+    deleteMessage,
+    updateMessage,
+    getOneChat,
+    getAllChats,
 };
