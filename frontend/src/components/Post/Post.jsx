@@ -6,6 +6,7 @@ import { backendUrl } from "../../api/api";
 import ky from "ky";
 import CommentPopUp from "../CommentPopup/CommentPopUp";
 import PostSettings from "../PostSettings/PostSettings";
+import DiscoverPostPopup from "../DiscoverPostPopup/DiscoverPostPopup";
 
 const calculatePostAge = (createdAt) => {
   const postDate = new Date(createdAt); // Tue May 28 2024 14:10:39 GMT+0200 (Mitteleuropäische Sommerzeit)
@@ -23,11 +24,19 @@ const calculatePostAge = (createdAt) => {
   return { showPostAge, postAgeInHours };
 };
 
-const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
+const Post = ({
+  postData,
+  setUpdUserFeed,
+  setFixBg,
+  setChangeHeaderZ,
+  changeHeaderZ,
+  discoverFeed,
+}) => {
   const [likeToggle, setLikeToggle] = useState(postData.likedByUser);
   const [crementLike, setCrementLike] = useState(postData.likes);
   const [saveToggle, setSaveToggle] = useState(postData.savedByUser);
   const [commentPopUp, setCommentPopUp] = useState(false);
+  const [openDiscoverFeed, setOpenDiscoverFeed] = useState(false);
   const { user, setUser } = useContext(UserDataContext);
   const { token } = useContext(TokenDataContext);
 
@@ -92,6 +101,8 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
     setFixBg((fixBg) => !fixBg);
   };
 
+  // console.log(discoverFeed);
+
   // console.log(commentPopUp);
   return (
     <>
@@ -107,48 +118,82 @@ const Post = ({ postData, setUpdUserFeed, setFixBg }) => {
           setUpdUserFeed={setUpdUserFeed}
         />
       )}
+      {openDiscoverFeed && (
+        <DiscoverPostPopup
+          postData={{ ...postData, postDate: newPostAge }}
+          openPopUpHandler={openPopUpHandler}
+          saveToggleHandler={saveToggleHandler}
+          likeToggleHandler={likeToggleHandler}
+          likeToggle={likeToggle}
+          saveToggle={saveToggle}
+          crementLike={crementLike}
+          setUpdUserFeed={setUpdUserFeed}
+          setChangeHeaderZ={setChangeHeaderZ}
+          setOpenDiscoverFeed={setOpenDiscoverFeed}
+          discoverFeed={discoverFeed}
+        />
+      )}
       <article className="post_wrapper">
-        <div className="post_upper">
-          <Link
-            to={`/profile/${postData.userId._id}`}
-            className="post_user_infos"
-          >
-            <img src={postData.userId.profilePicture} alt="" />
+        {!discoverFeed && (
+          <div className="post_upper">
+            <Link
+              to={`/profile/${postData.userId._id}`}
+              className="post_user_infos"
+            >
+              <img src={postData.userId.profilePicture} alt="" />
+              <div>
+                <h3 className="username_post">{postData.userId.userName}</h3>
+                <p className="userdescription_post">
+                  {postData.userId.profession}
+                </p>
+              </div>
+            </Link>
+            {user._id === postData.userId._id && (
+              <PostSettings
+                postData={postData}
+                setUpdUserFeed={setUpdUserFeed}
+              />
+            )}
+          </div>
+        )}
+
+        <img
+          onClick={() => {
+            if (discoverFeed) {
+              // openPopUpHandler();
+              setChangeHeaderZ((prev) => !prev);
+              setOpenDiscoverFeed((prev) => !prev);
+            }
+          }}
+          className={!discoverFeed ? "post_img" : "discoverFeed_img"}
+          src={postData.picture}
+          alt=""
+        />
+        {!discoverFeed && (
+          <div className="post_reactions">
             <div>
-              <h3 className="username_post">{postData.userId.userName}</h3>
-              <p className="userdescription_post">
-                {postData.userId.profession}
-              </p>
+              <img
+                onClick={saveToggleHandler}
+                src={saveToggle ? "/img/SaveClicked.svg" : "/img/Save.svg"}
+                alt=""
+              />
             </div>
-          </Link>
-          {user._id === postData.userId._id && (
-            <PostSettings postData={postData} setUpdUserFeed={setUpdUserFeed} />
-          )}
-        </div>
-        <img className="post_img" src={postData.picture} alt="" />
-        <div className="post_reactions">
-          <div>
-            <img
-              onClick={saveToggleHandler}
-              src={saveToggle ? "/img/SaveClicked.svg" : "/img/Save.svg"}
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              onClick={likeToggleHandler}
-              src={likeToggle ? "/img/HeartFilled.svg" : "/img/Heart.svg"}
-              alt=""
-            />
+            <div>
+              <img
+                onClick={likeToggleHandler}
+                src={likeToggle ? "/img/HeartFilled.svg" : "/img/Heart.svg"}
+                alt=""
+              />
 
-            <p>{Number(crementLike)}</p>
-          </div>
-          <div onClick={openPopUpHandler}>
-            <img src="/img/Comments.svg" alt="" />
+              <p>{Number(crementLike)}</p>
+            </div>
+            <div onClick={openPopUpHandler}>
+              <img src="/img/Comments.svg" alt="" />
 
-            <p>{postData.comments}</p>
+              <p>{postData.comments}</p>
+            </div>
           </div>
-        </div>
+        )}
       </article>
     </>
   );

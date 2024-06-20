@@ -5,11 +5,13 @@ import { backendUrl } from "../../api/api";
 import { TokenDataContext } from "../../components/context/Context";
 import SearchResult from "../../components/SearchResult/SearchResult";
 import { Link } from "react-router-dom";
+import DiscoverFeed from "../../components/DiscoverFeed/DiscoverFeed";
 const Search = () => {
   const [searchToggle, setSearchToggle] = useState(true);
   const [userSearchResults, setUserSearchResults] = useState([]);
   const [hashtagSearchResults, setHashtagSearchResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [changeHeaderZ, setChangeHeaderZ] = useState(false);
   const { token } = useContext(TokenDataContext);
 
   useEffect(() => {
@@ -41,13 +43,15 @@ const Search = () => {
     searchHandler();
   }, [searchToggle]);
 
+  let searchLC = searchInput.toLowerCase();
+
   // console.log(userSearchResults);
   // console.log(hashtagSearchResults);
   // console.log(searchToggle);
 
   return (
     <main className="search_site">
-      <div className="search_res_upper">
+      <div className={changeHeaderZ ? "lower_zindex" : "search_res_upper"}>
         <form>
           <label htmlFor="">
             <img src="./img/SearchUnclicked.svg" alt="" />
@@ -84,19 +88,21 @@ const Search = () => {
           <div className="red_line"></div>
         </div>
       </div>
-      <section className="search_results">
-        {searchToggle
-          ? userSearchResults?.map(
+      <section className={changeHeaderZ ? "higher_zindex" : "search_results"}>
+        {searchInput ? (
+          searchToggle ? (
+            userSearchResults?.map(
               (result) =>
                 searchInput &&
-                result.userName.includes(searchInput) && (
+                result.userName.includes(searchLC) && (
                   <SearchResult key={result._id} result={result} />
                 )
             )
-          : hashtagSearchResults?.map(
+          ) : (
+            hashtagSearchResults?.map(
               (hashtag, index) =>
                 searchInput &&
-                hashtag.includes(searchInput) && (
+                hashtag.includes(searchLC) && (
                   <Link
                     to={`/hashtagposts/${hashtag}`}
                     className="hashtag_link"
@@ -105,7 +111,14 @@ const Search = () => {
                     #{hashtag}
                   </Link>
                 )
-            )}
+            )
+          )
+        ) : (
+          <DiscoverFeed
+            changeHeaderZ={changeHeaderZ}
+            setChangeHeaderZ={setChangeHeaderZ}
+          />
+        )}
       </section>
     </main>
   );

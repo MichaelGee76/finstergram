@@ -1,0 +1,22 @@
+.discover_post_popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding-block: 48px 80px;
+  background-color: var(--main-background);
+  width: 100%;
+  height: 100svh;
+  padding-inline: 24px;
+  overflow: scroll;
+}
+
+.discover_post_popup .cmt_upper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.discover_back_img {
+  width: 24px;
+}

@@ -1,0 +1,150 @@
+import "./DiscoverPostPopup.css";
+import { Link } from "react-router-dom";
+import "../CommentPopup/CommentPopUp.css";
+import { useContext, useEffect, useState } from "react";
+import { TokenDataContext, UserDataContext } from "../context/Context";
+import ky from "ky";
+import { backendUrl } from "../../api/api";
+import Comment from "../Comment/Comment";
+import PostComment from "../PostComment/PostComment";
+
+const DiscoverPostPopup = ({
+  postData,
+  openPopUpHandler,
+  saveToggleHandler,
+  likeToggleHandler,
+  likeToggle,
+  saveToggle,
+  crementLike,
+  setUpdUserFeed,
+  setChangeHeaderZ,
+  setOpenDiscoverFeed,
+  discoverFeed,
+}) => {
+  const [comments, setComments] = useState([]);
+  const [commentUpd, setCommentUpd] = useState(false);
+  const [loadMoreComments, setLoadMoreComments] = useState(6);
+  const [replyMessage, setReplyMessage] = useState("");
+  const { user, setUser } = useContext(UserDataContext);
+  const { token } = useContext(TokenDataContext);
+
+  useEffect(() => {
+    const getCommentsFromPost = async () => {
+      const res = await ky
+        .get(`${backendUrl}/comments/allCommentsFromPost/${postData._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .json();
+
+      setComments(res.result);
+    };
+
+    getCommentsFromPost();
+  }, [commentUpd]);
+
+  return (
+    <section className="discover_post_popup ">
+      <div className="cmt_upper ">
+        <img
+          onClick={() => {
+            setChangeHeaderZ((prev) => !prev);
+            setOpenDiscoverFeed((prev) => !prev);
+          }}
+          className="discover_back_img"
+          src="/img/BackArrowLeft.svg"
+          alt=""
+        />
+        <img className="post_img" src={postData.picture} alt="" />
+      </div>
+      <article className="cmt_userinfos">
+        <div className="post_upper">
+          <Link
+            to={`/profile/${postData.userId._id}`}
+            className="post_user_infos"
+          >
+            <img src={postData.userId.profilePicture} alt="" />
+            <div>
+              <h3 className="username_post">{postData.userId.userName}</h3>
+              <p className="userdescription_post">
+                {postData.userId.profession}
+              </p>
+            </div>
+          </Link>
+          {user._id === postData.userId._id && (
+            <button>
+              <img src="./img/MoreCircle.svg" alt="" />
+            </button>
+          )}
+        </div>
+        <p className="post_desctext">{postData.description}</p>
+        <div className="hashtags_wrapper">
+          {postData.hashtags?.map((hashtag, index) => (
+            <Link key={index} to={`/search/${hashtag}`}>
+              #{hashtag}
+            </Link>
+          ))}
+        </div>
+        <p className="posted_date">{postData.postDate.showPostAge}</p>
+        <div className="post_reactions">
+          <div>
+            <img
+              onClick={saveToggleHandler}
+              src={saveToggle ? "./img/SaveClicked.svg" : "./img/Save.svg"}
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              onClick={likeToggleHandler}
+              src={likeToggle ? "./img/HeartFilled.svg" : "./img/Heart.svg"}
+              alt=""
+            />
+
+            <p>{Number(crementLike)}</p>
+          </div>
+          <div>
+            <img src="./img/Comments.svg" alt="" />
+
+            <p>{postData.comments}</p>
+          </div>
+        </div>
+      </article>
+      <section className="cmnt_section">
+        {comments.length > 0 ? (
+          comments
+            .slice(0, loadMoreComments)
+            ?.map((comment) => (
+              <Comment
+                key={comment._id}
+                comment={comment}
+                postData={postData}
+                setReplyMessage={setReplyMessage}
+              />
+            ))
+        ) : (
+          <p>No comments yet. Be the first one to leave a comment!</p>
+        )}
+        {comments.length >= loadMoreComments && (
+          <button
+            onClick={() =>
+              setLoadMoreComments((loadMoreComments) => loadMoreComments + 5)
+            }
+            className="more_cmnts_btn"
+          >
+            more comments
+          </button>
+        )}
+      </section>
+      <PostComment
+        setCommentUpd={setCommentUpd}
+        postId={postData._id}
+        setUpdUserFeed={setUpdUserFeed}
+        replyMessage={replyMessage}
+      />
+    </section>
+  );
+};
+
+export default DiscoverPostPopup;

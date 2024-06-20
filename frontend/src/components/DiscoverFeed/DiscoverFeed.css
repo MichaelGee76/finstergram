@@ -1,0 +1,8 @@
+.discover_feed_sec {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+}
+.discover_feed_sec .post_wrapper {
+  margin-bottom: 1px;
+}
