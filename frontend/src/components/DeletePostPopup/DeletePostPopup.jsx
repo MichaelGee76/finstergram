@@ -2,7 +2,6 @@ import ky from "ky";
 import "./DeletePostPopup.css";
 import { backendUrl } from "../../api/api";
 import { useContext, useState } from "react";
-import { set } from "mongoose";
 import { TokenDataContext } from "../context/Context";
 
 const DeletePostPopup = ({
