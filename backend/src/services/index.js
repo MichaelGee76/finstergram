@@ -32,6 +32,7 @@ import { deleteLike } from "./like/deleteLike.js";
 //Follow
 import { postFollow } from "./follow/postFollow.js";
 import { deleteFollow } from "./follow/deleteFollow.js";
+import { getFollowInfo } from "./follow/getFollowInfo.js";
 //Save
 import { savePost } from "./save/savePost.js";
 import { deleteSavePost } from "./save/deleteSavePost.js";
@@ -44,58 +45,58 @@ import { getOneChat } from "./messages/getOneChat.js";
 import { getAllChats } from "./messages/getAllChats.js";
 
 export const UserService = {
-    registerUser,
-    verifyEmailUser,
-    showAllUsers,
-    showOneUser,
-    refreshAccessToken,
-    updateUser,
-    loginUser,
-    deleteUser,
-    logoutUser,
-    getInbox,
-    updateInbox,
+  registerUser,
+  verifyEmailUser,
+  showAllUsers,
+  showOneUser,
+  refreshAccessToken,
+  updateUser,
+  loginUser,
+  deleteUser,
+  logoutUser,
+  getInbox,
+  updateInbox,
 };
 
 export const PostServices = {
-    getUserPosts,
-    getUserFeed,
-    postNewPost,
-    updatePost,
-    deletePost,
-    getAllPostsWithHashtags,
-    getHashtag,
-    getOnePost,
-    getDiscoverFeed,
+  getUserPosts,
+  getUserFeed,
+  postNewPost,
+  updatePost,
+  deletePost,
+  getAllPostsWithHashtags,
+  getHashtag,
+  getOnePost,
+  getDiscoverFeed,
 };
 
 export const CommentService = {
-    postComment,
-    deleteComment,
-    patchComment,
-    getAllCommentsFromPost,
+  postComment,
+  deleteComment,
+  patchComment,
+  getAllCommentsFromPost,
 };
 
 export const LikeService = {
-    postLike,
-    deleteLike,
+  postLike,
+  deleteLike,
 };
 
 export const FollowService = {
-    postFollow,
-    deleteFollow,
+  postFollow,
+  deleteFollow,
+  getFollowInfo,
 };
-
 export const SaveService = {
-    savePost,
-    deleteSavePost,
-    getSavedPosts,
+  savePost,
+  deleteSavePost,
+  getSavedPosts,
 };
 
 export const MessageService = {
-    postMessage,
-    deleteMessage,
-    updateMessage,
-    getOneChat,
-    getAllChats,
+  postMessage,
+  deleteMessage,
+  updateMessage,
+  getOneChat,
+  getAllChats,
 };
