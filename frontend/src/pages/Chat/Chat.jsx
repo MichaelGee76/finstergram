@@ -9,12 +9,11 @@ import ChatInput from "../../components/ChatInput/ChatInput";
 
 const Chat = () => {
   const [chatData, setChatData] = useState([]);
-  const [newMessage, setNewMessage] = useState();
+
+  const [chatUpd, setChatUpd] = useState(false);
   const { token } = useContext(TokenDataContext);
   const { id } = useParams();
   const navigate = useNavigate();
-
-  console.log(id);
 
   useEffect(() => {
     const chatData = async () => {
@@ -31,9 +30,23 @@ const Chat = () => {
     };
 
     chatData();
-  }, []);
-
+  }, [chatUpd]);
   console.log(chatData);
+
+  useEffect(() => {
+    const messagesSeen = async () => {
+      const res = await ky
+        .patch(`${backendUrl}/message/${chatData.chatPartner.userId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .json();
+    };
+
+    messagesSeen();
+  }, [chatData]);
 
   return (
     <main className="chat_page">
@@ -47,9 +60,15 @@ const Chat = () => {
         <h1>{chatData.chatPartner?.userName}</h1>
       </section>
       <section className="messages_sec">
-        <ChatMessage />
+        {chatData.chat?.map((message, index) => (
+          <ChatMessage
+            key={index}
+            messageData={message}
+            chatPartner={chatData.chatPartner}
+          />
+        ))}
       </section>
-      <ChatInput setNewMessage={setNewMessage} />
+      <ChatInput setChatUpd={setChatUpd} />
     </main>
   );
 };

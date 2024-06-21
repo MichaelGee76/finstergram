@@ -22,18 +22,22 @@ const calculatePostAge = (createdAt) => {
 const ChatView = ({ chatData }) => {
   const messageDate = calculatePostAge(chatData?.lastMessageDate);
 
+  console.log(chatData);
+
+  const messageStyle = !chatData.wasRead ? { fontWeight: "800" } : {};
+
   return (
     <Link to={`/chat/${chatData.userId}`} className="chat_view">
       <div className="chat_view_content">
         <img src={chatData.profilePicture} alt="profile picture" />
         <div>
           <h3>{chatData.userName}</h3>
-          <p style={chatData.wasRead && { fontWeight: "800" }}>
+          <p style={messageStyle}>
             "{chatData.lastMessage}" <span>- {messageDate.showPostAge}</span>
           </p>
         </div>
       </div>
-      {chatData.wasRead && <div className="message_unread_dot"></div>}
+      {!chatData.wasRead && <div className="message_unread_dot"></div>}
     </Link>
   );
 };

@@ -9,7 +9,7 @@ const postMessageCtrl = asyncHandler(async (req, res) => {
   const result = await MessageService.postMessage(
     userId,
     messageContent,
-    messageId
+    messagedId
   );
   if (!result) {
     res.status(500).json("Could not post message");
@@ -20,13 +20,8 @@ const postMessageCtrl = asyncHandler(async (req, res) => {
 const updateMessageCtrl = asyncHandler(async (req, res) => {
   const userId = req.authenticatedUserId;
   const messagedId = req.params.id;
-  const messageContent = req.body;
 
-  const result = await MessageService.updateMessage(
-    userId,
-    messageToUpdate,
-    messageId
-  );
+  const result = await MessageService.updateMessage(userId, messagedId);
   if (!result) {
     res.status(500).json({ message: "Could not update comment" });
   }

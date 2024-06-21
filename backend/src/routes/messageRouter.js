@@ -4,7 +4,7 @@ import { MessageController } from "../controllers/messageController.js";
 
 export const messageRouter = express
   .Router()
-  .post("/newMessage", doJWTAuth, MessageController.postMessageCtrl)
+  .post("/newMessage/:id", doJWTAuth, MessageController.postMessageCtrl)
   .delete("/:id", doJWTAuth, MessageController.deleteMessageCtrl)
   .patch("/:id", doJWTAuth, MessageController.updateMessageCtrl)
   .get("/chat/:id", doJWTAuth, MessageController.getOneChatCtrl)

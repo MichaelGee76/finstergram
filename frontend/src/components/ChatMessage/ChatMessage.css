@@ -1,0 +1,28 @@
+.message_div {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.message_img_div {
+  min-width: 36px;
+}
+
+.message_img_div .message_profile_pic {
+  width: 36px;
+  height: 36px;
+  border-radius: 60px;
+  object-fit: cover;
+}
+
+.message_content {
+  padding-bottom: 6px;
+  background-color: var(--input-grey);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.message_content p {
+  font-weight: 800;
+  line-height: 200%;
+}

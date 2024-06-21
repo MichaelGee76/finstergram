@@ -2,13 +2,29 @@
   position: fixed;
   bottom: 12px;
   left: 24px;
-
+  display: flex;
+  justify-content: space-between;
+  width: 89%;
   background-color: var(--input-grey);
   border-radius: 100px;
   border: 1px solid var(--icons-grey);
+  padding: 4px;
 }
 
 .send_message input {
   background-color: unset;
+  border: unset;
+  padding: 12px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.send_message button {
+  background-color: var(--mid-pink);
+  border-radius: 100px;
+  color: var(--main-background);
+  padding-inline: 18px;
+  font-size: 18px;
+  font-weight: 600;
   border: unset;
 }

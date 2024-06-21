@@ -30,7 +30,6 @@ const ChatDashboard = () => {
     getChatsHandler();
   }, []);
 
-  console.log(chats);
   return (
     <main className="chat_dash">
       <section>

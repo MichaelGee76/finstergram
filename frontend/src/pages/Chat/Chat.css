@@ -14,11 +14,22 @@
   padding: 24px;
 }
 
-/* .chat_upper {
-    
-} */
+.chat_upper h1 {
+  /* font-size: 22px; */
+  font-weight: 600;
+}
 
 .chat_upper_pic {
   width: 48px;
-  min-height: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 100px;
+}
+
+.messages_sec {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  padding-top: 90px;
 }

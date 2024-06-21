@@ -9,7 +9,7 @@ export async function getOneChat(userId, messagedId) {
       { userId, messagedId },
       { userId: messagedId, messagedId: userId },
     ], // wie rum sortieren? auf oder ab?
-  }).sort({ createdAt: -1 });
+  }).sort({ createdAt: 1 });
 
   const user = await User.findById(messagedId);
 

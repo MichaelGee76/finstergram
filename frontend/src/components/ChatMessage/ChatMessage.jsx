@@ -1,7 +1,33 @@
+import { useContext } from "react";
 import "./ChatMessage.css";
+import { UserDataContext } from "../context/Context";
 
-const ChatMessage = () => {
-  return <div></div>;
+const ChatMessage = ({ messageData, chatPartner }) => {
+  const { user } = useContext(UserDataContext);
+
+  console.log(messageData);
+  return messageData.userId === user._id ? (
+    <div className="message_div">
+      <div className="message_img_div">
+        <img className="message_profile_pic" src={user.profilePicture} alt="" />
+      </div>
+
+      <div className="message_content">{messageData.text}</div>
+    </div>
+  ) : (
+    <div className="message_div">
+      <div className="message_img_div">
+        <img
+          className="message_profile_pic"
+          src={chatPartner.profilePicture}
+          alt=""
+        />
+      </div>
+      <div className="message_content">
+        <p>{messageData.text}</p>
+      </div>
+    </div>
+  );
 };
 
 export default ChatMessage;

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Message } from "../../models/message.js";
 import { User } from "../../models/user.js";
 
@@ -7,8 +8,8 @@ export async function getAllChats(userId) {
     {
       $match: {
         $or: [
-          { userId: userId }, // Nachrichten, die der Benutzer gesendet hat
-          { messagedId: userId }, // Nachrichten, die der Benutzer empfangen hat
+          { userId: new mongoose.Types.ObjectId(userId) }, // Nachrichten, die der Benutzer gesendet hat
+          { messagedId: new mongoose.Types.ObjectId(userId) }, // Nachrichten, die der Benutzer empfangen hat
         ],
       },
     },
@@ -19,7 +20,7 @@ export async function getAllChats(userId) {
       $group: {
         _id: {
           $cond: {
-            if: { $eq: ["$userId", userId] },
+            if: { $eq: ["$userId", new mongoose.Types.ObjectId(userId)] },
             then: "$messagedId",
             else: "$userId",
           },
@@ -32,8 +33,8 @@ export async function getAllChats(userId) {
   // Benutzerinformationen abrufen und die Übersicht erstellen
   const chatOverview = await Promise.all(
     messages.map(async (chat) => {
-      const userId = chat._id;
-      const user = await User.findById(userId).select(
+      const chatPartnerId = chat._id;
+      const user = await User.findById(chatPartnerId).select(
         "profilePicture userName _id"
       );
       return {
@@ -46,6 +47,5 @@ export async function getAllChats(userId) {
       };
     })
   );
-
   return chatOverview;
 }
