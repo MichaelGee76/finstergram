@@ -24,6 +24,7 @@ const ChatDashboard = () => {
           },
         })
         .json();
+      console.log(chats);
 
       setChats(res.result);
     };
