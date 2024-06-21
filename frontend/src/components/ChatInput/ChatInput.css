@@ -1,0 +1,14 @@
+.send_message {
+  position: fixed;
+  bottom: 12px;
+  left: 24px;
+
+  background-color: var(--input-grey);
+  border-radius: 100px;
+  border: 1px solid var(--icons-grey);
+}
+
+.send_message input {
+  background-color: unset;
+  border: unset;
+}

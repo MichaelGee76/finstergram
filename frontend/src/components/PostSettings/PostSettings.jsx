@@ -41,7 +41,7 @@ const PostSettings = ({ postData, setUpdUserFeed }) => {
               Delete
             </button>
             <Link
-              to={`/editpost/:${postData._id}`}
+              to={`/editpost/${postData._id}`}
               className="post_settings_link"
             >
               Edit
