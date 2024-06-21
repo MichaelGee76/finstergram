@@ -43,12 +43,6 @@ const Search = () => {
     searchHandler();
   }, [searchToggle]);
 
-  let searchLC = searchInput.toLowerCase();
-
-  // console.log(userSearchResults);
-  // console.log(hashtagSearchResults);
-  // console.log(searchToggle);
-
   return (
     <main className="search_site">
       <div className={changeHeaderZ ? "lower_zindex" : "search_res_upper"}>
@@ -94,7 +88,9 @@ const Search = () => {
             userSearchResults?.map(
               (result) =>
                 searchInput &&
-                result.userName.includes(searchLC) && (
+                result.userName
+                  .toLowerCase()
+                  .includes(searchInput.toLowerCase()) && (
                   <SearchResult key={result._id} result={result} />
                 )
             )
@@ -102,7 +98,7 @@ const Search = () => {
             hashtagSearchResults?.map(
               (hashtag, index) =>
                 searchInput &&
-                hashtag.includes(searchLC) && (
+                hashtag.toLowerCase().includes(searchInput.toLowerCase()) && (
                   <Link
                     to={`/hashtagposts/${hashtag}`}
                     className="hashtag_link"
