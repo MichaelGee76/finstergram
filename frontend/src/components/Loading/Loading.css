@@ -1,0 +1,21 @@
+.loading_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+}
+
+.loading_section img {
+  display: inline-block;
+  position: absolute;
+  margin-inline: auto;
+  width: 30%;
+  z-index: 1;
+}
+
+.lottie {
+  margin-inline: auto;
+  display: block;
+  position: relative;
+  z-index: 0;
+}
