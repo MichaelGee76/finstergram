@@ -23,7 +23,7 @@ const ChatView = ({ chatData }) => {
   const messageDate = calculatePostAge(chatData?.lastMessageDate);
 
   return (
-    <Link to={`/chat`} className="chat_view">
+    <Link to={`/chat/${chatData.userId}`} className="chat_view">
       <div className="chat_view_content">
         <img src={chatData.profilePicture} alt="profile picture" />
         <div>

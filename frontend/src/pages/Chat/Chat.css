@@ -1,0 +1,24 @@
+.chat_page {
+  position: relative;
+}
+
+.chat_upper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--main-background);
+  padding: 24px;
+}
+
+/* .chat_upper {
+    
+} */
+
+.chat_upper_pic {
+  width: 48px;
+  min-height: 48px;
+}

@@ -34,11 +34,12 @@ export async function getAllChats(userId) {
     messages.map(async (chat) => {
       const userId = chat._id;
       const user = await User.findById(userId).select(
-        "profilePicture userName"
+        "profilePicture userName _id"
       );
       return {
         profilePicture: user.profilePicture,
         userName: user.userName,
+        userId: user._id,
         lastMessage: chat.lastMessage.text,
         lastMessageDate: chat.lastMessage.createdAt,
         wasRead: chat.lastMessage.wasRead,

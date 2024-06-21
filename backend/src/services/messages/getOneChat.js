@@ -3,6 +3,7 @@ import { User } from "../../models/user.js";
 
 export async function getOneChat(userId, messagedId) {
   // sucht in beide Richtungen zwischen 2 benutzern
+
   const chat = await Message.find({
     $or: [
       { userId, messagedId },

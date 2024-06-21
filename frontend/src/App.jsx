@@ -47,7 +47,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/chat"
+                  path="/chat/:id"
                   element={
                     <AuthRequired>
                       <Chat />
