@@ -23,6 +23,11 @@
 }
 
 .message_content p {
-  font-weight: 800;
+  font-weight: 400;
   line-height: 200%;
+}
+
+.partner_messages {
+  margin-left: auto;
+  flex-direction: row-reverse;
 }

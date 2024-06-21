@@ -7,12 +7,14 @@ const ChatMessage = ({ messageData, chatPartner }) => {
 
   console.log(messageData);
   return messageData.userId === user._id ? (
-    <div className="message_div">
+    <div className="message_div partner_messages">
       <div className="message_img_div">
         <img className="message_profile_pic" src={user.profilePicture} alt="" />
       </div>
 
-      <div className="message_content">{messageData.text}</div>
+      <div className="message_content">
+        <p>{messageData.text}</p>
+      </div>
     </div>
   ) : (
     <div className="message_div">
