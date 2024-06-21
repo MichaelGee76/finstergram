@@ -7,12 +7,11 @@ import ky from "ky";
 import { TokenDataContext, UserDataContext } from "../../components/context/Context";
 import { backendUrl } from "../../api/api";
 import ProfilPostsList from "../../components/ProfilPostsList/ProfilPostsList";
+import FollowPopup from "../../components/FollowPopup/FollowPopup";
 
 const Profile = () => {
   const { token } = useContext(TokenDataContext);
   const { user } = useContext(UserDataContext);
-
-  console.log(user);
 
   const [activeSection, setActiveSection] = useState("posts");
   const [isUser, setIsUser] = useState(false);
@@ -20,6 +19,8 @@ const Profile = () => {
   // * states for fetch
   const [posts, setPosts] = useState();
   const [userProfile, setUserProfile] = useState();
+
+  const [follow, setFollow] = useState();
 
   const { id } = useParams();
 
@@ -31,6 +32,12 @@ const Profile = () => {
   // * Toggle PopUp for post list
   const [popupList, setPopupList] = useState(false);
   const [updProfilFeed, setUpdProfilFeed] = useState(false);
+
+  // * Toggle PopUp for follower list
+  const [followerPopUp, setFollowerPopUp] = useState(false);
+  const showFollowerPopUp = () => {
+    setFollowerPopUp(!followerPopUp);
+  };
 
   // * numbers format change if it is 5 digit - for follower number
   const formatNumber = (num) => {
@@ -53,6 +60,7 @@ const Profile = () => {
         .json();
       setPosts(res.result.posts);
       setUserProfile(res.result);
+      setFollow(res.result.isFollowed);
     };
     if (user._id === id) {
       setIsUser(true);
@@ -62,8 +70,30 @@ const Profile = () => {
     getUserPosts();
   }, [setUpdProfilFeed]);
 
-  console.log(userProfile);
+  const postFollowing = async () => {
+    const res = await ky
+      .post(`${backendUrl}/follow/newfollow/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .json();
+    setFollow(true);
+  };
 
+  const deleteFollowing = async () => {
+    const res = await ky
+      .delete(`${backendUrl}/follow/follow/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .json();
+    setFollow(false);
+  };
+  console.log(userProfile);
   return userProfile ? (
     <section className="profile">
       {/*//! (Logo TOGGLE -> Back Arrow), Username */}
@@ -94,7 +124,17 @@ const Profile = () => {
               </defs>
             </svg>
           ) : (
-            <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="20"
+              height="17"
+              viewBox="0 0 20 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                window.history.back();
+              }}
+            >
               <path
                 d="M19.3333 8.32007C19.3333 8.76305 19.0042 9.12914 18.5771 9.18708L18.4583 9.19507L0.958342 9.19507C0.475093 9.19507 0.0833422 8.80332 0.0833422 8.32007C0.0833422 7.87709 0.412522 7.511 0.83961 7.45306L0.958342 7.44507L18.4583 7.44507C18.9416 7.44507 19.3333 7.83682 19.3333 8.32007Z"
                 fill="#212121"
@@ -286,22 +326,38 @@ const Profile = () => {
           <p>Posts</p>
         </div>
 
-        <div className="profile_numberbox profile_numberborder">
-          <h1>{userProfile.followedNumber}</h1>
+        <div onClick={showFollowerPopUp} className="profile_numberbox">
+          <h1>{userProfile.followedNumber.length}</h1>
           <p>Follower</p>
         </div>
-        <div className="profile_numberbox">
-          <h1>{userProfile.followingNumber}</h1>
+        <div onClick={showFollowerPopUp} className="profile_numberbox">
+          <h1> {userProfile.followingNumber.length}</h1>
           <p>Gefolgt</p>
         </div>
       </div>
 
+      {followerPopUp && (
+        <FollowPopup
+          showFollowerPopUp={showFollowerPopUp}
+          setFollowerPopUp={setFollowerPopUp}
+          userProfile={userProfile}
+          token={token}
+        />
+      )}
+
       {/* //! Follow button only for visitors and TOGGLE color  */}
 
       {!isUser &&
-        (!userProfile.isFollowed ? (
+        (!follow ? (
           <button className="button_unclicked">
-            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 21 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={postFollowing}
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -313,7 +369,14 @@ const Profile = () => {
           </button>
         ) : (
           <button className="button_clicked">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={deleteFollowing}
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -322,7 +385,7 @@ const Profile = () => {
               />
               <rect x="14.5" y="8" width="5" height="1.5" rx="0.75" fill="white" />
             </svg>
-            Unfollow
+            Following
           </button>
         ))}
       {/* //# profilpost section component */}
@@ -342,5 +405,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-// posts.followednumber.map->item. if(item) ist in userfollowed , dann

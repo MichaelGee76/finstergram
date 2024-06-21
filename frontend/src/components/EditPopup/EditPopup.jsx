@@ -106,7 +106,7 @@ const EditPopup = ({ togglePopup, userProfile, setUserProfile, id, setEditPopup 
         </div>
 
         <div className="profile_img edit_img">
-          <img src={newPicture ? newPicture : userData.profilePicture} style={{ objectFit: "cover" }} />
+          <img src={newPicture ? newPicture : userData.profilePicture} />
           <input
             type="file"
             id="edit_profilePicture"
