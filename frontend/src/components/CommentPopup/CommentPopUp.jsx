@@ -46,13 +46,13 @@ const CommentPopUp = ({
         <div>
           <img
             onClick={() => openPopUpHandler((commentPopUp) => !commentPopUp)}
-            src="./img/BackArrowLeft.svg"
+            src="/img/BackArrowLeft.svg"
             alt=""
           />
           <h3> Comments</h3>
         </div>
         <Link>
-          <img src="./img/Messanger.svg" alt="" />
+          <img src="/img/Messanger.svg" alt="" />
         </Link>
       </div>
       <article className="cmt_userinfos">
@@ -71,7 +71,7 @@ const CommentPopUp = ({
           </Link>
           {user._id === postData.userId._id && (
             <button>
-              <img src="./img/MoreCircle.svg" alt="" />
+              <img src="/img/MoreCircle.svg" alt="" />
             </button>
           )}
         </div>
@@ -88,21 +88,21 @@ const CommentPopUp = ({
           <div>
             <img
               onClick={saveToggleHandler}
-              src={saveToggle ? "./img/SaveClicked.svg" : "./img/Save.svg"}
+              src={saveToggle ? "/img/SaveClicked.svg" : "/img/Save.svg"}
               alt=""
             />
           </div>
           <div>
             <img
               onClick={likeToggleHandler}
-              src={likeToggle ? "./img/HeartFilled.svg" : "./img/Heart.svg"}
+              src={likeToggle ? "/img/HeartFilled.svg" : "/img/Heart.svg"}
               alt=""
             />
 
             <p>{Number(crementLike)}</p>
           </div>
           <div>
-            <img src="./img/Comments.svg" alt="" />
+            <img src="/img/Comments.svg" alt="" />
 
             <p>{postData.comments}</p>
           </div>

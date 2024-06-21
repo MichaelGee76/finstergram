@@ -1,60 +1,50 @@
 import { Message } from "../../models/message.js";
-// export async function getAllChats(userId) {
-//     // MongoDB-Aggregationspipeline, um die Chats abzurufen
-//     const messages = await Message.aggregate([
-//         //Filtere Nachrichten, die die angegebenen userId haben
-//         { $match: { userId: userId } },
-//         // Gruppiere Nachrichten nach messagedId
-//         {
-//             $group: {
-//                 _id: "$messagedId", // Der Schlüssel für die Gruppierung ist messagedId
-//                 messages: { $push: "$$ROOT" }, // Füge alle Nachrichten in ein Array mit dem Namen "messages" ein
-//             },
-//         }, // sortiert nur
-//         { $sort: { "messages.createdAt": -1 } },
-//     ]);
-
-//     if (!messages) {
-//         throw new Error("No messages found for this user");
-//     }
-
-//     return messages;
-// }
-
-//  ! das ist der ansatz der nachrichten von uns und an uns gehen
-
-import mongoose from "mongoose";
+import { User } from "../../models/user.js";
 
 export async function getAllChats(userId) {
-    const messages = await Message.aggregate([
-        {
-            $match: {
-                $or: [
-                    { userId: mongoose.Types.ObjectId(userId) }, // Nachrichten, die der Benutzer gesendet hat
-                    { messagedId: mongoose.Types.ObjectId(userId) }, // Nachrichten, die der Benutzer empfangen hat
-                ],
-            },
+  // Nachrichten abrufen und gruppieren
+  const messages = await Message.aggregate([
+    {
+      $match: {
+        $or: [
+          { userId: userId }, // Nachrichten, die der Benutzer gesendet hat
+          { messagedId: userId }, // Nachrichten, die der Benutzer empfangen hat
+        ],
+      },
+    },
+    {
+      $sort: { createdAt: -1 }, // Sortieren nach dem Erstellungsdatum, absteigend
+    },
+    {
+      $group: {
+        _id: {
+          $cond: {
+            if: { $eq: ["$userId", userId] },
+            then: "$messagedId",
+            else: "$userId",
+          },
         },
-        {
-            $group: {
-                _id: {
-                    $cond: {
-                        if: {
-                            $eq: ["$userId", mongoose.Types.ObjectId(userId)],
-                        },
-                        then: "$messagedId",
-                        else: "$userId",
-                    },
-                },
-                messages: { $push: "$$ROOT" },
-            },
-        },
-        { $sort: { "messages.createdAt": -1 } },
-    ]);
+        lastMessage: { $first: "$$ROOT" },
+      },
+    },
+  ]);
 
-    if (!messages || messages.length === 0) {
-        throw new Error("No messages found for this user");
-    }
+  // Benutzerinformationen abrufen und die Übersicht erstellen
+  const chatOverview = await Promise.all(
+    messages.map(async (chat) => {
+      const userId = chat._id;
+      const user = await User.findById(userId).select(
+        "profilePicture userName"
+      );
+      return {
+        profilePicture: user.profilePicture,
+        userName: user.userName,
+        lastMessage: chat.lastMessage.text,
+        lastMessageDate: chat.lastMessage.createdAt,
+        wasRead: chat.lastMessage.wasRead,
+      };
+    })
+  );
 
-    return messages;
+  return chatOverview;
 }

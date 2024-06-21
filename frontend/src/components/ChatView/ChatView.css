@@ -1,0 +1,36 @@
+.chat_view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: unset;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--input-grey);
+  cursor: pointer;
+}
+
+.chat_view_content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.chat_view_content img {
+  min-width: 48px;
+  height: 48px;
+  border-radius: 100px;
+}
+
+.chat_view_content p {
+  font-size: 16px;
+}
+
+.chat_view_content p span {
+  font-weight: 400;
+}
+
+.message_unread_dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 12px;
+  background-color: var(--mid-pink);
+}

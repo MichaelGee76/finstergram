@@ -1,0 +1,25 @@
+.chat_dash {
+  padding-block: 32px;
+}
+.chat_dash h1 {
+  font-size: 28px;
+}
+
+.chat_dash_nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.chat_dash_nav div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat_dash_output {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

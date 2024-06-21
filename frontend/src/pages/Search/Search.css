@@ -38,6 +38,7 @@
 .search_site form input {
   background-color: unset;
   border: unset;
+  width: 100%;
 }
 
 .search_btns_wrapper {

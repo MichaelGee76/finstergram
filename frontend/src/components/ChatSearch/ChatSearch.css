@@ -1,0 +1,17 @@
+.chat_search {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.chat_search input {
+  width: 100%;
+  padding-block: 6px;
+  background-color: unset;
+  border: unset;
+}

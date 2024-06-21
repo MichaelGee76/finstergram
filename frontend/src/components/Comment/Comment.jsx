@@ -14,7 +14,9 @@ const calculateCommentAge = (createdAt) => {
   const commentAgeInMin = Math.floor(commentAge / 1000 / 60); // 10
   const commentAgeInHours = Math.floor(commentAgeInMin / 60); // 0
   const showCommentAge =
-    commentAgeInHours >= 1
+    commentAgeInHours >= 24
+      ? `${Math.floor(commentAgeInHours / 24)}d`
+      : commentAgeInHours >= 1
       ? `${commentAgeInHours} hours ago`
       : commentAgeInMin > 1
       ? `${commentAgeInMin} min ago`
