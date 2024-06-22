@@ -1,5 +1,6 @@
 .new_chat {
-  min-height: 100svh;
+  max-height: 100svh;
+  overflow-y: scroll;
   width: 100%;
   position: fixed;
   top: 0;
@@ -27,4 +28,26 @@
   padding-right: 12px;
   border-bottom: 1px solid var(--input-grey);
   width: 100%;
+}
+
+.new_chat_userinfos {
+  display: flex;
+  gap: 12px;
+}
+
+.new_chat_userinfos div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.new_chat_userinfos div p {
+  text-decoration: none;
+}
+
+.new_chat_profilepic {
+  min-width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 100px;
 }

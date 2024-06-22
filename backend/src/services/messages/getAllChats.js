@@ -37,15 +37,24 @@ export async function getAllChats(userId) {
       const user = await User.findById(chatPartnerId).select(
         "profilePicture userName _id"
       );
+
+      const wasRead = chat.lastMessage.userId.equals(userId)
+        ? true
+        : chat.lastMessage.wasRead;
+
       return {
         profilePicture: user.profilePicture,
         userName: user.userName,
         userId: user._id,
         lastMessage: chat.lastMessage.text,
         lastMessageDate: chat.lastMessage.createdAt,
-        wasRead: chat.lastMessage.wasRead,
+        wasRead: wasRead,
       };
     })
+  );
+
+  chatOverview.sort(
+    (a, b) => new Date(b.lastMessageDate) - new Date(a.lastMessageDate)
   );
   return chatOverview;
 }

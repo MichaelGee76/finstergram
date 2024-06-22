@@ -13,6 +13,8 @@ export async function getOneChat(userId, messagedId) {
 
   const user = await User.findById(messagedId);
 
+  console.log(messagedId);
+
   const chatPartner = {
     userName: user.userName,
     profilePicture: user.profilePicture,

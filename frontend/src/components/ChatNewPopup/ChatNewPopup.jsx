@@ -73,20 +73,53 @@ const ChatNewPopup = () => {
             />
           </form>
           <div className="new_chat_output">
-            {followedUsers.slice(0, showMoreUsers)?.map((followedUser) => (
-              <article key={followedUser._id}>
-                <Link to={`profile/${followedUser._id}`}>
-                  <img src="" alt="" />
-                  <div>
-                    <p></p>
-                    <p></p>
-                  </div>
-                </Link>
-                <Link to={`/chat/${followedUser._id}`}>
-                  <img src="/img/Message.svg" alt="" />
-                </Link>
-              </article>
-            ))}
+            {followedUsers.slice(0, showMoreUsers)?.map((followedUser) =>
+              searchInput ? (
+                followedUser.followedId.userName
+                  .toLowerCase()
+                  .includes(searchInput.toLowerCase()) && (
+                  <article key={followedUser._id}>
+                    <Link
+                      className="new_chat_userinfos"
+                      to={`/profile/${followedUser.followedId._id}`}
+                    >
+                      <img
+                        className="new_chat_profilepic"
+                        src={followedUser.followedId.profilePicture}
+                        alt=""
+                      />
+                      <div>
+                        <p>{followedUser.followedId.userName}</p>
+                        <p>{followedUser.followedId.profession}</p>
+                      </div>
+                    </Link>
+                    <Link to={`/chat/${followedUser.followedId._id}`}>
+                      <img src="/img/Message.svg" alt="" />
+                    </Link>
+                  </article>
+                )
+              ) : (
+                <article key={followedUser._id}>
+                  <Link
+                    className="new_chat_userinfos"
+                    to={`/profile/${followedUser.followedId._id}`}
+                  >
+                    <img
+                      className="new_chat_profilepic"
+                      src={followedUser.followedId.profilePicture}
+                      alt=""
+                    />
+                    <div>
+                      <p>{followedUser.followedId.userName}</p>
+                      <p>{followedUser.followedId.profession}</p>
+                    </div>
+                  </Link>
+                  <Link to={`/chat/${followedUser.followedId._id}`}>
+                    <img src="/img/Message.svg" alt="" />
+                  </Link>
+                </article>
+              )
+            )}
           </div>
         </section>
       )}
