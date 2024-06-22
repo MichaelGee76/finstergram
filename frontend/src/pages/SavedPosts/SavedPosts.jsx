@@ -2,11 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import "./SavedPosts.css";
 import { backendUrl } from "../../api/api";
 import ky from "ky";
+import Post from "../../components/Post/Post";
+import { TokenDataContext } from "../../components/context/Context";
 
 const SavedPosts = () => {
   const { token } = useContext(TokenDataContext);
   const [savedPosts, setSavedPosts] = useState([]);
   const [error, setError] = useState(null);
+  const [fixBg, setFixBg] = useState(false);
+  const [changeHeaderZ, setChangeHeaderZ] = useState(false);
 
   useEffect(() => {
     const fetchSavedPosts = async () => {
@@ -19,7 +23,7 @@ const SavedPosts = () => {
             },
           })
           .json();
-        setSavedPosts(res); //setSavedPosts(res.result)???
+        setSavedPosts(res.result); //setSavedPosts(res.result)???
       } catch (err) {
         setError("failed to fetch saved posts");
       }
@@ -30,13 +34,16 @@ const SavedPosts = () => {
   return (
     <section>
       <h1>Saved Posts</h1>
-      <div className="saved_posts">
-        {savedPosts?.map((singlePost, index) => (
-          <div className="post_container" key={index}>
-            <h2>{singlePost.description}</h2>
-            <p>{singlePost.location}</p>
-            <p>{singlePost.hashtags.join(",")}</p>
-          </div>
+      <div className="discover_feed_sec">
+        {savedPosts?.map((post, index) => (
+          <Post
+            key={index}
+            postData={post}
+            setFixBg={setFixBg}
+            discoverFeed={true}
+            setChangeHeaderZ={setChangeHeaderZ}
+            changeHeaderZ={changeHeaderZ}
+          />
         ))}
       </div>
     </section>
