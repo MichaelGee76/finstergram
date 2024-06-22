@@ -29,6 +29,7 @@ import { getAllCommentsFromPost } from "./comment/getAllCommentsFromPost.js";
 //Like
 import { postLike } from "./like/postLike.js";
 import { deleteLike } from "./like/deleteLike.js";
+import { getLikes } from "./like/getLikes.js";
 
 import { getLikedPosts } from "./like/getLikedPosts.js";
 //Follow
@@ -82,6 +83,7 @@ export const CommentService = {
 export const LikeService = {
   postLike,
   deleteLike,
+  getLikes,
 
   getLikedPosts,
 };
