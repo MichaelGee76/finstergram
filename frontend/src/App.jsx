@@ -17,6 +17,9 @@ import HashtagPosts from "./pages/HashtagPosts/HashtagPosts";
 import AuthRequired from "./components/Authrequired";
 import SinglePost from "./pages/SinglePost/SinglePost";
 import Loading from "./components/Loading/Loading";
+import EditPost from "./pages/EditPost/EditPost";
+import SavedPosts from "./pages/SavedPosts/SavedPosts";
+import LikedPosts from "./pages/LikedPosts/LikedPosts";
 
 function App() {
   const [user, setUser] = useState();
@@ -109,6 +112,30 @@ function App() {
                   element={
                     <AuthRequired>
                       <SinglePost />
+                    </AuthRequired>
+                  }
+                />
+                <Route
+                  path="/editpost/:id"
+                  element={
+                    <AuthRequired>
+                      <EditPost />
+                    </AuthRequired>
+                  }
+                />
+                <Route
+                  path="/savedposts"
+                  element={
+                    <AuthRequired>
+                      <SavedPosts />
+                    </AuthRequired>
+                  }
+                />
+                <Route
+                  path="/likedposts"
+                  element={
+                    <AuthRequired>
+                      <LikedPosts />
                     </AuthRequired>
                   }
                 />
