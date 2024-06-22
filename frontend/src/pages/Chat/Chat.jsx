@@ -30,7 +30,7 @@ const Chat = () => {
           },
         })
         .json();
-
+      setChatData(true);
       setChatData(res.result);
     };
 
@@ -38,20 +38,18 @@ const Chat = () => {
   }, [chatUpd, reloadChat]);
 
   useEffect(() => {
-    if (chatData.length > 0) {
-      const messagesSeen = async () => {
-        const res = await ky
-          .patch(`${backendUrl}/message/${chatData.chatPartner.userId}`, {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .json();
-      };
+    const messagesSeen = async () => {
+      const res = await ky
+        .patch(`${backendUrl}/message/${chatData.chatPartner.userId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .json();
+    };
 
-      messagesSeen();
-    }
+    messagesSeen();
   }, [chatData]);
 
   const handleScroll = () => {

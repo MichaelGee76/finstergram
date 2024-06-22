@@ -30,8 +30,8 @@
 }
 
 .message_unread_dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 12px;
   background-color: var(--mid-pink);
 }

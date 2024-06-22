@@ -62,8 +62,8 @@
 }
 
 .inbox_dot {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 10px;
   background-color: var(--mid-pink);
 }
