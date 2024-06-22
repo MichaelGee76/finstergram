@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { backendUrl } from "../../api/api";
 import { TokenDataContext } from "../../components/context/Context";
 import ChatView from "../../components/ChatView/ChatView";
+import ChatNewPopup from "../../components/ChatNewPopup/ChatNewPopup";
 
 const ChatDashboard = () => {
   const [chats, setChats] = useState([]);
@@ -42,7 +43,8 @@ const ChatDashboard = () => {
             />
             <h1>Messages</h1>
           </div>
-          <img src="/img/NewMessage.svg" alt="" />
+
+          <ChatNewPopup />
         </div>
         <ChatSearch setSearchInput={setSearchInput} searchInput={searchInput} />
       </section>

@@ -2,6 +2,7 @@
   display: flex;
   align-items: flex-end;
   gap: 16px;
+  width: 75%;
 }
 
 .message_img_div {
@@ -16,18 +17,27 @@
 }
 
 .message_content {
-  padding-bottom: 6px;
   background-color: var(--input-grey);
-  border-radius: 12px;
-  padding: 15px;
+  border-radius: 20px;
+  padding: 12px;
 }
 
 .message_content p {
-  font-weight: 400;
-  line-height: 200%;
+  font-weight: 500;
+  line-height: 160%;
+  font-size: 16px;
 }
 
 .partner_messages {
   margin-left: auto;
   flex-direction: row-reverse;
+}
+
+.partner_messages .message_content {
+  background: linear-gradient(0.38turn, var(--light-pink), var(--mid-pink));
+  /* background-color: var(--light-pink); */
+}
+.partner_messages .message_content p {
+  color: var(--input-grey);
+  font-weight: 600;
 }

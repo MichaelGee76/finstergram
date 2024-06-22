@@ -1,10 +1,22 @@
 .send_message {
   position: fixed;
-  bottom: 12px;
-  left: 24px;
+  left: 0px;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
-  width: 89%;
+  width: 100%;
+  background: linear-gradient(
+    transparent,
+    var(--main-background),
+    var(--main-background) 55% 100%
+  );
+  padding: 32px 24px 16px 24px;
+  border-radius: 24px 24px 0 0;
+}
+.send_message form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   background-color: var(--input-grey);
   border-radius: 100px;
   border: 1px solid var(--icons-grey);
@@ -20,7 +32,8 @@
 }
 
 .send_message button {
-  background-color: var(--mid-pink);
+  /* background-color: var(--mid-pink); */
+  background: linear-gradient(0.38turn, var(--light-pink), var(--mid-pink));
   border-radius: 100px;
   color: var(--main-background);
   padding-inline: 18px;

@@ -63,6 +63,14 @@ function App() {
                   }
                 />
                 <Route
+                  path="/newChat"
+                  element={
+                    <AuthRequired>
+                      <ChatDashboard />
+                    </AuthRequired>
+                  }
+                />
+                <Route
                   path="/profile/:id"
                   element={
                     <AuthRequired>

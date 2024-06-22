@@ -6,10 +6,11 @@ nav {
   display: flex;
   justify-content: space-between;
   padding-inline: 58px;
-  padding-block: 13px 6px;
+  padding-block: 16px 12px;
   background-color: var(--main-background);
-  border-radius: 16px 16px 0 0;
+  border-radius: 20px 20px 0 0;
   border-top: 1px solid #eeeeee;
+  box-shadow: 5px -10px 15px rgba(0, 0, 0, 0.03);
 }
 
 nav a {
