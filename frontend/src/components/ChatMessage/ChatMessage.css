@@ -23,9 +23,9 @@
 }
 
 .message_content p {
-  font-weight: 500;
+  font-weight: 400;
   line-height: 160%;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .partner_messages {
@@ -39,5 +39,5 @@
 }
 .partner_messages .message_content p {
   color: var(--input-grey);
-  font-weight: 600;
+  font-weight: 500;
 }

@@ -21,8 +21,12 @@
   object-fit: cover;
 }
 
-.chat_view_content p {
+.chat_view_content h3 {
   font-size: 16px;
+}
+
+.chat_view_content p {
+  font-size: 14px;
 }
 
 .chat_view_content p span {

@@ -89,12 +89,12 @@ const ChatNewPopup = () => {
                         alt=""
                       />
                       <div>
-                        <p>{followedUser.followedId.userName}</p>
+                        <h3 className="">{followedUser.followedId.userName}</h3>
                         <p>{followedUser.followedId.profession}</p>
                       </div>
                     </Link>
                     <Link to={`/chat/${followedUser.followedId._id}`}>
-                      <img src="/img/Message.svg" alt="" />
+                      <img src="/img/SendMessageLightPink.svg" alt="" />
                     </Link>
                   </article>
                 )
@@ -110,12 +110,12 @@ const ChatNewPopup = () => {
                       alt=""
                     />
                     <div>
-                      <p>{followedUser.followedId.userName}</p>
+                      <h3>{followedUser.followedId.userName}</h3>
                       <p>{followedUser.followedId.profession}</p>
                     </div>
                   </Link>
                   <Link to={`/chat/${followedUser.followedId._id}`}>
-                    <img src="/img/Message.svg" alt="" />
+                    <img src="/img/SendMessageLightPink.svg" alt="" />
                   </Link>
                 </article>
               )

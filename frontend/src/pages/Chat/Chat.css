@@ -15,6 +15,13 @@
   padding: 24px;
 }
 
+.chat_upper a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
 .chat_upper h1 {
   /* font-size: 22px; */
   font-weight: 600;
@@ -30,7 +37,7 @@
 .messages_sec {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   width: 100%;
   padding-top: 90px;
 }

@@ -22,7 +22,7 @@ const calculatePostAge = (createdAt) => {
 const ChatView = ({ chatData }) => {
   const messageDate = calculatePostAge(chatData?.lastMessageDate);
 
-  const messageStyle = !chatData.wasRead ? { fontWeight: "800" } : {};
+  const messageStyle = !chatData.wasRead ? { fontWeight: "700" } : {};
 
   return (
     <Link to={`/chat/${chatData.userId}`} className="chat_view">

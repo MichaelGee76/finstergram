@@ -1,5 +1,5 @@
 .search_site {
-  margin-top: 210px;
+  margin-top: 200px;
   padding-bottom: 50px;
   display: flex;
   flex-direction: column;
@@ -9,14 +9,14 @@
 .search_res_upper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   position: fixed;
   z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
   padding-top: 44px;
-  padding-inline: 24px;
+  padding-inline: 14px;
   background-color: var(--main-background);
   border-radius: 0 0 12px 12px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
@@ -57,13 +57,17 @@
   border: unset;
 }
 
+.search_btns_wrapper button img {
+  height: 21px;
+}
+
 .search_btns_wrapper button:first-of-type img {
-  height: 28px;
+  height: 24px;
 }
 
 .red_line {
   width: 100%;
-  height: 4px;
+  height: 3px;
   background-color: var(--mid-pink);
   border-radius: 5px;
 }

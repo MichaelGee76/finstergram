@@ -2,7 +2,7 @@ import { User } from "../../models/user.js";
 import { Comment } from "../../models/comment.js";
 import { Like } from "../../models/like.js";
 
-async function getCommentsWithReplies(commentId) {
+async function getCommentsWithReplies(commentId, authenticatedUserId) {
   const comments = await Comment.find({ commentId })
     .sort({ createdAt: -1 })
     .populate({
@@ -14,11 +14,18 @@ async function getCommentsWithReplies(commentId) {
   return Promise.all(
     comments.map(async (comment) => {
       const likes = await Like.find({ commentId: comment._id });
-      const replies = await getCommentsWithReplies(comment._id);
+      const likedByUser = likes.some(
+        (like) => like.userId.toString() === authenticatedUserId.toString()
+      );
+      const replies = await getCommentsWithReplies(
+        comment._id,
+        authenticatedUserId
+      );
 
       return {
         ...comment.toObject(),
         likesCount: likes.length,
+        likedByUser,
         replies,
       };
     })
@@ -40,11 +47,18 @@ export async function getAllCommentsFromPost(postId, authenticatedUserId) {
   const commentArr = await Promise.all(
     comments.map(async (comment) => {
       const likes = await Like.find({ commentId: comment._id });
-      const replies = await getCommentsWithReplies(comment._id);
+      const likedByUser = likes.some(
+        (like) => like.userId.toString() === authenticatedUserId.toString()
+      );
+      const replies = await getCommentsWithReplies(
+        comment._id,
+        authenticatedUserId
+      );
 
       return {
         ...comment.toObject(),
         likesCount: likes.length,
+        likedByUser,
         replies,
       };
     })

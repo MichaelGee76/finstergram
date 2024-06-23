@@ -1,5 +1,5 @@
 .new_chat {
-  max-height: 100svh;
+  height: 100svh;
   overflow-y: scroll;
   width: 100%;
   position: fixed;
@@ -30,6 +30,18 @@
   width: 100%;
 }
 
+.new_chat_output article a {
+  text-decoration: none;
+}
+
+.new_chat_output article a div {
+  gap: 6px;
+}
+
+.new_chat_output article a div h3 {
+  font-size: 16px;
+}
+
 .new_chat_userinfos {
   display: flex;
   gap: 12px;
@@ -39,10 +51,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.new_chat_userinfos div p {
-  text-decoration: none;
+  justify-content: center;
 }
 
 .new_chat_profilepic {

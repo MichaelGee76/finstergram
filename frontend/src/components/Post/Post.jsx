@@ -68,6 +68,8 @@ const Post = ({
     }
   };
 
+  console.log(postData);
+
   const likeToggleHandler = async () => {
     if (!likeToggle) {
       const res = await ky

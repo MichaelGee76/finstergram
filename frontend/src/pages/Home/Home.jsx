@@ -36,7 +36,7 @@ const Home = () => {
 
     getUserFeed();
   }, [updUserFeed]);
-  console.log(chats);
+
   useEffect(() => {
     const getChatsHandler = async () => {
       const res = await ky
@@ -47,13 +47,13 @@ const Home = () => {
           },
         })
         .json();
-      console.log(chats);
+
       setNewMessage(res.result.filter((element) => !element.wasRead));
       setChats(res.result);
     };
     getChatsHandler();
   }, [feed]);
-  console.log(newMessage);
+
   return (
     <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
       <div className="dash_heading_div">

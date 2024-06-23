@@ -41,7 +41,7 @@
 .inbox_postimg {
   width: 55px;
   height: 55px;
-  border-radius: 12px;
+  border-radius: 10px;
   object-fit: cover;
 }
 
