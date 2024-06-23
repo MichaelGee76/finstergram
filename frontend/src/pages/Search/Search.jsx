@@ -6,6 +6,7 @@ import { TokenDataContext } from "../../components/context/Context";
 import SearchResult from "../../components/SearchResult/SearchResult";
 import { Link } from "react-router-dom";
 import DiscoverFeed from "../../components/DiscoverFeed/DiscoverFeed";
+
 const Search = () => {
   const [searchToggle, setSearchToggle] = useState(true);
   const [userSearchResults, setUserSearchResults] = useState([]);

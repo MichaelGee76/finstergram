@@ -4,10 +4,14 @@ import EditPopup from "../../components/EditPopup/EditPopup";
 import { Link, useParams } from "react-router-dom";
 import ProfilPosts from "../../components/ProfilPosts/ProfilPosts";
 import ky from "ky";
-import { TokenDataContext, UserDataContext } from "../../components/context/Context";
+import {
+  TokenDataContext,
+  UserDataContext,
+} from "../../components/context/Context";
 import { backendUrl } from "../../api/api";
 import ProfilPostsList from "../../components/ProfilPostsList/ProfilPostsList";
 import FollowPopup from "../../components/FollowPopup/FollowPopup";
+import SettingsPopup from "../../components/SettingsPopup/SettingsPopup";
 
 const Profile = () => {
   const { token } = useContext(TokenDataContext);
@@ -40,6 +44,13 @@ const Profile = () => {
   const showFollowerPopUp = (isFollower = true) => {
     setPopupTab(isFollower); // <-- Setze den aktiven Tab beim Öffnen des Popups
     setFollowerPopUp(!followerPopUp);
+  };
+
+  //settingPopup toggle für settings
+  const [settingsPopup, setSettingsPopup] = useState(false);
+
+  const settingTogglePopup = () => {
+    setSettingsPopup(!settingsPopup);
   };
 
   // * numbers format change if it is 5 digit - for follower number
@@ -106,8 +117,19 @@ const Profile = () => {
       <div className="profile_top">
         <div className="profile_title">
           {isUser ? (
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="32" height="32" rx="12" fill="url(#paint0_linear_3509_1537)" />
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                width="32"
+                height="32"
+                rx="12"
+                fill="url(#paint0_linear_3509_1537)"
+              />
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -159,7 +181,13 @@ const Profile = () => {
           {isUser ? (
             <div>
               <Link to={"/upload"}>
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M14.043 9.87305V18.2129"
                     stroke="#212121"
@@ -185,7 +213,13 @@ const Profile = () => {
                   />
                 </svg>
               </Link>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M16.0386 23.8501H24.5"
                   stroke="#212121"
@@ -210,7 +244,15 @@ const Profile = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/*    hier kommt  unten das oncklick */}
+              <svg
+                onClick={() => settingTogglePopup()}
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -244,7 +286,13 @@ const Profile = () => {
               </svg>
             </div>
           ) : (
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -331,13 +379,19 @@ const Profile = () => {
           <p>Posts</p>
         </div>
 
-        <div onClick={() => showFollowerPopUp(true)} className="profile_numberbox">
+        <div
+          onClick={() => showFollowerPopUp(true)}
+          className="profile_numberbox"
+        >
           {" "}
           {/* Follower Tab */}
           <h1>{userProfile.followedNumber.length}</h1>
           <p>Follower</p>
         </div>
-        <div onClick={() => showFollowerPopUp(false)} className="profile_numberbox">
+        <div
+          onClick={() => showFollowerPopUp(false)}
+          className="profile_numberbox"
+        >
           {" "}
           {/* Following Tab */}
           <h1> {userProfile.followingNumber.length}</h1>
@@ -398,7 +452,14 @@ const Profile = () => {
                 d="M12.0522 6.27229C12.0522 8.59746 10.2121 10.4613 7.91663 10.4613C5.62115 10.4613 3.7811 8.59746 3.7811 6.27229C3.7811 3.94711 5.62115 2.08325 7.91663 2.08325C10.2121 2.08325 12.0522 3.94711 12.0522 6.27229ZM1.66663 15.2053C1.66663 13.0516 4.54515 12.5126 7.91663 12.5126C11.3056 12.5126 14.1666 13.0702 14.1666 15.2239C14.1666 17.3775 11.2873 17.9166 7.91663 17.9166C4.52763 17.9166 1.66663 17.3581 1.66663 15.2053Z"
                 fill="white"
               />
-              <rect x="14.5" y="8" width="5" height="1.5" rx="0.75" fill="white" />
+              <rect
+                x="14.5"
+                y="8"
+                width="5"
+                height="1.5"
+                rx="0.75"
+                fill="white"
+              />
             </svg>
             Following
           </button>
@@ -410,9 +471,15 @@ const Profile = () => {
         setActiveSection={setActiveSection}
         setPopupList={setPopupList}
       />
+
       {popupList && (
-        <ProfilPostsList posts={userProfile} setPopupList={setPopupList} setUpdProfilFeed={setUpdProfilFeed} />
+        <ProfilPostsList
+          posts={userProfile}
+          setPopupList={setPopupList}
+          setUpdProfilFeed={setUpdProfilFeed}
+        />
       )}
+      {settingsPopup && <SettingsPopup />}
     </section>
   ) : (
     <p>loading..</p>
