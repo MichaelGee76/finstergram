@@ -26,14 +26,7 @@ const calculatePostAge = (createdAt) => {
   return { showPostAge, postAgeInHours };
 };
 
-const Post = ({
-  postData,
-  setUpdUserFeed,
-  setFixBg,
-  setChangeHeaderZ,
-  changeHeaderZ,
-  discoverFeed,
-}) => {
+const Post = ({ postData, setUpdUserFeed, setFixBg, setChangeHeaderZ, changeHeaderZ, discoverFeed }) => {
   const [likeToggle, setLikeToggle] = useState(postData.likedByUser);
   const [crementLike, setCrementLike] = useState(postData.likes);
   const [saveToggle, setSaveToggle] = useState(postData.savedByUser);
@@ -140,23 +133,15 @@ const Post = ({
       <article className="post_wrapper">
         {!discoverFeed && (
           <div className="post_upper">
-            <Link
-              to={`/profile/${postData.userId._id}`}
-              className="post_user_infos"
-            >
+            <Link to={`/profile/${postData.userId._id}`} className="post_user_infos">
               <img src={postData.userId.profilePicture} alt="" />
               <div>
                 <h3 className="username_post">{postData.userId.userName}</h3>
-                <p className="userdescription_post">
-                  {postData.userId.profession}
-                </p>
+                <p className="userdescription_post">{postData.userId.profession}</p>
               </div>
             </Link>
             {user._id === postData.userId._id && (
-              <PostSettings
-                postData={postData}
-                setUpdUserFeed={setUpdUserFeed}
-              />
+              <PostSettings postData={postData} setUpdUserFeed={setUpdUserFeed} />
             )}
           </div>
         )}

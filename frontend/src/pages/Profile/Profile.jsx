@@ -20,7 +20,7 @@ const Profile = () => {
   // * states for fetch
   const [posts, setPosts] = useState();
   const [userProfile, setUserProfile] = useState();
-
+  const [updateFollowers, setUpdateFollowers] = useState(false);
   const [follow, setFollow] = useState();
 
   const { id } = useParams();
@@ -36,7 +36,9 @@ const Profile = () => {
 
   // * Toggle PopUp for follower list
   const [followerPopUp, setFollowerPopUp] = useState(false);
-  const showFollowerPopUp = () => {
+  const [popupTab, setPopupTab] = useState(true);
+  const showFollowerPopUp = (isFollower = true) => {
+    setPopupTab(isFollower); // <-- Setze den aktiven Tab beim Öffnen des Popups
     setFollowerPopUp(!followerPopUp);
   };
 
@@ -69,7 +71,7 @@ const Profile = () => {
       setIsUser(false);
     }
     getUserPosts();
-  }, [setUpdProfilFeed]);
+  }, [updProfilFeed, updateFollowers]);
 
   const postFollowing = async (userId) => {
     const res = await ky
@@ -81,6 +83,7 @@ const Profile = () => {
       })
       .json();
     setFollow(true);
+    setUpdateFollowers(!updateFollowers);
   };
 
   const deleteFollowing = async (userId) => {
@@ -93,6 +96,7 @@ const Profile = () => {
       })
       .json();
     setFollow(false);
+    setUpdateFollowers(!updateFollowers);
   };
 
   return userProfile ? (
@@ -327,11 +331,15 @@ const Profile = () => {
           <p>Posts</p>
         </div>
 
-        <div onClick={showFollowerPopUp} className="profile_numberbox">
+        <div onClick={() => showFollowerPopUp(true)} className="profile_numberbox">
+          {" "}
+          {/* Follower Tab */}
           <h1>{userProfile.followedNumber.length}</h1>
           <p>Follower</p>
         </div>
-        <div onClick={showFollowerPopUp} className="profile_numberbox">
+        <div onClick={() => showFollowerPopUp(false)} className="profile_numberbox">
+          {" "}
+          {/* Following Tab */}
           <h1> {userProfile.followingNumber.length}</h1>
           <p>Gefolgt</p>
         </div>
@@ -347,6 +355,8 @@ const Profile = () => {
           setFollow={setFollow}
           postFollowing={postFollowing}
           deleteFollowing={deleteFollowing}
+          setUpdateFollowers={setUpdateFollowers}
+          popupTab={popupTab}
         />
       )}
 

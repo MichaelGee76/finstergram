@@ -5,7 +5,7 @@ import ky from "ky";
 import { backendUrl } from "../../api/api";
 import { TokenDataContext } from "../context/Context";
 
-const FollowerResult = ({ myFollower }) => {
+const FollowerResult = ({ myFollower, handleFollowUpdate }) => {
   const [followUpdate, setFollowUpdate] = useState(myFollower.isFollowed);
   const { token } = useContext(TokenDataContext);
 
@@ -19,6 +19,7 @@ const FollowerResult = ({ myFollower }) => {
       })
       .json();
     setFollowUpdate(true);
+    handleFollowUpdate();
   };
 
   const deleteFollowing = async (userId) => {
@@ -31,6 +32,7 @@ const FollowerResult = ({ myFollower }) => {
       })
       .json();
     setFollowUpdate(false);
+    handleFollowUpdate();
   };
 
   return (

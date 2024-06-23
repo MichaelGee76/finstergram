@@ -33,11 +33,13 @@
 .section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 1px;
 }
 
 .section img {
-  width: 115px;
-  height: 115px;
+  width: 133px;
+  height: 133px;
   object-fit: cover;
+
+  border-radius: 4px;
 }

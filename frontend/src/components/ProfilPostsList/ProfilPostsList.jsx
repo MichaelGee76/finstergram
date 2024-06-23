@@ -1,8 +1,7 @@
 import Post from "../Post/Post";
 import "./ProfilPostsList.css";
 
-const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed }) => {
-  //   console.log(posts[0]);
+const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setChangeHeaderZ }) => {
   return (
     <section className="profilposts_list">
       <div className="posts_popup">
@@ -34,8 +33,15 @@ const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed }) => {
                 userName: posts.userData.userName,
                 _id: item.userId,
               },
+              likes: item.likes,
+              comments: item.comments,
+              likedByUser: item.likedByUser,
+              savedByUser: item.savedByUser,
             }}
             setUpdUserFeed={setUpdProfilFeed}
+            setFixBg={setFixBg}
+            setChangeHeaderZ={setChangeHeaderZ}
+            discoverFeed={false}
           />
         ))}
       </div>

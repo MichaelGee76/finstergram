@@ -5,7 +5,7 @@ import ky from "ky";
 import { backendUrl } from "../../api/api";
 import { TokenDataContext } from "../context/Context";
 
-const FollowingResult = ({ iAmFollowing }) => {
+const FollowingResult = ({ iAmFollowing, handleFollowUpdate }) => {
   const [followUpdate, setFollowUpdate] = useState(iAmFollowing.isFollowed);
   const { token } = useContext(TokenDataContext);
 
@@ -19,6 +19,7 @@ const FollowingResult = ({ iAmFollowing }) => {
       })
       .json();
     setFollowUpdate(true);
+    handleFollowUpdate();
   };
 
   const deleteFollowing = async (userId) => {
@@ -31,6 +32,7 @@ const FollowingResult = ({ iAmFollowing }) => {
       })
       .json();
     setFollowUpdate(false);
+    handleFollowUpdate();
   };
 
   return (

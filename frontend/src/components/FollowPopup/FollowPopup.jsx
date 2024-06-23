@@ -2,16 +2,23 @@ import { useEffect, useState } from "react";
 import "./FollowPopup.css";
 import ky from "ky";
 import { backendUrl } from "../../api/api";
-
 import FollowerResult from "../FollowerResult/FollowerResult";
 import FollowingResult from "../FollowingResult/FollowingResult";
 
-const FollowPopup = ({ showFollowerPopUp, userProfile, token, id, setFollow, postFollowing, deleteFollowing }) => {
+const FollowPopup = ({
+  showFollowerPopUp,
+  userProfile,
+  token,
+  id,
+  setFollow,
+  postFollowing,
+  deleteFollowing,
+  setUpdateFollowers,
+  popupTab,
+}) => {
   const [followMe, setFollowMe] = useState([]);
   const [iFollow, setIFollow] = useState([]);
-  const [changePopup, setChangePopup] = useState(true);
-  const [toggleButton, setToggleButton] = useState(false);
-  const [activeslide, setActiveSlide] = useState("follower");
+  const [changePopup, setChangePopup] = useState(popupTab);
 
   useEffect(() => {
     const userFetch = async () => {
@@ -25,11 +32,11 @@ const FollowPopup = ({ showFollowerPopUp, userProfile, token, id, setFollow, pos
       setIFollow(res.result.iAmFollowing);
     };
     userFetch();
-  }, []);
+  }, [id, token]);
 
-  console.log(changePopup);
-  console.log(iFollow);
-  console.log(followMe);
+  const handleFollowUpdate = () => {
+    setUpdateFollowers((prev) => !prev);
+  };
 
   return followMe && iFollow ? (
     <section className="follow_popup">
@@ -53,10 +60,10 @@ const FollowPopup = ({ showFollowerPopUp, userProfile, token, id, setFollow, pos
         </svg>
 
         <div className="toggle_change ">
-          <h3 className="tab" onClick={() => setChangePopup(true)}>
+          <h3 className={`tab ${changePopup ? "active" : ""}`} onClick={() => setChangePopup(true)}>
             Follower
           </h3>
-          <h3 className="tab" onClick={() => setChangePopup(false)}>
+          <h3 className={`tab ${!changePopup ? "active" : ""}`} onClick={() => setChangePopup(false)}>
             Gefolgt
           </h3>
         </div>
@@ -64,13 +71,13 @@ const FollowPopup = ({ showFollowerPopUp, userProfile, token, id, setFollow, pos
         {changePopup ? (
           <div className="search_results">
             {followMe.map((myFollower, index) => (
-              <FollowerResult myFollower={myFollower} key={index} />
+              <FollowerResult key={index} myFollower={myFollower} handleFollowUpdate={handleFollowUpdate} />
             ))}
           </div>
         ) : (
           <div className="search_results">
             {iFollow.map((iAmFollowing, index) => (
-              <FollowingResult iAmFollowing={iAmFollowing} key={index} />
+              <FollowingResult key={index} iAmFollowing={iAmFollowing} handleFollowUpdate={handleFollowUpdate} />
             ))}
           </div>
         )}
