@@ -1,0 +1,77 @@
+.edit_post_sec {
+  margin-top: 130px;
+  margin-bottom: 80px;
+}
+
+.edit_post_sec form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.edit_post_sec form div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.edit_post_sec form div label {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.edit_post_sec form div input {
+  padding: 6px;
+  border: 1px solid var(--loginfont-grey);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.edit_post_sec form div .hashtags_output {
+  flex-direction: row;
+}
+
+.edit_post_sec form div .hashtags_output div {
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+}
+
+.edit_hashtag_btn {
+  background-color: var(--light-pink);
+  padding: 8px;
+  border: unset;
+  border-radius: 100px;
+  color: var(--input-grey);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.edit_post_btn {
+  background-color: var(--mid-pink);
+  padding: 8px;
+  border: unset;
+  border-radius: 100px;
+  color: var(--input-grey);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.edit_post_sec .location_suggestions {
+  margin-left: 12px;
+  /* padding-bottom: 12px; */
+}
+
+.edit_post_sec .location_suggestions div {
+  flex-direction: row;
+}
+
+form div .location_edit_wrapper {
+  flex-direction: row;
+  align-items: center;
+}
+form div .location_edit_wrapper p {
+  font-size: 16px;
+}

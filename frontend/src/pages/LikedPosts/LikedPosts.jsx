@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { backendUrl } from "../../api/api";
 import Post from "../../components/Post/Post";
 import "./LikedPosts.css";
+import { useNavigate } from "react-router-dom";
 
 const LikedPosts = () => {
   const { token } = useContext(TokenDataContext);
@@ -11,6 +12,7 @@ const LikedPosts = () => {
   const [error, setError] = useState(null);
   const [fixBg, setFixBg] = useState(false);
   const [changeHeaderZ, setChangeHeaderZ] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLikedPosts = async () => {
@@ -32,9 +34,12 @@ const LikedPosts = () => {
     fetchLikedPosts();
   }, []);
 
+  console.log(likedPosts);
+
   return (
-    <section>
-      <h1>Liked Posts</h1>
+    <section className="saved_posts_sec">
+
+
       <div className="discover_feed_sec">
         {likedPosts?.map((post, index) => (
           <Post

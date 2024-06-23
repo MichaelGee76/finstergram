@@ -4,6 +4,7 @@ import { backendUrl } from "../../api/api";
 import ky from "ky";
 import Post from "../../components/Post/Post";
 import { TokenDataContext } from "../../components/context/Context";
+import { useNavigate } from "react-router-dom";
 
 const SavedPosts = () => {
   const { token } = useContext(TokenDataContext);
@@ -11,6 +12,7 @@ const SavedPosts = () => {
   const [error, setError] = useState(null);
   const [fixBg, setFixBg] = useState(false);
   const [changeHeaderZ, setChangeHeaderZ] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSavedPosts = async () => {
@@ -32,8 +34,22 @@ const SavedPosts = () => {
   }, []);
 
   return (
-    <section>
-      <h1>Saved Posts</h1>
+    <section className="saved_posts_sec">
+      <div className="saved_posts_upper">
+        <div>
+          <img
+            src="/img/BackArrowLeft.svg"
+            alt=""
+            onClick={() => navigate(-1)}
+            className="nobtn"
+          />
+          <h1>Saved Posts</h1>
+        </div>
+        <p className="saved_posts_disclaimer">
+          Only you can see what you've saved
+        </p>
+      </div>
+
       <div className="discover_feed_sec">
         {savedPosts?.map((post, index) => (
           <Post

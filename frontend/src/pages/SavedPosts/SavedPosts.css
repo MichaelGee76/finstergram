@@ -1,0 +1,35 @@
+.saved_posts_sec {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 120px;
+  margin-bottom: 70px;
+}
+
+.saved_posts_upper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  padding-top: 32px;
+
+  padding-bottom: 12px;
+  background-color: var(--main-background);
+  border-radius: 0 0 24px 24px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.saved_posts_upper div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--input-grey);
+}
+
+.saved_posts_disclaimer {
+  text-align: center;
+  color: var(--loginfont-grey);
+}

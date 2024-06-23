@@ -169,7 +169,7 @@ const Upload = () => {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
 
-  console.log(isLoaded);
+  // console.log(isLoaded);
 
   // img mit filtern abspeichern
   useEffect(() => {

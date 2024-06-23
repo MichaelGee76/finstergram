@@ -1,20 +1,22 @@
 import ky from "ky";
 import "./EditPost.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { backendUrl } from "../../api/api";
 import { useContext, useEffect, useState } from "react";
 import { TokenDataContext } from "../../components/context/Context";
 
 const EditPost = () => {
   const { token } = useContext(TokenDataContext);
-  const [description, setDescription] = useState();
-  const [hashtags, setHashtags] = useState();
-  const [location, setLocation] = useState();
-
-  const [hashtagsARR, setHashtagsARR] = useState([]);
-
+  const [description, setDescription] = useState("");
+  const [hashtags, setHashtags] = useState([]);
+  const [location, setLocation] = useState("");
+  const [locationPlaceholder, setLocationPlaceholder] = useState();
+  const [places, setPlaces] = useState();
+  const [postData, setPostData] = useState({});
+  const [hashtagsARR, setHashtagsARR] = useState("");
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const currentPost = async () => {
@@ -31,22 +33,24 @@ const EditPost = () => {
         setDescription(res.result.post.description);
         setHashtags(res.result.post.hashtags);
         setLocation(res.result.post.location);
+        setLocationPlaceholder(res.result.post.location);
+        setPostData(res.result);
       } catch (err) {
         setError("Failed to fetch post");
       }
     };
     currentPost();
-  }, []);
+  }, [id, token]);
 
-  const handleEditPost = async () => {
+  const handleEditPost = async (event) => {
+    event.preventDefault();
     try {
       const updatedPost = {
         description,
         hashtags,
-        location,
+        location: locationPlaceholder,
       };
 
-      console.log(updatedPost);
       await ky.patch(`${backendUrl}/posts/${id}`, {
         headers: {
           "Content-Type": "application/json",
@@ -54,52 +58,65 @@ const EditPost = () => {
         },
         json: updatedPost,
       });
+      // navigate(`/posts/${id}`);
     } catch (error) {
-      setError("failed to update post");
+      setError("Failed to update post");
     }
   };
 
-  const addHashtag = () => {
-    if (hashtagsARR !== "") {
-      setHashtags([...hashtags, hashtagsARR]);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!location) return;
+      try {
+        const response = await ky
+          .get(
+            `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=10&appid=e1678d75ce4af9fec1178e60c5f88016&units=metric&lang=de`
+          )
+          .json();
+        setPlaces(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [location]);
+
+  const addHashtag = (event) => {
+    event.preventDefault();
+    if (hashtagsARR.trim() !== "") {
+      setHashtags([...hashtags, hashtagsARR.trim()]);
       setHashtagsARR("");
     }
   };
 
-  /*   const removeHashtag = (indexToRemove) => {
-    const updatedHashtagsARR = [...hashtagsARR];
-    updatedHashtagsARR.splice(indexToRemove, 1);
-    setHashtagsARR(updatedHashtagsARR);
-    console.log(hashtagsARR);
-  }; */
-  /* 
-  const removeHashtag = (indexToRemove) => {
-    setHashtags((prevState) => {
-      const newHashtags = prevState.hashtags.filter(
-        (_, index) => index !== indexToRemove
-      );
-      return { ...prevState, hashtags: newHashtags };
-    });
-  }; */
-
-  const removeHashtag = (indexToRemove) => {
-    setHashtags((prevHashtags) => {
-      if (Array.isArray(prevHashtags)) {
-        return prevHashtags.filter((_, index) => index !== indexToRemove);
-      }
-      return prevHashtags;
-    });
+  const removeHashtag = (indexToRemove, event) => {
+    event.preventDefault();
+    setHashtags((prevHashtags) =>
+      prevHashtags.filter((_, index) => index !== indexToRemove)
+    );
+  };
+  const addLocation = (city) => {
+    setLocationPlaceholder(city);
+    setLocation("");
   };
 
+  console.log(locationPlaceholder);
   return (
-    <section>
-      <h1>Edit Post</h1>;
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleEditPost();
-        }}
-      >
+    <section className="edit_post_sec">
+      <div className="saved_posts_upper">
+        <div>
+          <img
+            src="/img/BackArrowLeft.svg"
+            alt=""
+            onClick={() => navigate(-1)}
+            className="nobtn"
+          />
+          <h1>Edit your Post</h1>
+        </div>
+        <p className="saved_posts_disclaimer">You cannot change the image</p>
+      </div>
+      <img className="post_img" src={postData?.post?.picture} alt="" />
+      <form onSubmit={(event) => event.preventDefault()}>
         <div>
           <label htmlFor="description">Description:</label>
           <input
@@ -112,34 +129,69 @@ const EditPost = () => {
 
         <div>
           <label htmlFor="hashtags">Hashtags:</label>
+          <div className="hashtags_output">
+            {hashtags?.map((hashtag, index) => (
+              <div key={index}>
+                <p>#{hashtag}</p>
+                <button
+                  type="button"
+                  onClick={(event) => removeHashtag(index, event)}
+                >
+                  x
+                </button>
+              </div>
+            ))}
+          </div>
           <input
             type="text"
             id="hashtags"
             value={hashtagsARR}
             onChange={(e) => setHashtagsARR(e.target.value)}
           />
-          <button onClick={addHashtag}>Add</button>
-        </div>
-
-        <div className="hashtags_output">
-          {hashtags?.map((hashtag, index) => (
-            <div key={index}>
-              <p>#{hashtag}</p>
-              <button onClick={() => removeHashtag(index)}>x</button>
-            </div>
-          ))}
+          <button
+            className="edit_hashtag_btn"
+            onClick={addHashtag}
+            type="button"
+          >
+            Add Hashtag
+          </button>
         </div>
 
         <div>
-          <label htmlFor="location">Location:</label>
+          <div className="location_edit_wrapper">
+            <label htmlFor="location">Location:</label>
+            <p>{locationPlaceholder}</p>
+          </div>
+
           <input
             type="text"
             id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
+          {location && (
+            <div className="location_suggestions">
+              {places?.map((city) => (
+                <div
+                  onClick={() => addLocation(`${city.name} ${city.country}`)}
+                  key={city.lat}
+                >
+                  <p className="location_city">{city.name}</p>
+                  <p className="location_country">{city.country}</p>
+                  {city.state && <p className="location_state">{city.state}</p>}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        <button type="submit">Update Post</button>
+        <button
+          onClick={handleEditPost}
+          className="edit_post_btn"
+          type="submit"
+        >
+          Update Post
+        </button>
+        {error && <p className="error_message">{error}</p>}
       </form>
     </section>
   );
