@@ -3,77 +3,37 @@ import "./FollowPopup.css";
 import ky from "ky";
 import { backendUrl } from "../../api/api";
 
-const FollowPopup = ({ showFollowerPopUp, userProfile, token }) => {
-  const [followedUser, setFollowedUser] = useState([]);
-  const [followingUser, setFollowingUser] = useState([]);
-  const [changePopup, setChangePopup] = useState(false);
+import FollowerResult from "../FollowerResult/FollowerResult";
+import FollowingResult from "../FollowingResult/FollowingResult";
+
+const FollowPopup = ({ showFollowerPopUp, userProfile, token, id, setFollow, postFollowing, deleteFollowing }) => {
+  const [followMe, setFollowMe] = useState([]);
+  const [iFollow, setIFollow] = useState([]);
+  const [changePopup, setChangePopup] = useState(true);
+  const [toggleButton, setToggleButton] = useState(false);
+  const [activeslide, setActiveSlide] = useState("follower");
 
   useEffect(() => {
     const userFetch = async () => {
-      if (changePopup) {
-        const users = await Promise.all(
-          userProfile.followedNumber.map(async (follower) => {
-            const res = await ky
-              .get(`${backendUrl}/users/${follower.userId}`, {
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-              })
-              .json();
-            setFollowedUser(res.result);
-          })
-        );
-      } else {
-        const res = await ky.get("${backendUrl}/users/${follower2.followedId");
-      }
+      const res = await ky
+        .get(`${backendUrl}/follow/${id}`, {
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        })
+        .json();
+
+      setFollowMe(res.result.myFollower);
+      setIFollow(res.result.iAmFollowing);
     };
-  });
+    userFetch();
+  }, []);
 
-  //   useEffect(() => {
-  //     if (changePopup === true) {
-  //       const fetchFollowedUsers = async () => {
-  //         const users = await Promise.all(
-  //           userProfile.followedNumber.map(async (follower) => {
-  //             console.log(follower);
-  //             const res = await ky
-  //               .get(`${backendUrl}/users/${follower.userId}`, {
-  //                 headers: {
-  //                   "Content-Type": "application/json",
-  //                   Authorization: `Bearer ${token}`,
-  //                 },
-  //               })
-  //               .json();
-  //             return res.result;
-  //           })
-  //         );
-  //         setFollowedUser(users);
-  //       };
+  console.log(changePopup);
+  console.log(iFollow);
+  console.log(followMe);
 
-  //       fetchFollowedUsers();
-  //     } else {
-  //       const fetchFollowingUsers = async () => {
-  //         const users2 = await Promise.all(
-  //           userProfile.followingNumber.map(async (follower2) => {
-  //             console.log(follower2);
-  //             const res = await ky
-  //               .get(`${backendUrl}/users/${follower2.followedId}`, {
-  //                 headers: {
-  //                   "Content-Type": "application/json",
-  //                   Authorization: `Bearer ${token}`,
-  //                 },
-  //               })
-  //               .json();
-
-  //             return res.result;
-  //           })
-  //         );
-  //         setFollowingUser(users2);
-  //       };
-  //       fetchFollowingUsers();
-  //     }
-  //   }, [userProfile, backendUrl, token]);
-
-  return userProfile ? (
+  return followMe && iFollow ? (
     <section className="follow_popup">
-      <div className="follow_popup">
+      <div className="follow_popup_inner">
         <svg
           onClick={showFollowerPopUp}
           width="20"
@@ -91,16 +51,26 @@ const FollowPopup = ({ showFollowerPopUp, userProfile, token }) => {
             fill="#212121"
           />
         </svg>
+
+        <div className="toggle_change ">
+          <h3 className="tab" onClick={() => setChangePopup(true)}>
+            Follower
+          </h3>
+          <h3 className="tab" onClick={() => setChangePopup(false)}>
+            Gefolgt
+          </h3>
+        </div>
+
         {changePopup ? (
-          <div>
-            {followedUser.map((user, index) => (
-              <div key={index}>{user.userName}</div>
+          <div className="search_results">
+            {followMe.map((myFollower, index) => (
+              <FollowerResult myFollower={myFollower} key={index} />
             ))}
           </div>
         ) : (
-          <div>
-            {followingUser.map((user, index) => (
-              <div key={index}>{user.userName}</div>
+          <div className="search_results">
+            {iFollow.map((iAmFollowing, index) => (
+              <FollowingResult iAmFollowing={iAmFollowing} key={index} />
             ))}
           </div>
         )}

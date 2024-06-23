@@ -23,3 +23,11 @@
     transform: translateY(0);
   }
 }
+.toggle_change {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 16px;
+  margin-bottom: 12px;
+}

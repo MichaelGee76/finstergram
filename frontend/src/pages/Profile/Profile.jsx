@@ -14,6 +14,7 @@ const Profile = () => {
   const { user } = useContext(UserDataContext);
 
   const [activeSection, setActiveSection] = useState("posts");
+
   const [isUser, setIsUser] = useState(false);
 
   // * states for fetch
@@ -70,9 +71,9 @@ const Profile = () => {
     getUserPosts();
   }, [setUpdProfilFeed]);
 
-  const postFollowing = async () => {
+  const postFollowing = async (userId) => {
     const res = await ky
-      .post(`${backendUrl}/follow/newfollow/${id}`, {
+      .post(`${backendUrl}/follow/newfollow/${userId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -82,9 +83,9 @@ const Profile = () => {
     setFollow(true);
   };
 
-  const deleteFollowing = async () => {
+  const deleteFollowing = async (userId) => {
     const res = await ky
-      .delete(`${backendUrl}/follow/follow/${id}`, {
+      .delete(`${backendUrl}/follow/follow/${userId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -93,7 +94,7 @@ const Profile = () => {
       .json();
     setFollow(false);
   };
-  console.log(userProfile);
+
   return userProfile ? (
     <section className="profile">
       {/*//! (Logo TOGGLE -> Back Arrow), Username */}
@@ -118,7 +119,7 @@ const Profile = () => {
                   y2="20.9599"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#FF4D67" />
+                  <stop stopColor="#FF4D67" />
                   <stop offset="1" stop-color="#FF8A9B" />
                 </linearGradient>
               </defs>
@@ -342,6 +343,10 @@ const Profile = () => {
           setFollowerPopUp={setFollowerPopUp}
           userProfile={userProfile}
           token={token}
+          id={id}
+          setFollow={setFollow}
+          postFollowing={postFollowing}
+          deleteFollowing={deleteFollowing}
         />
       )}
 
@@ -356,7 +361,7 @@ const Profile = () => {
               viewBox="0 0 21 21"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              onClick={postFollowing}
+              onClick={() => postFollowing(id)}
             >
               <path
                 fillRule="evenodd"
@@ -375,7 +380,7 @@ const Profile = () => {
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              onClick={deleteFollowing}
+              onClick={() => deleteFollowing(id)}
             >
               <path
                 fillRule="evenodd"

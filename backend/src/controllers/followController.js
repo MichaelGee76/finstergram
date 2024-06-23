@@ -23,8 +23,9 @@ const deleteFollowCtrl = asyncHandler(async (req, res) => {
 });
 
 const getFollowInfoCtrl = asyncHandler(async (req, res) => {
-  const userId = req.authenticatedUserId;
-  const result = await FollowService.getFollowInfo(userId);
+  const authenticatedUserId = req.authenticatedUserId;
+  const userId = req.params.userId;
+  const result = await FollowService.getFollowInfo(userId, authenticatedUserId);
   if (!result) {
     throw new Error("cannot get users ");
   }
