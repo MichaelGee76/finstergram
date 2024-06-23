@@ -8,6 +8,7 @@ import { TokenDataContext, UserDataContext } from "../../components/context/Cont
 import { backendUrl } from "../../api/api";
 import ProfilPostsList from "../../components/ProfilPostsList/ProfilPostsList";
 import FollowPopup from "../../components/FollowPopup/FollowPopup";
+import SettingsPopup from "../../components/SettingsPopup/SettingsPopup";
 
 const Profile = () => {
   const { token } = useContext(TokenDataContext);
@@ -40,6 +41,13 @@ const Profile = () => {
   const showFollowerPopUp = (isFollower = true) => {
     setPopupTab(isFollower); // <-- Setze den aktiven Tab beim Öffnen des Popups
     setFollowerPopUp(!followerPopUp);
+  };
+
+  //settingPopup toggle für settings
+  const [settingsPopup, setSettingsPopup] = useState(false);
+
+  const settingTogglePopup = () => {
+    setSettingsPopup(!settingsPopup);
   };
 
   // * numbers format change if it is 5 digit - for follower number
@@ -210,7 +218,15 @@ const Profile = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/*    hier kommt  unten das oncklick */}
+              <svg
+                onClick={() => settingTogglePopup()}
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -410,11 +426,11 @@ const Profile = () => {
         setActiveSection={setActiveSection}
         setPopupList={setPopupList}
       />
+
       {popupList && (
         <ProfilPostsList posts={userProfile} setPopupList={setPopupList} setUpdProfilFeed={setUpdProfilFeed} />
       )}
-
-      
+      {settingsPopup && <SettingsPopup />}
     </section>
   ) : (
     <p>loading..</p>
