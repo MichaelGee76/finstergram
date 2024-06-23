@@ -1,7 +1,22 @@
+import { useState } from "react";
 import Post from "../Post/Post";
 import "./ProfilPostsList.css";
 
 const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setChangeHeaderZ }) => {
+  const [postsData, setPostsData] = useState(posts.posts);
+
+  const updateLikes = (postId, newLikes) => {
+    setPostsData((prevPosts) =>
+      prevPosts.map((post) => (post._id === postId ? { ...post, likes: newLikes } : post))
+    );
+  };
+
+  const updateComments = (postId, newComments) => {
+    setPostsData((prevPosts) =>
+      prevPosts.map((post) => (post._id === postId ? { ...post, comments: newComments } : post))
+    );
+  };
+
   return (
     <section className="profilposts_list">
       <div className="posts_popup">
@@ -23,7 +38,7 @@ const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setC
           />
         </svg>
 
-        {posts.posts.map((item) => (
+        {postsData.map((item) => (
           <Post
             key={item._id}
             postData={{
@@ -33,15 +48,13 @@ const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setC
                 userName: posts.userData.userName,
                 _id: item.userId,
               },
-              likes: item.likes,
-              comments: item.comments,
-              likedByUser: item.likedByUser,
-              savedByUser: item.savedByUser,
             }}
             setUpdUserFeed={setUpdProfilFeed}
             setFixBg={setFixBg}
             setChangeHeaderZ={setChangeHeaderZ}
             discoverFeed={false}
+            updateLikes={updateLikes}
+            updateComments={updateComments}
           />
         ))}
       </div>

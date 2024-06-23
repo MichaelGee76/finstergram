@@ -413,6 +413,8 @@ const Profile = () => {
       {popupList && (
         <ProfilPostsList posts={userProfile} setPopupList={setPopupList} setUpdProfilFeed={setUpdProfilFeed} />
       )}
+
+      
     </section>
   ) : (
     <p>loading..</p>
