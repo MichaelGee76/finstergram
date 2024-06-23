@@ -9,6 +9,7 @@
   box-sizing: border-box;
   font-family: urbanist;
   color: var(--main-text);
+  text-decoration: none;
 }
 /* body {
   overflow-x: hidden;

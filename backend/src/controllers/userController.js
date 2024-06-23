@@ -81,6 +81,7 @@ const updateUserCtrl = asyncHandler(async (req, res) => {
 const deleteUserCtrl = asyncHandler(async (req, res) => {
   // const authenticatedUserId = req.authenticatedUserId;
   const userId = req.params.userId;
+
   const result = await UserService.deleteUser(userId);
 
   if (!result) {
@@ -93,7 +94,9 @@ const deleteUserCtrl = asyncHandler(async (req, res) => {
 // ! mist, jetzt haben wir doch einen service gebraucht!
 
 const postLogoutUserCtrl = asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
+  /*  const userId = req.params.userId; */
+  const userId = req.authenticatedUserId;
+  console.log(("userId:", userId));
   const result = await UserService.logoutUser(userId, req);
   if (!result) {
     res.status(500).json({ result });

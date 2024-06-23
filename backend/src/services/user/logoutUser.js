@@ -7,11 +7,11 @@ export async function logoutUser(userId, req) {
   }
   // zerstört die session komplett, nicht nur refreshtoken auf null
   // sondern auch die aktive sitzung beenden
-  req.session.destroy((err) => {
-    if (err) {
-      throw new Error("Failed to destroy session");
-    }
-  });
+  // req.session.destroy((err) => {
+  //   if (err) {
+  //     throw new Error("Failed to destroy session");
+  //   }
+  // });
 
   // req.session.refreshToken = null;
   user.isOnline = false;

@@ -21,10 +21,11 @@ const SettingsPopup = () => {
         })
         .json();
 
+      console.log("result", res);
       if (res) {
-        setToken(null);
-
-        navigate("/");
+        /* window.location.href = "https://www.google.de"; */
+        setToken("");
+        navigate("/signinup");
       }
     } catch (err) {
       console.error("Failed to logout:", err);
@@ -71,12 +72,12 @@ const SettingsPopup = () => {
           <img src="/img/InformationCenter.svg" alt="" />
           <p>Information Center</p>
         </div>
-        <div>
-          <button className="logout" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
       </section>
+      <div>
+        <button className="logout" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
     </article>
   );
 };
