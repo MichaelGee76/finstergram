@@ -96,7 +96,7 @@
 }
 
 .upload_profile_img {
-  width: 56px;
+  min-width: 56px;
   height: 56px;
   border-radius: 30px;
   object-fit: cover;

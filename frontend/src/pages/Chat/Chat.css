@@ -1,5 +1,6 @@
 .chat_page {
   position: relative;
+  padding-bottom: 90px;
 }
 
 .chat_upper {
@@ -12,6 +13,13 @@
   width: 100%;
   background-color: var(--main-background);
   padding: 24px;
+}
+
+.chat_upper a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
 }
 
 .chat_upper h1 {
@@ -29,7 +37,7 @@
 .messages_sec {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   width: 100%;
   padding-top: 90px;
 }

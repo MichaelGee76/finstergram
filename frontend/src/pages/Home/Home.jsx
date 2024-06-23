@@ -2,7 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { backendUrl } from "../../api/api";
-import { TokenDataContext } from "../../components/context/Context";
+import {
+  ChatsDataContext,
+  TokenDataContext,
+} from "../../components/context/Context";
 import ky from "ky";
 import Post from "../../components/Post/Post";
 import Inbox from "../../components/Inbox/Inbox";
@@ -13,6 +16,9 @@ const Home = () => {
   const [updUserFeed, setUpdUserFeed] = useState(false);
   const [fixBG, setFixBg] = useState(false);
   const [loadMorePosts, setLoadMorePosts] = useState(6);
+  const [newMessage, setNewMessage] = useState(false);
+
+  const { chats, setChats } = useContext(ChatsDataContext);
 
   useEffect(() => {
     const getUserFeed = async () => {
@@ -31,6 +37,23 @@ const Home = () => {
     getUserFeed();
   }, [updUserFeed]);
 
+  useEffect(() => {
+    const getChatsHandler = async () => {
+      const res = await ky
+        .get(`${backendUrl}/message/chats`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .json();
+
+      setNewMessage(res.result.filter((element) => !element.wasRead));
+      setChats(res.result);
+    };
+    getChatsHandler();
+  }, [feed]);
+
   return (
     <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
       <div className="dash_heading_div">
@@ -39,8 +62,14 @@ const Home = () => {
           <h1>TokTok</h1>
         </div>
         <div>
-          <Link to="/chatDashboard">
+          <Link style={{ position: "relative" }} to="/chatDashboard">
             <img src="/img/Messanger.svg" alt="" />
+            {newMessage.length > 0 && (
+              <div
+                style={{ position: "absolute", top: "0", right: "-5px" }}
+                className="message_unread_dot"
+              ></div>
+            )}
           </Link>
           <Inbox />
         </div>

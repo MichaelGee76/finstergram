@@ -22,9 +22,7 @@ const calculatePostAge = (createdAt) => {
 const ChatView = ({ chatData }) => {
   const messageDate = calculatePostAge(chatData?.lastMessageDate);
 
-  console.log(chatData);
-
-  const messageStyle = !chatData.wasRead ? { fontWeight: "800" } : {};
+  const messageStyle = !chatData.wasRead ? { fontWeight: "700" } : {};
 
   return (
     <Link to={`/chat/${chatData.userId}`} className="chat_view">
@@ -33,7 +31,11 @@ const ChatView = ({ chatData }) => {
         <div>
           <h3>{chatData.userName}</h3>
           <p style={messageStyle}>
-            "{chatData.lastMessage}" <span>- {messageDate.showPostAge}</span>
+            "
+            {chatData.lastMessage.length > 25
+              ? `${chatData.lastMessage.slice(0, 30)}... `
+              : chatData.lastMessage}
+            " <span>- {messageDate.showPostAge}</span>
           </p>
         </div>
       </div>

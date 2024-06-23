@@ -83,7 +83,10 @@ const CommentPopUp = ({
             </Link>
           ))}
         </div>
-        <p className="posted_date">{postData.postDate.showPostAge}</p>
+        <div className="post_date_wrapper">
+          <p>{postData.location}</p>
+          <p className="posted_date">{postData.postDate.showPostAge}</p>
+        </div>
         <div className="post_reactions">
           <div>
             <img

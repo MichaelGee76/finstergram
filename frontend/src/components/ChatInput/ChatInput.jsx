@@ -30,15 +30,17 @@ const ChatInput = ({ setChatUpd }) => {
     }
   };
   return (
-    <form className="send_message" action="">
-      <input
-        type="text"
-        placeholder={errorMessage ? errorMessage : "Message.."}
-        value={newMessage}
-        onChange={(e) => setNewMessage(() => e.target.value)}
-      />
-      <button onClick={sendMessageHandler}>Send</button>
-    </form>
+    <div className="send_message">
+      <form action="">
+        <input
+          type="text"
+          placeholder={errorMessage ? errorMessage : "Message.."}
+          value={newMessage}
+          onChange={(e) => setNewMessage(() => e.target.value)}
+        />
+        <button onClick={sendMessageHandler}>Send</button>
+      </form>
+    </div>
   );
 };
 

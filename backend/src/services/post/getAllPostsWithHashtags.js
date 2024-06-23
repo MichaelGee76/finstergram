@@ -49,6 +49,7 @@ export async function getAllPostsWithHashtags(authenticatedUserId, hashtag) {
   // Likes vom authentifizierten Benutzer für die Posts abrufen
   const userSaves = await Save.find({
     postId: { $in: postIds },
+    commentId: null,
     userId: authenticatedUserId,
   }).select("postId");
 

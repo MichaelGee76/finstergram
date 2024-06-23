@@ -14,12 +14,14 @@ const calculateCommentAge = (createdAt) => {
   const commentAgeInMin = Math.floor(commentAge / 1000 / 60); // 10
   const commentAgeInHours = Math.floor(commentAgeInMin / 60); // 0
   const showCommentAge =
-    commentAgeInHours >= 24
+    commentAgeInHours >= 24 * 7
+      ? `${Math.floor(commentAgeInHours / 24 / 7)}d`
+      : commentAgeInHours >= 24
       ? `${Math.floor(commentAgeInHours / 24)}d`
       : commentAgeInHours >= 1
-      ? `${commentAgeInHours} hours ago`
+      ? `${commentAgeInHours}h ago`
       : commentAgeInMin > 1
-      ? `${commentAgeInMin} min ago`
+      ? `${commentAgeInMin}m ago`
       : "just now";
 
   return { showCommentAge, commentAgeInHours };
@@ -27,7 +29,7 @@ const calculateCommentAge = (createdAt) => {
 
 const Comment = ({ comment, postData, setReplyMessage }) => {
   // liked by user? einfügen
-  const [likeToggle, setLikeToggle] = useState();
+  const [likeToggle, setLikeToggle] = useState(comment.likedByUser);
   // like anzahl einfügen
   const [crementLike, setCrementLike] = useState(comment.likesCount);
   const [showMetaComments, setShowMetaComments] = useState(1);
@@ -35,6 +37,7 @@ const Comment = ({ comment, postData, setReplyMessage }) => {
   const { token } = useContext(TokenDataContext);
 
   const newcommentAge = calculateCommentAge(comment?.createdAt);
+  console.log(comment);
 
   const likeToggleHandler = async () => {
     if (!likeToggle) {

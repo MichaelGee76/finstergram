@@ -9,7 +9,7 @@ const ChatSearch = ({ searchInput, setSearchInput }) => {
       </label>
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Search chats.."
         value={searchInput}
         onChange={(event) => setSearchInput(event.target.value)}
       />

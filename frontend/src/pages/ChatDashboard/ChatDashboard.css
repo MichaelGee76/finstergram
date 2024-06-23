@@ -1,5 +1,6 @@
 .chat_dash {
   padding-block: 32px;
+  position: relative;
 }
 .chat_dash h1 {
   font-size: 28px;

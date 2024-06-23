@@ -5,31 +5,20 @@ import { useNavigate } from "react-router-dom";
 import ky from "ky";
 import { Link } from "react-router-dom";
 import { backendUrl } from "../../api/api";
-import { TokenDataContext } from "../../components/context/Context";
+import {
+  ChatsDataContext,
+  TokenDataContext,
+} from "../../components/context/Context";
 import ChatView from "../../components/ChatView/ChatView";
+import ChatNewPopup from "../../components/ChatNewPopup/ChatNewPopup";
 
 const ChatDashboard = () => {
-  const [chats, setChats] = useState([]);
+  const { chats, setChats } = useContext(ChatsDataContext);
   const [searchInput, setSearchInput] = useState("");
   const { token } = useContext(TokenDataContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getChatsHandler = async () => {
-      const res = await ky
-        .get(`${backendUrl}/message/chats`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .json();
-      console.log(chats);
-
-      setChats(res.result);
-    };
-    getChatsHandler();
-  }, []);
+  console.log(chats);
 
   return (
     <main className="chat_dash">
@@ -43,7 +32,7 @@ const ChatDashboard = () => {
             />
             <h1>Messages</h1>
           </div>
-          <img src="/img/NewMessage.svg" alt="" />
+          <ChatNewPopup />
         </div>
         <ChatSearch setSearchInput={setSearchInput} searchInput={searchInput} />
       </section>

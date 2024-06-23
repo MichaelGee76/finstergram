@@ -39,7 +39,7 @@ const InboxElement = ({ element }) => {
           <p>
             <span className="inbox_username">{element.userId.userName}</span>
             {element.type === "comment"
-              ? ` liked your comment`
+              ? ` commented your Post`
               : ` liked your Post`}
           </p>
           <p className="inbox_post_date">{newPostAge.showPostAge}</p>
