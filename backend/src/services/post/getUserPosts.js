@@ -44,16 +44,11 @@ export async function getUserPosts(userId, authenticatedUserId) {
                 path: "userId",
                 select: "userName profilePicture",
             });
-            const isSaved = await SavedPost.exists({
-                userId: authenticatedUserId,
-                postId: post._id,
-            }); // Prüfe, ob der Beitrag gespeichert wurde
 
             return {
                 ...post.toObject(),
                 likes,
                 comments,
-                isSaved: !!isSaved, // Convert to boolean
             };
         })
     );
