@@ -1,12 +1,17 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
-import { TokenDataContext, UserDataContext } from "./context/Context";
+import {
+  ColorModeContext,
+  TokenDataContext,
+  UserDataContext,
+} from "./context/Context";
 
 const AuthRequired = ({ children }) => {
   // assume just re-loaded
   const { user, setUser } = useContext(UserDataContext);
   const { token, setToken } = useContext(TokenDataContext);
+  const { colorSelect, setColorSelect } = useContext(ColorModeContext);
   const [loading, setLoading] = useState(token ? false : true);
 
   const timeoutRef = useRef(null); // aktuellen timeout für silent refresh
@@ -35,6 +40,7 @@ const AuthRequired = ({ children }) => {
         setUser(data.result.user);
         setToken(data.result.newAccessToken);
         doSilentRefresh(data.result.newAccessToken);
+        setColorSelect(data.result.user.dark);
       } else {
         console.log("was not logged in (anymore)");
         navigate("/signinup");

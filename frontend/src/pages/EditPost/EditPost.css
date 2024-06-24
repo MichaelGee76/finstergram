@@ -44,7 +44,7 @@
   padding: 8px;
   border: unset;
   border-radius: 100px;
-  color: var(--input-grey);
+  color: white;
   font-size: 16px;
   font-weight: 500;
 }
@@ -54,7 +54,7 @@
   padding: 8px;
   border: unset;
   border-radius: 100px;
-  color: var(--input-grey);
+  color: white;
   font-size: 16px;
   font-weight: 500;
 }

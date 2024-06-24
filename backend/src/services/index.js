@@ -46,6 +46,7 @@ import { updateMessage } from "./messages/updateMessage.js";
 import { deleteMessage } from "./messages/deleteMessage.js";
 import { getOneChat } from "./messages/getOneChat.js";
 import { getAllChats } from "./messages/getAllChats.js";
+import { changeDarkMode } from "./user/changeDarkMode.js";
 
 export const UserService = {
   registerUser,
@@ -59,6 +60,7 @@ export const UserService = {
   logoutUser,
   getInbox,
   updateInbox,
+  changeDarkMode,
 };
 
 export const PostServices = {

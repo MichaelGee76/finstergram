@@ -20,4 +20,5 @@ export const userRouter = express
     validateRefreshTokenInCookieSession,
     UserController.postRefreshAccessTokenCtrl
   )
-  .post("/logout", doJWTAuth, UserController.postLogoutUserCtrl);
+  .post("/logout", doJWTAuth, UserController.postLogoutUserCtrl)
+  .patch("/darkmode/:selected", doJWTAuth, UserController.patchDarkModeCtrl);

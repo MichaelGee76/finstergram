@@ -141,6 +141,20 @@ const updateInboxCtrl = asyncHandler(async (req, res) => {
   sendResponse(res, result);
 });
 
+const patchDarkModeCtrl = asyncHandler(async (req, res) => {
+  const selected = req.params.selected;
+  const authenticatedUserId = req.authenticatedUserId;
+
+  const result = await UserService.changeDarkMode(
+    selected,
+    authenticatedUserId
+  );
+  if (!result) {
+    res.status(500).json("Could not change dark/light mode settings");
+  }
+  sendResponse(res, result);
+});
+
 export const UserController = {
   postRegisterUserCtrl,
   postVerifyEmailUserCtrl,
@@ -154,4 +168,5 @@ export const UserController = {
   getResendVerifyEmailCtrl,
   getInboxCtrl,
   updateInboxCtrl,
+  patchDarkModeCtrl,
 };
