@@ -9,7 +9,7 @@ nav {
   padding-block: 16px 12px;
   background-color: var(--main-background);
   border-radius: 20px 20px 0 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid var(--input-grey);
   box-shadow: 5px -10px 15px rgba(0, 0, 0, 0.03);
 }
 

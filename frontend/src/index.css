@@ -11,10 +11,9 @@
   color: var(--main-text);
   text-decoration: none;
 }
-/* body {
-  overflow-x: hidden;
-  max-width: 100vw;
-} */
+body {
+  background-color: var(--main-background);
+}
 img {
   max-width: 100%;
 }
@@ -35,8 +34,9 @@ img {
 }
 
 .container {
-  margin-inline: 14px;
-  margin-block: 12px;
+  padding-inline: 14px;
+  padding-block: 12px;
+  background-color: var(--main-background);
 }
 
 p {

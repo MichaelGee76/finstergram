@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ky from "ky";
 import { backendUrl } from "../../api/api";
 import { TokenDataContext } from "../../components/context/Context";
+import ColorMode from "../ColorMode/ColorMode";
 
 const SettingsPopup = ({ setSettingsPopup }) => {
   const { token, setToken } = useContext(TokenDataContext);
@@ -40,7 +41,7 @@ const SettingsPopup = ({ setSettingsPopup }) => {
             <img src="/img/Setting.svg" alt="" />
             <p>Settings</p>
           </div>
-
+          <ColorMode />
           <div className="setting_container">
             <img src="/img/Archive.svg" alt="" />
             <p>Archive</p>
