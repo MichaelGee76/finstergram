@@ -3,6 +3,7 @@ import { User } from "../../models/user.js";
 import { Follow } from "../../models/follow.js";
 import { Like } from "../../models/like.js";
 import { Comment } from "../../models/comment.js";
+import { Save } from "../../models/save.js"; // Hinzufügen des Save-Modells
 
 export async function getUserPosts(userId, authenticatedUserId) {
     const user = await User.findById(userId);
@@ -18,6 +19,7 @@ export async function getUserPosts(userId, authenticatedUserId) {
         phone: user.phone,
         gender: user.gender,
     };
+
     // folge ich:
     // alter code nur die länge const followingNumber = await Follow.countDocuments({ userId });
     const followingNumber = await Follow.find({ userId });
@@ -39,19 +41,36 @@ export async function getUserPosts(userId, authenticatedUserId) {
     // Füge Likes, Kommentare und ob der Beitrag gespeichert wurde zu den Posts hinzu
     const postsWithDetails = await Promise.all(
         posts.map(async (post) => {
-            const likes = await Like.countDocuments({ postId: post._id });
-            const comments = await Comment.find({ postId: post._id }).populate({
+            const postId = post._id;
+
+            const likes = await Like.countDocuments({ postId });
+            const comments = await Comment.find({ postId }).populate({
                 path: "userId",
                 select: "userName profilePicture",
             });
+
+            // Prüfen, ob der Post vom authentifizierten Benutzer gespeichert wurde
+            const savedByUser = !!(await Save.exists({
+                userId: authenticatedUserId,
+                postId,
+            }));
+
+            // Prüfen, ob der Post vom authentifizierten Benutzer geliked wurde
+            const likedByUser = !!(await Like.exists({
+                userId: authenticatedUserId,
+                postId,
+            }));
 
             return {
                 ...post.toObject(),
                 likes,
                 comments: comments.length,
+                savedByUser, // Hinzufügen des isSaved-Status
+                likedByUser, // Hinzufügen des isLiked-Status
             };
         })
     );
+
     let isFollowed = false;
 
     if (userId !== authenticatedUserId) {
@@ -61,8 +80,8 @@ export async function getUserPosts(userId, authenticatedUserId) {
         });
         isFollowed = !!following; // Convert to boolean
     }
+    console.log(postsWithDetails);
 
-    console.log(isFollowed);
     return {
         posts: postsWithDetails,
         userData,
