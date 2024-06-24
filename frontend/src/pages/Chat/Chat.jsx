@@ -47,10 +47,11 @@ const Chat = () => {
           },
         })
         .json();
+      setChatUpd((prev) => !prev);
     };
 
     messagesSeen();
-  }, []);
+  }, [chatData]);
 
   const handleScroll = () => {
     if (window.scrollY === 0) {
