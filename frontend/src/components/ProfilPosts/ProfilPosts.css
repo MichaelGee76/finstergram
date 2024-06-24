@@ -23,6 +23,7 @@
 .profile_content {
   overflow: hidden;
   width: 100%;
+  margin-bottom: 75px;
 }
 .sections {
   display: flex;

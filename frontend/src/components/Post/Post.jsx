@@ -151,7 +151,8 @@ const Post = ({
               <img src={postData.userId.profilePicture} alt="" />
               <div>
                 <h3 className="username_post">{postData.userId.userName}</h3>
-                <p className="userdescription_post">{postData.userId.profession}</p>
+
+                <p className="userdescription_post">{postData.userId.profession && postData.userId.profession}</p>
               </div>
             </Link>
             {user._id === postData.userId._id && (

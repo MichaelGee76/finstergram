@@ -3,8 +3,10 @@ import Post from "../Post/Post";
 import "./ProfilPostsList.css";
 import ky from "ky"; // Ensure ky is imported
 
-const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setChangeHeaderZ }) => {
+const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setChangeHeaderZ }) => {
   const [postsData, setPostsData] = useState(posts.posts);
+
+  const [fixBG, setFixBg] = useState(false);
 
   useEffect(() => {
     setPostsData(posts.posts);
@@ -23,8 +25,8 @@ const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setC
   };
 
   return (
-    <section className="profilposts_list">
-      <div className="posts_popup">
+    <section className="posts_popup " style={fixBG ? { overflow: "hidden" } : {}}>
+      <div className="svg_fixed">
         <svg
           onClick={() => setPopupList((popupList) => !popupList)}
           className="back_button"
@@ -43,27 +45,27 @@ const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setC
             fill="#212121"
           />
         </svg>
-
-        {postsData.map((item) => (
-          <Post
-            key={item._id}
-            postData={{
-              ...item,
-              userId: {
-                profilePicture: posts.userData.profilePicture,
-                userName: posts.userData.userName,
-                _id: item.userId,
-              },
-            }}
-            setUpdUserFeed={setUpdProfilFeed}
-            setFixBg={setFixBg}
-            setChangeHeaderZ={setChangeHeaderZ}
-            discoverFeed={false}
-            updateLikes={updateLikes}
-            updateComments={updateComments}
-          />
-        ))}
       </div>
+
+      {postsData.map((item) => (
+        <Post
+          key={item._id}
+          postData={{
+            ...item,
+            userId: {
+              profilePicture: posts.userData.profilePicture,
+              userName: posts.userData.userName,
+              _id: item.userId,
+            },
+          }}
+          setUpdUserFeed={setUpdProfilFeed}
+          setFixBg={setFixBg}
+          setChangeHeaderZ={setChangeHeaderZ}
+          discoverFeed={false}
+          updateLikes={updateLikes}
+          updateComments={updateComments}
+        />
+      ))}
     </section>
   );
 };
