@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const ColorMode = () => {
-  const [toggle, setToggle] = useState(false);
   const [colorSelect, setColorSelect] = useState(0);
 
   if (colorSelect === "light") {
@@ -25,7 +24,7 @@ const ColorMode = () => {
     document.documentElement.style.setProperty("--main-text", "#D9D9D9"); //check
     document.documentElement.style.setProperty("--sec-text", "#D9D9D9"); //check
   }
-  console.log(toggle);
+
   console.log(colorSelect);
 
   return (

@@ -51,8 +51,23 @@ const CommentPopUp = ({
           />
           <h3> Comments</h3>
         </div>
-        <Link>
-          <img src="/img/Messanger.svg" alt="" />
+
+        <Link style={{ position: "relative" }} to="/chatDashboard">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18.4712 9.53707L11.7939 16.2857L4.19934 11.5356C3.11121 10.8548 3.33756 9.20201 4.56834 8.84208L22.5998 3.56156C23.7268 3.23123 24.7713 4.28497 24.4365 5.41566L19.1019 23.4345C18.7365 24.6671 17.0931 24.8873 16.4187 23.7945L11.7903 16.2869"
+              stroke="var(--main-text)"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </Link>
       </div>
       <article className="cmt_userinfos">
@@ -71,7 +86,44 @@ const CommentPopUp = ({
           </Link>
           {user._id === postData.userId._id && (
             <button>
-              <img src="/img/MoreCircle.svg" alt="" />
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M14.0002 3.2085C19.9596 3.2085 24.7919 8.03966 24.7919 14.0002C24.7919 19.9595 19.9596 24.7918 14.0002 24.7918C8.03972 24.7918 3.20856 19.9595 3.20856 14.0002C3.20856 8.04083 8.04089 3.2085 14.0002 3.2085Z"
+                  stroke="var(--main-text)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18.596 14.0152H18.6065"
+                  stroke="#212121"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M13.9188 14.0152H13.9293"
+                  stroke="#212121"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9.2416 14.0152H9.2521"
+                  stroke="#212121"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </button>
           )}
         </div>

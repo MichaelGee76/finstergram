@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  min-height: 100svh;
 }
 
 .search_res_upper {
