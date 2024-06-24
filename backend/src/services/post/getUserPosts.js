@@ -50,13 +50,13 @@ export async function getUserPosts(userId, authenticatedUserId) {
             });
 
             // Prüfen, ob der Post vom authentifizierten Benutzer gespeichert wurde
-            const isSaved = !!(await Save.exists({
+            const savedByUser = !!(await Save.exists({
                 userId: authenticatedUserId,
                 postId,
             }));
 
             // Prüfen, ob der Post vom authentifizierten Benutzer geliked wurde
-            const isLiked = !!(await Like.exists({
+            const likedByUser = !!(await Like.exists({
                 userId: authenticatedUserId,
                 postId,
             }));
