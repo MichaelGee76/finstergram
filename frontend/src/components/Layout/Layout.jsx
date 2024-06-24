@@ -6,7 +6,8 @@ const Layout = ({ children }) => {
   const hideNav =
     location.pathname === "/signinup" ||
     location.pathname === "/chatDashboard" ||
-    location.pathname.startsWith("/chat/");
+    location.pathname.startsWith("/chat/") ||
+    location.pathname.startsWith("/singlepost");
 
   return (
     <div>

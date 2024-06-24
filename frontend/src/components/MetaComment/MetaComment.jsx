@@ -57,7 +57,7 @@ const MetaComment = ({
           </Link>
           {user._id === reply.userId._id && (
             <button>
-              <img src="./img/MoreCircle.svg" alt="" />
+              <img src="/img/MoreCircle.svg" alt="" />
             </button>
           )}
         </div>
@@ -66,7 +66,7 @@ const MetaComment = ({
           <div>
             <img
               onClick={likeToggleHandler}
-              src={likeToggle ? "./img/HeartFilled.svg" : "./img/Heart.svg"}
+              src={likeToggle ? "/img/HeartFilled.svg" : "/img/Heart.svg"}
               alt=""
             />
             <p>{crementLike}</p>

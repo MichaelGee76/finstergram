@@ -24,6 +24,8 @@ const InboxElement = ({ element }) => {
 
   const newPostAge = calculatePostAge(element?.createdAt);
 
+  console.log(element);
+
   return element.postId ? (
     <div className="single_inbox_element">
       <div>
@@ -45,7 +47,7 @@ const InboxElement = ({ element }) => {
           <p className="inbox_post_date">{newPostAge.showPostAge}</p>
         </div>
       </div>
-      <Link to={`profile/${element.userId._id}`}>
+      <Link to={`singlepost/${element.postId._id}`}>
         <img className="inbox_postimg" src={element.postId.picture} alt="" />
       </Link>
     </div>
