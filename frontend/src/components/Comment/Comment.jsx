@@ -37,7 +37,6 @@ const Comment = ({ comment, postData, setReplyMessage }) => {
   const { token } = useContext(TokenDataContext);
 
   const newcommentAge = calculateCommentAge(comment?.createdAt);
-  console.log(comment);
 
   const likeToggleHandler = async () => {
     if (!likeToggle) {
@@ -79,7 +78,7 @@ const Comment = ({ comment, postData, setReplyMessage }) => {
         </Link>
         {user._id === comment.userId._id && (
           <button>
-            <img src="./img/MoreCircle.svg" alt="" />
+            <img src="/img/MoreCircle.svg" alt="" />
           </button>
         )}
       </div>
@@ -88,7 +87,7 @@ const Comment = ({ comment, postData, setReplyMessage }) => {
         <div>
           <img
             onClick={likeToggleHandler}
-            src={likeToggle ? "./img/HeartFilled.svg" : "./img/Heart.svg"}
+            src={likeToggle ? "/img/HeartFilled.svg" : "/img/Heart.svg"}
             alt=""
           />
           <p>{crementLike}</p>

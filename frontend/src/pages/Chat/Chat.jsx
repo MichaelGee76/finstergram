@@ -50,7 +50,7 @@ const Chat = () => {
     };
 
     messagesSeen();
-  }, [chatData]);
+  }, []);
 
   const handleScroll = () => {
     if (window.scrollY === 0) {

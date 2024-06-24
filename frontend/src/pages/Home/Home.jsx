@@ -54,12 +54,15 @@ const Home = () => {
     getChatsHandler();
   }, [feed]);
 
+  console.log(newMessage);
+  console.log(chats);
+
   return (
     <main className="dash_section" style={fixBG ? { overflow: "hidden" } : {}}>
       <div className="dash_heading_div">
         <div>
           <img src="/img/LogoSmall.svg" alt="" />
-          <h1>TokTok</h1>
+          <h1>Finstagram</h1>
         </div>
         <div>
           <Link style={{ position: "relative" }} to="/chatDashboard">

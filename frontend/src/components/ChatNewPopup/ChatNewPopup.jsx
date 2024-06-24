@@ -16,7 +16,7 @@ const ChatNewPopup = () => {
   useEffect(() => {
     const getFollowedUsersHandler = async () => {
       const res = await ky
-        .get(`${backendUrl}/follow`, {
+        .get(`${backendUrl}/follow/${user._id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
