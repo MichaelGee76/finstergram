@@ -99,7 +99,9 @@ const Search = () => {
             hashtagSearchResults?.map(
               (hashtag, index) =>
                 searchInput &&
-                hashtag.toLowerCase().includes(searchInput.toLowerCase()) && (
+                hashtag
+                  .toLowerCase()
+                  .includes(searchInput.toLowerCase().replace(/^#/, "")) && (
                   <Link
                     to={`/hashtagposts/${hashtag}`}
                     className="hashtag_link"
