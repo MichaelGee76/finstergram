@@ -273,8 +273,8 @@ const CommentPopUp = ({
                     y2="16.6806"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stopColor="#FF4D67" />
-                    <stop offset="1" stopColor="#FF8A9B" />
+                    <stop stopColor="var( --mid-pink)" />
+                    <stop offset="1" stopColor="var(--light-pink)" />
                   </linearGradient>
                 </defs>
               </svg>
