@@ -16,12 +16,8 @@ export async function updateMessage(userId, messagedId) {
 
   // Aktualisiere alle Nachrichten zwischen den beiden Benutzern, um `wasRead` auf `true` zu setzen
   const updatedMessages = await Message.updateMany(
-    {
-      $or: [
-        { userId: userId, messagedId: messagedId },
-        { userId: messagedId, messagedId: userId },
-      ],
-    },
+    { userId: messagedId, messagedId: userId },
+
     { wasRead: true }
   );
 
