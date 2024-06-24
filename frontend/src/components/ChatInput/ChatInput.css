@@ -35,7 +35,7 @@
   /* background-color: var(--mid-pink); */
   background: linear-gradient(0.38turn, var(--light-pink), var(--mid-pink));
   border-radius: 100px;
-  color: var(--main-background);
+  color: white;
   padding-inline: 18px;
   font-size: 17px;
   font-weight: 600;
