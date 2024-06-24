@@ -1,0 +1,27 @@
+.colormode_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.colormode_wrapper svg {
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+.colormode_wrapper button {
+  background-color: unset;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--main-text);
+  padding: 3px 12px;
+  border-radius: 0 20px 20px 0;
+}
+
+.colormode_wrapper button:first-of-type {
+  border-radius: 20px 0 0 20px;
+}
+
+.colormode_wrapper .colormode_pressed {
+  background-color: var(--main-text);
+  color: var(--main-background);
+}
