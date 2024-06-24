@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 3000;
   padding-block: 48px 80px;
   background-color: var(--main-background);
   width: 100%;

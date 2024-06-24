@@ -23,7 +23,6 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState();
   const [updateFollowers, setUpdateFollowers] = useState(false);
   const [follow, setFollow] = useState();
-  console.log(posts);
 
   const { id } = useParams();
 
@@ -107,8 +106,6 @@ const Profile = () => {
     setFollow(false);
     setUpdateFollowers(!updateFollowers);
   };
-
-  console.log(posts);
 
   return userProfile ? (
     <section className="profile">
