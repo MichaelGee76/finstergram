@@ -48,7 +48,7 @@ export async function getUserPosts(userId, authenticatedUserId) {
             return {
                 ...post.toObject(),
                 likes,
-                comments,
+                comments: comments.length,
             };
         })
     );
