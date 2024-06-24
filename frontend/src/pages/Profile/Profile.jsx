@@ -110,6 +110,8 @@ const Profile = () => {
     setUpdateFollowers(!updateFollowers);
   };
 
+  console.log(posts);
+
   return userProfile ? (
     <section className="profile">
       {/*//! (Logo TOGGLE -> Back Arrow), Username */}
