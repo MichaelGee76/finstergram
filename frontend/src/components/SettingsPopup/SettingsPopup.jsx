@@ -5,7 +5,7 @@ import ky from "ky";
 import { backendUrl } from "../../api/api";
 import { TokenDataContext } from "../../components/context/Context";
 
-const SettingsPopup = () => {
+const SettingsPopup = ({ setSettingsPopup }) => {
   const { token, setToken } = useContext(TokenDataContext);
 
   const navigate = useNavigate();
@@ -33,52 +33,61 @@ const SettingsPopup = () => {
   };
 
   return (
-    <article className="settings_popup">
-      <section className="setting_section">
-        <div className="setting_container">
-          <img src="/img/Setting.svg" alt="" />
-          <p>Settings</p>
-        </div>
+    <>
+      <article className="settings_popup">
+        <section className="setting_section">
+          <div className="setting_container">
+            <img src="/img/Setting.svg" alt="" />
+            <p>Settings</p>
+          </div>
 
-        <div className="setting_container">
-          <img src="/img/Archive.svg" alt="" />
-          <p>Archive</p>
-        </div>
-        <div className="setting_container">
-          <img src="/img/YourActivity.svg" alt="" />
-          <p>Your Activity</p>
-        </div>
-        <div className="setting_container">
-          <img src="/img/QRCode.svg" alt="" />
-          <p>QR Code</p>
-        </div>
+          <div className="setting_container">
+            <img src="/img/Archive.svg" alt="" />
+            <p>Archive</p>
+          </div>
+          <div className="setting_container">
+            <img src="/img/YourActivity.svg" alt="" />
+            <p>Your Activity</p>
+          </div>
+          <div className="setting_container">
+            <img src="/img/QRCode.svg" alt="" />
+            <p>QR Code</p>
+          </div>
 
-        <Link className="setting_container" to="/savedposts">
-          <img src="/img/Save.svg" alt="" />
-          <p>Saved</p>
-        </Link>
+          <Link className="setting_container" to="/savedposts">
+            <img src="/img/Save.svg" alt="" />
+            <p>Saved</p>
+          </Link>
 
-        <div className="setting_container">
-          <img src="/img/CloseFriends.svg" alt="" />
-          <p>Close Friends</p>
+          <div className="setting_container">
+            <img src="/img/CloseFriends.svg" alt="" />
+            <p>Close Friends</p>
+          </div>
+
+          <Link className="setting_container" to="/likedposts">
+            <img src="/img/Heart.svg" alt="" />
+            <p>Favorites</p>
+          </Link>
+
+          <div className="setting_container">
+            <img src="/img/InformationCenter.svg" alt="" />
+            <p>Information Center</p>
+          </div>
+        </section>
+        <div>
+          <button className="logout" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
-
-        <Link className="setting_container" to="/likedposts">
-          <img src="/img/Heart.svg" alt="" />
-          <p>Favorites</p>
-        </Link>
-
-        <div className="setting_container">
-          <img src="/img/InformationCenter.svg" alt="" />
-          <p>Information Center</p>
-        </div>
-      </section>
-      <div>
-        <button className="logout" onClick={handleLogout}>
-          Logout
+        <button
+          className="cancel"
+          onClick={() => setSettingsPopup((settingsPopup) => !settingsPopup)}
+        >
+          Cancel
         </button>
-      </div>
-    </article>
+      </article>
+      <div className="dark_background"></div>
+    </>
   );
 };
 
