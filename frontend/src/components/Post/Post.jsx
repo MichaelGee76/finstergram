@@ -44,66 +44,75 @@ const Post = ({
   const { token } = useContext(TokenDataContext);
 
   const saveToggleHandler = async () => {
-    if (!saveToggle) {
-      await ky
-        .post(`${backendUrl}/save/${postData._id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .json();
-      setSaveToggle((saveToggle) => !saveToggle);
-    } else {
-      await ky
-        .delete(`${backendUrl}/save/${postData._id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .json();
-      setSaveToggle((saveToggle) => !saveToggle);
+    try {
+      if (!saveToggle) {
+        await ky
+          .post(`${backendUrl}/save/${postData._id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .json();
+      } else {
+        await ky
+          .delete(`${backendUrl}/save/${postData._id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .json();
+      }
+      setSaveToggle((prev) => !prev);
+      setUpdUserFeed();
+    } catch (error) {
+      console.error("Error saving post:", error);
     }
   };
 
   const likeToggleHandler = async () => {
-    if (!likeToggle) {
-      await ky
-        .post(`${backendUrl}/likes/newLike`, {
-          json: { postId: postData._id },
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .json();
-      const newLikes = crementLike + 1;
-      setCrementLike(newLikes);
-      setLikeToggle((likeToggle) => !likeToggle);
-      updateLikes(postData._id, newLikes);
-    } else {
-      await ky
-        .delete(`${backendUrl}/likes/like`, {
-          json: { postId: postData._id },
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .json();
-      const newLikes = crementLike - 1;
-      setCrementLike(newLikes);
-      setLikeToggle((likeToggle) => !likeToggle);
-      updateLikes(postData._id, newLikes);
+    try {
+      if (!likeToggle) {
+        await ky
+          .post(`${backendUrl}/likes/newLike`, {
+            json: { postId: postData._id },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .json();
+        const newLikes = crementLike + 1;
+        setCrementLike(newLikes);
+        setLikeToggle((prev) => !prev);
+        updateLikes(postData._id, newLikes);
+      } else {
+        await ky
+          .delete(`${backendUrl}/likes/like`, {
+            json: { postId: postData._id },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .json();
+        const newLikes = crementLike - 1;
+        setCrementLike(newLikes);
+        setLikeToggle((prev) => !prev);
+        updateLikes(postData._id, newLikes);
+      }
+      setUpdUserFeed();
+    } catch (error) {
+      console.error("Error liking post:", error);
     }
   };
 
   const newPostAge = calculatePostAge(postData?.createdAt);
 
   const openPopUpHandler = async () => {
-    setCommentPopUp((commentPopUp) => !commentPopUp);
-    setFixBg((fixBg) => !fixBg);
+    setCommentPopUp((prev) => !prev);
+    setFixBg((prev) => !prev);
   };
 
   return (
