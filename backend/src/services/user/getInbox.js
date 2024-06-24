@@ -9,8 +9,10 @@ export async function getInbox(authenticatedUserId) {
     const postIds = posts.map((post) => post._id);
 
     // Finde alle Likes zu den Posts des authentifizierten Users
+    // ausgenommen die eigenen!
     const likes = await Like.find({
         postId: { $in: postIds },
+        userId: { $ne: authenticatedUserId },
     })
         .populate({ path: "userId", select: "userName profilePicture" })
         .populate({ path: "postId", select: "postId picture" });
