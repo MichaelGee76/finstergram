@@ -1,6 +1,7 @@
 import { Post } from "../../models/post.js";
 import { User } from "../../models/user.js";
 import { Follow } from "../../models/follow.js";
+import { Like } from "../../models/like.js";
 
 export async function getUserPosts(userId, authenticatedUserId) {
     const user = await User.findById(userId);
