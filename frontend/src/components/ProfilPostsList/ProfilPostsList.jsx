@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Post from "../Post/Post";
 import "./ProfilPostsList.css";
+import ky from "ky"; // Ensure ky is imported
 
 const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setChangeHeaderZ }) => {
   const [postsData, setPostsData] = useState(posts.posts);
+
+  useEffect(() => {
+    setPostsData(posts.posts);
+  }, [posts.posts]);
 
   const updateLikes = (postId, newLikes) => {
     setPostsData((prevPosts) =>
@@ -22,6 +27,7 @@ const ProfilPostsList = ({ posts, setPopupList, setUpdProfilFeed, setFixBg, setC
       <div className="posts_popup">
         <svg
           onClick={() => setPopupList((popupList) => !popupList)}
+          className="back_button"
           width="20"
           height="17"
           viewBox="0 0 20 17"

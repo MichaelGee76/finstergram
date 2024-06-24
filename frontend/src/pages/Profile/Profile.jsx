@@ -164,7 +164,7 @@ const Profile = () => {
 
         {/*//!  Post, Edit, (Settings TOGGLE -> Only Settings) */}
         <div className="profile_nav">
-          {isUser ? (
+          {isUser && (
             <div>
               <Link to={"/upload"}>
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,7 +193,14 @@ const Profile = () => {
                   />
                 </svg>
               </Link>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                onClick={toggleEditPopup}
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M16.0386 23.8501H24.5"
                   stroke="#212121"
@@ -259,39 +266,6 @@ const Profile = () => {
                 />
               </svg>
             </div>
-          ) : (
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M14.0002 3.2085C19.9596 3.2085 24.7919 8.03966 24.7919 14.0002C24.7919 19.9595 19.9596 24.7918 14.0002 24.7918C8.03972 24.7918 3.20856 19.9595 3.20856 14.0002C3.20856 8.04083 8.04089 3.2085 14.0002 3.2085Z"
-                stroke="#212121"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M18.596 14.0152H18.6065"
-                stroke="#212121"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M13.9188 14.0152H13.9293"
-                stroke="#212121"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M9.2416 14.0152H9.2521"
-                stroke="#212121"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
           )}
         </div>
       </div>
