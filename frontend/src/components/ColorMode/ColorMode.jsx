@@ -19,7 +19,7 @@ const ColorMode = () => {
     document.documentElement.style.setProperty("--light-pink", "#8186FF"); //check
     document.documentElement.style.setProperty("--icons-grey", "#D9D9D9"); //check
     document.documentElement.style.setProperty("--input-grey", "#1B2730"); //check
-    document.documentElement.style.setProperty("--loginfont-grey", "#1B2730"); //check
+    document.documentElement.style.setProperty("--loginfont-grey", "#D9D9D9"); //check
     document.documentElement.style.setProperty("--hashtag-blue", "#03A9F4"); //check
     document.documentElement.style.setProperty("--main-background", "#06141D"); //check
     document.documentElement.style.setProperty("--main-text", "#D9D9D9"); //check

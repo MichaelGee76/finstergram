@@ -8,7 +8,7 @@
   width: 100%;
   padding: 24px;
   border-radius: 24px 24px 0 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid var(--input-grey);
   background-color: var(--main-background);
 }
 
