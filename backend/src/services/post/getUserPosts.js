@@ -65,8 +65,8 @@ export async function getUserPosts(userId, authenticatedUserId) {
                 ...post.toObject(),
                 likes,
                 comments: comments.length,
-                isSaved, // Hinzufügen des isSaved-Status
-                isLiked, // Hinzufügen des isLiked-Status
+                savedByUser, // Hinzufügen des isSaved-Status
+                likedByUser, // Hinzufügen des isLiked-Status
             };
         })
     );
