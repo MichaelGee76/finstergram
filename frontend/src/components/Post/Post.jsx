@@ -36,6 +36,7 @@ const Post = ({
   discoverFeed,
   updateLikes,
   updateComments,
+  linkToSinglePost,
 }) => {
   const [likeToggle, setLikeToggle] = useState(postData.likedByUser);
   const [crementLike, setCrementLike] = useState(postData.likes || 0); // Ensure likes is a number
@@ -149,16 +150,24 @@ const Post = ({
       <article className="post_wrapper">
         {!discoverFeed && (
           <div className="post_upper">
-            <Link to={`/profile/${postData.userId._id}`} className="post_user_infos">
+            <Link
+              to={`/profile/${postData.userId._id}`}
+              className="post_user_infos"
+            >
               <img src={postData.userId.profilePicture} alt="" />
               <div>
                 <h3 className="username_post">{postData.userId.userName}</h3>
 
-                <p className="userdescription_post">{postData.userId.profession && postData.userId.profession}</p>
+                <p className="userdescription_post">
+                  {postData.userId.profession && postData.userId.profession}
+                </p>
               </div>
             </Link>
             {user._id === postData.userId._id && (
-              <PostSettings postData={postData} setUpdUserFeed={setUpdUserFeed} />
+              <PostSettings
+                postData={postData}
+                setUpdUserFeed={setUpdUserFeed}
+              />
             )}
           </div>
         )}
@@ -281,62 +290,113 @@ const Post = ({
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M3.4089 14.5207C2.15707 10.6123 3.62124 5.75318 7.7244 4.43251C9.88274 3.73601 12.5462 4.31701 14.0594 6.40418C15.4862 4.24001 18.2267 3.74068 20.3827 4.43251C24.4847 5.75318 25.9571 10.6123 24.7064 14.5207C22.7581 20.7157 15.9599 23.9427 14.0594 23.9427C12.1601 23.9427 5.42257 20.788 3.4089 14.5207Z"
                     stroke="var(--main-text)"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M18.42 8.82471C19.8282 8.96937 20.709 10.0859 20.6565 11.6504"
                     stroke="var(--main-text)"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               )}
 
               <p>{crementLike}</p>
             </div>
-            <div onClick={openPopUpHandler}>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M22.2499 22.2481C18.6844 25.814 13.4047 26.5844 9.08413 24.5863C8.4463 24.3295 7.92338 24.1219 7.42625 24.1219C6.04155 24.1301 4.31801 25.4728 3.42223 24.5781C2.52646 23.6822 3.87012 21.9573 3.87012 20.5642C3.87012 20.067 3.6708 19.5534 3.41403 18.9144C1.41495 14.5945 2.18644 9.31305 5.75195 5.74833C10.3035 1.19509 17.6983 1.19509 22.2499 5.74715C26.8097 10.3074 26.8015 17.696 22.2499 22.2481Z"
-                  stroke="var(--main-text)"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M18.596 14.4818H18.6065"
-                  stroke="var(--main-text)"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M13.9188 14.4818H13.9293"
-                  stroke="var(--main-text)"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M9.2416 14.4818H9.2521"
-                  stroke="var(--main-text)"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+            {linkToSinglePost ? (
+              <Link to={`/singlepost/${postData._id}`}>
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M22.2499 22.2481C18.6844 25.814 13.4047 26.5844 9.08413 24.5863C8.4463 24.3295 7.92338 24.1219 7.42625 24.1219C6.04155 24.1301 4.31801 25.4728 3.42223 24.5781C2.52646 23.6822 3.87012 21.9573 3.87012 20.5642C3.87012 20.067 3.6708 19.5534 3.41403 18.9144C1.41495 14.5945 2.18644 9.31305 5.75195 5.74833C10.3035 1.19509 17.6983 1.19509 22.2499 5.74715C26.8097 10.3074 26.8015 17.696 22.2499 22.2481Z"
+                    stroke="var(--main-text)"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M18.596 14.4818H18.6065"
+                    stroke="var(--main-text)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M13.9188 14.4818H13.9293"
+                    stroke="var(--main-text)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9.2416 14.4818H9.2521"
+                    stroke="var(--main-text)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
 
-              <p>{postData.comments || 0}</p>
-            </div>
+                <p>{postData.comments || 0}</p>
+              </Link>
+            ) : (
+              <div onClick={openPopUpHandler}>
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M22.2499 22.2481C18.6844 25.814 13.4047 26.5844 9.08413 24.5863C8.4463 24.3295 7.92338 24.1219 7.42625 24.1219C6.04155 24.1301 4.31801 25.4728 3.42223 24.5781C2.52646 23.6822 3.87012 21.9573 3.87012 20.5642C3.87012 20.067 3.6708 19.5534 3.41403 18.9144C1.41495 14.5945 2.18644 9.31305 5.75195 5.74833C10.3035 1.19509 17.6983 1.19509 22.2499 5.74715C26.8097 10.3074 26.8015 17.696 22.2499 22.2481Z"
+                    stroke="var(--main-text)"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M18.596 14.4818H18.6065"
+                    stroke="var(--main-text)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M13.9188 14.4818H13.9293"
+                    stroke="var(--main-text)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9.2416 14.4818H9.2521"
+                    stroke="var(--main-text)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+
+                <p>{postData.comments || 0}</p>
+              </div>
+            )}
           </div>
         )}
       </article>

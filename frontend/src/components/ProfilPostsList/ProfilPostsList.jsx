@@ -76,6 +76,7 @@ const ProfilPostsList = ({
           discoverFeed={false}
           updateLikes={updateLikes}
           updateComments={updateComments}
+          linkToSinglePost={true}
         />
       ))}
     </section>
