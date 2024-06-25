@@ -59,6 +59,7 @@
 // Fachkraft sagt die index muss eine catchall route haben.... lets try
 
 import express from "express";
+import path from "path";
 import morgan from "morgan";
 import cors from "cors";
 import { connect2DB } from "./utils/connect2DB.js";
@@ -72,7 +73,6 @@ import { google } from "googleapis";
 import dotenv from "dotenv";
 import { commentRouter } from "./routes/commentRouter.js";
 import cookieSession from "cookie-session";
-import path from "path"; // Neue Zeile
 
 const PORT = process.env.PORT || 4420;
 
@@ -102,12 +102,12 @@ app.use(cookieSession(cookieSessionOptions));
 // cors config end
 app.use(morgan("dev"));
 app.use(express.json());
-// Wenn Express.js-Anwendung Formulardaten analysieren werden, die mit dem application/x-www-form-urlencoded MIME-Typ gesendet werden, dann ist diese Zeile notwendig. Andernfalls ist sie nicht erforderlich.
+//Wenn Express.js-Anwendung Formulardaten analysieren werden, die mit dem application/x-www-form-urlencoded MIME-Typ gesendet werden, dann ist diese Zeile notwendig. Andernfalls ist sie nicht erforderlich.
 app.use(express.urlencoded({ extended: false }));
 
-// Statische Dateien aus dem Build-Verzeichnis bereitstellen
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "dist")));
+// Serve static files from the frontend dist directory if they exist locally
+const frontendDir = path.join(__dirname, "../frontend/dist");
+app.use(express.static(frontendDir));
 
 // Routes
 app.use("/api/v1/users", userRouter);
@@ -118,9 +118,12 @@ app.use("/api/v1/save", saveRouter);
 app.use("/api/v1/follow", followRouter);
 app.use("/api/v1/message", messageRouter);
 
-// Catch-All Route einrichten, um index.html für alle nicht gefundenen Routen zurückzugeben
-app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"));
+// Catch-all route to serve index.html for all other routes
+app.get("*", (req, res) => {
+    if (req.path.startsWith("/api/")) {
+        return res.status(404).json({ message: "API route not found" });
+    }
+    res.sendFile(path.join(frontendDir, "index.html"));
 });
 
 app.listen(PORT, () => {
