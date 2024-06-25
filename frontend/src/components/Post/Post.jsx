@@ -118,12 +118,6 @@ const Post = ({
     setFixBg((prev) => !prev);
   };
 
-  const scrollToPost = () => {
-    const postElement = document.getElementById(`post-${postData._id}`);
-    if (postElement) {
-      postElement.scrollIntoView();
-    }
-  };
   return (
     <>
       {commentPopUp && (
@@ -153,7 +147,7 @@ const Post = ({
           discoverFeed={discoverFeed}
         />
       )}
-      <article id={`post-${postData._id}`} className="post_wrapper">
+      <article id={postData._id} className="post_wrapper">
         {!discoverFeed && (
           <div className="post_upper">
             <Link

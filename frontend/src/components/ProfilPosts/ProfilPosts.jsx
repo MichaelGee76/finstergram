@@ -1,6 +1,21 @@
 import "./ProfilPosts.css";
 
-const ProfilPosts = ({ activeSection, setActiveSection, posts, setPopupList }) => {
+const ProfilPosts = ({
+  activeSection,
+  setActiveSection,
+  posts,
+  setPopupList,
+}) => {
+  const scrollToPost = (postId) => {
+    const postElement = document.getElementById(postId);
+    console.log(postElement);
+    if (postElement) {
+      postElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      console.log("Post with this Id not found");
+    }
+  };
+
   return (
     <section className="profile_posts">
       {/* tabs for allposts, videos, tagged posts */}
@@ -29,7 +44,11 @@ const ProfilPosts = ({ activeSection, setActiveSection, posts, setPopupList }) =
           className="sections"
           style={{
             transform: `translateX(${
-              activeSection === "posts" ? "0%" : activeSection === "reels" ? "-100%" : "-200%"
+              activeSection === "posts"
+                ? "0%"
+                : activeSection === "reels"
+                ? "-100%"
+                : "-200%"
             })`,
           }}
         >
@@ -40,7 +59,11 @@ const ProfilPosts = ({ activeSection, setActiveSection, posts, setPopupList }) =
                   src={item.picture}
                   alt="Beiträge"
                   key={item._id}
-                  onClick={() => setPopupList((popupList) => !popupList)}
+                  onClick={() => {
+                    setPopupList((popupList) => !popupList);
+
+                    scrollToPost(item._id);
+                  }}
                 />
               ))
             ) : (
