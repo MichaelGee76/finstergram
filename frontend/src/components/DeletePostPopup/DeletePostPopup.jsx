@@ -12,7 +12,7 @@ const DeletePostPopup = ({
 }) => {
   const [deletePostMessage, setDeletePostMessage] = useState("");
   const { token } = useContext(TokenDataContext);
-
+  console.log(postData);
   const deletePostHandler = async (event) => {
     event.preventDefault();
 
@@ -34,8 +34,6 @@ const DeletePostPopup = ({
       setPostSettings((prev) => !prev);
     }, 2000);
   };
-
-  console.log(postData);
 
   return (
     <div className="delete_popup">

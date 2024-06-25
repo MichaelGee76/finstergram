@@ -139,8 +139,8 @@ const SinglePost = () => {
         <svg
           className="single_post_back"
           onClick={() => navigate(-1)}
-          width="20"
-          height="17"
+          width="36"
+          height="36"
           viewBox="0 0 20 17"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +223,7 @@ const SinglePost = () => {
                       gradientUnits="userSpaceOnUse"
                     >
                       <stop stopColor="var(--light-pink)" />
-                      <stop offset="1" stopColor="var(mid--pink)" />
+                      <stop offset="1" stopColor="var(--mid-pink)" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -290,7 +290,7 @@ const SinglePost = () => {
                       y2="16.6806"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stopColor="var( --mid-pink)" />
+                      <stop stopColor="var(--mid-pink)" />
                       <stop offset="1" stopColor="var(--light-pink)" />
                     </linearGradient>
                   </defs>
