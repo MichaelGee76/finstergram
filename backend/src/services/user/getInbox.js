@@ -20,6 +20,7 @@ export async function getInbox(authenticatedUserId) {
     // Finde alle Kommentare zu den Posts des authentifizierten Users
     const comments = await Comment.find({
         postId: { $in: postIds },
+        userId: { $ne: authenticatedUserId },
     })
         .populate({ path: "userId", select: "userName profilePicture" })
         .populate({ path: "postId", select: "postId picture" });
