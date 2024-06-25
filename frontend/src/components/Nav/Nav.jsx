@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import "./Nav.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { ColorModeContext, UserDataContext } from "../context/Context";
 
@@ -47,10 +47,10 @@ const Nav = () => {
   }, [user, colorSelect]);
 
   // Example usage
-  const containsExampleString = urlContains("upload");
-  const strokeColor = containsExampleString
-    ? "var(--mid-pink)"
-    : "var(--icons-grey)";
+  const isOnUpload = urlContains("upload");
+  // const strokeColor = containsExampleString
+  //   ? "var(--mid-pink)"
+  //   : "var(--icons-grey)";
   return (
     <nav>
       <NavLink to="/">
@@ -99,69 +99,146 @@ const Nav = () => {
         </svg>
         <p>Search</p>
       </NavLink>
-      <NavLink className="upload_link" to="/upload">
-        <svg
-          className="upload_svg"
-          width="25"
-          height="24"
-          viewBox="0 0 25 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g clipPath="url(#clip0_1_2137)">
-            <g clipPath="url(#clip1_1_2137)">
-              <path
-                className="cross_svg"
-                d="M12.9364 6.10437V18.0184"
-                stroke={strokeColor}
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M18.8993 12.0614H6.97302"
-                stroke={strokeColor}
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="cross_svg"
-              />
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M-3.29169 12.0614C-3.29169 -0.108792 0.766208 -4.16669 12.9364 -4.16669C25.1066 -4.16669 29.1645 -0.108792 29.1645 12.0614C29.1645 24.2316 25.1066 28.2895 12.9364 28.2895C0.766208 28.2895 -3.29169 24.2316 -3.29169 12.0614Z"
-                stroke="var(--icons-grey)"
-                strokeWidth="71"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </g>
-          </g>
-          <rect
-            x="1.625"
-            y="0.75"
-            width="22.5"
-            height="22.5"
-            rx="11.25"
-            stroke="var(--icons-grey)"
-            strokeWidth="1.5"
-          />
-          <defs>
-            <clipPath id="clip0_1_2137">
-              <rect x="0.875" width="24" height="24" rx="12" fill="white" />
-            </clipPath>
-            <clipPath id="clip1_1_2137">
+      {isOnUpload ? (
+        <Link className="upload_link" to="/upload">
+          <svg
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clipPath="url(#clip0_1_1934)">
               <rect
-                width="40"
-                height="40"
-                fill="white"
-                transform="translate(-7.125 -8)"
+                x="0.875"
+                width="24"
+                height="24"
+                rx="12"
+                fill="var(--mid-pink)"
               />
-            </clipPath>
-          </defs>
-        </svg>
-        <p>Upload</p>
-      </NavLink>
+              <g clipPath="url(#clip1_1_1934)">
+                <path
+                  d="M8.74954 7.78769L17.174 16.2122"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M17.1783 7.78353L8.74509 16.2167"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M1.48682 23.475C-7.11879 14.8694 -7.11879 9.13064 1.48682 0.525021C10.0924 -8.08059 15.8312 -8.08059 24.4368 0.525021C33.0424 9.13064 33.0424 14.8694 24.4368 23.475C15.8312 32.0806 10.0924 32.0806 1.48682 23.475Z"
+                  stroke="var(--main-background)"
+                  strokeWidth="71"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            </g>
+            <rect
+              x="1.625"
+              y="0.75"
+              width="22.5"
+              height="22.5"
+              rx="11.25"
+              stroke="var(--mid-pink)"
+              strokeWidth="1.5"
+            />
+            <defs>
+              <clipPath id="clip0_1_1934">
+                <rect
+                  x="0.875"
+                  width="24"
+                  height="24"
+                  rx="12"
+                  fill="var(--main-background)"
+                />
+              </clipPath>
+              <clipPath id="clip1_1_1934">
+                <rect
+                  width="40"
+                  height="40"
+                  fill="var(--main-background)"
+                  transform="translate(-15.4093 12) rotate(-45)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+          <p>Upload</p>
+        </Link>
+      ) : (
+        <NavLink className="upload_link" to="/upload">
+          <svg
+            className="upload_svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clipPath="url(#clip0_1_2137)">
+              <g clipPath="url(#clip1_1_2137)">
+                <path
+                  className="cross_svg"
+                  d="M12.9364 6.10437V18.0184"
+                  stroke="var(--icons-grey)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M18.8993 12.0614H6.97302"
+                  stroke="var(--icons-grey)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="cross_svg"
+                />
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M-3.29169 12.0614C-3.29169 -0.108792 0.766208 -4.16669 12.9364 -4.16669C25.1066 -4.16669 29.1645 -0.108792 29.1645 12.0614C29.1645 24.2316 25.1066 28.2895 12.9364 28.2895C0.766208 28.2895 -3.29169 24.2316 -3.29169 12.0614Z"
+                  stroke="var(--icons-grey)"
+                  strokeWidth="71"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            </g>
+            <rect
+              x="1.625"
+              y="0.75"
+              width="22.5"
+              height="22.5"
+              rx="11.25"
+              stroke="var(--icons-grey)"
+              strokeWidth="1.5"
+            />
+            <defs>
+              <clipPath id="clip0_1_2137">
+                <rect x="0.875" width="24" height="24" rx="12" fill="white" />
+              </clipPath>
+              <clipPath id="clip1_1_2137">
+                <rect
+                  width="40"
+                  height="40"
+                  fill="white"
+                  transform="translate(-7.125 -8)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+          <p>Upload</p>
+        </NavLink>
+      )}
+
       <NavLink to={user ? `/profile/${user._id}` : `/profile`}>
         <svg
           width="25"
