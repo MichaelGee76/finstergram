@@ -11,10 +11,37 @@
   overflow: scroll;
 }
 
+.discover_post_popup .cmt_userinfos {
+  border: unset;
+  padding: unset;
+  margin: unset;
+}
+
+.discover_post_popup .post_upper {
+  border: unset;
+  padding: unset;
+}
+
+.discover_post_popup .cmt_upper div {
+  gap: 4px;
+}
+
 .discover_post_popup .cmt_upper {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.discover_post_popup .post_reactions {
+  margin-bottom: 24px;
+}
+
+.discover_post_popup .posted_date {
+  margin-bottom: 24px;
+}
+
+.discover_post_popup .hashtags_wrapper {
+  margin-bottom: 12px;
 }
 
 .discover_back_img {

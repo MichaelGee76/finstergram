@@ -61,6 +61,12 @@
   gap: 8px;
   cursor: pointer;
 }
+.post_reactions a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
 
 .post_reactions div p {
   font-weight: 600;
