@@ -26,7 +26,7 @@ export async function registerUser({
 
     const userNameExists = await User.findOne({ userName });
     if (userNameExists) {
-        throw new Error("Username already exists");
+        return { message: "UserName already exists" };
     }
 
     const salt = await bcrypt.genSalt(10);
