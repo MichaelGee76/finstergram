@@ -107,7 +107,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Statische Dateien aus dem Build-Verzeichnis bereitstellen
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 // Routes
 app.use("/api/v1/users", userRouter);
