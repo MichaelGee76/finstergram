@@ -17,10 +17,13 @@ const oAuth2Client = new google.auth.OAuth2(
     CLIENT_SECRET,
     REDIRECT_URL
 );
+
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 export const sendEmail = asyncHandler(async ({ to, subject, text }) => {
     const accessToken = await oAuth2Client.getAccessToken();
+    console.log("test333");
+    console.log(accessToken);
 
     if (!accessToken) {
         throw new Error("Could not get access token");
@@ -39,7 +42,7 @@ export const sendEmail = asyncHandler(async ({ to, subject, text }) => {
     });
 
     const sentMessageInfo = await transporter.sendMail({
-        from: `"Finstergram Team" <${GMAIL_ADDRESS}>`,
+        from: `"Finstagram Team" <${GMAIL_ADDRESS}>`,
         to,
         subject,
         text,
