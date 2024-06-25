@@ -84,3 +84,42 @@
   font-size: 12px;
   font-weight: 500;
 }
+@media (min-width: 1024px) {
+  .cmnt_popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* Anpassung auf eine angemessene Breite */
+    max-width: 800px; /* Maximale Breite, um zu große Breiten zu vermeiden */
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 48px 48px 0 48px; /* Erhöhter Innenabstand */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Schatten für bessere Abhebung */
+    border-radius: 25px;
+  }
+
+  .cmt_upper div h3 {
+    font-size: 28px; /* Größere Schriftgröße für Desktop */
+  }
+
+  .cmt_userinfos .post_upper {
+    flex-direction: row; /* Anpassen der Anordnung */
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cmt_userinfos .hashtags_wrapper {
+    margin-top: 12px;
+  }
+
+  .more_cmnts_btn {
+    margin-left: auto; /* Zentriert den Button im Bereich */
+    margin-right: auto;
+  }
+
+  .post_date_wrapper {
+    justify-content: space-between; /* Optimiert die Anzeige von Datum und Ort */
+  }
+}

@@ -66,3 +66,32 @@ nav .active svg {
 nav .active svg rect {
   stroke: var(--mid-pink);
 }
+@media (min-width: 1024px) {
+  nav {
+    top: 50%; /* Zentriert die Nav vertikal zur Hälfte des Bildschirms */
+    left: 0;
+    transform: translateY(-50%); /* Perfekte vertikale Zentrierung */
+    width: 80px; /* Verkleinern der Breite für eine schmalere Sidebar */
+    max-height: 260px; /* Entfernen der vollen Höhe, um die Höhe der Inhalte anzupassen */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 0;
+    border-radius: 0 20px 20px 0; /* Rundung nur an den rechten Ecken */
+    border-top: none;
+    border-left: 1px solid var(--input-grey);
+    box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.03), /* Schatten oben rechts */ -15px 15px 25px rgba(0, 0, 0, 0.1),
+      /* Schatten oben links */ 15px -15px 25px rgba(0, 0, 0, 0.03),
+      /* Schatten unten rechts */ -15px -15px 25px rgba(0, 0, 0, 0.03); /* Schatten unten links */
+  }
+
+  nav a {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  nav a p {
+    font-size: 12px;
+    display: block; /* Stellt sicher, dass der Text immer angezeigt wird */
+  }
+}
