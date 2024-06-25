@@ -21,7 +21,10 @@ export async function registerUser({
     const userExists = await User.findOne({ email });
     if (userExists) {
         //res.status(400);
-        throw new Error("User already exists");
+        return {
+            message:
+                "Looks like you already have an account. Try to login please",
+        };
     }
 
     const userNameExists = await User.findOne({ userName });
