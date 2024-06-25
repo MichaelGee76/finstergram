@@ -5,61 +5,64 @@ import { useContext, useState } from "react";
 import { TokenDataContext } from "../context/Context";
 
 const DeletePostPopup = ({
-  postData,
-  setDeletePostPopup,
-  setPostSettings,
-  setUpdUserFeed,
+    postData,
+    setDeletePostPopup,
+    setPostSettings,
+    setUpdUserFeed,
 }) => {
-  const [deletePostMessage, setDeletePostMessage] = useState("");
-  const { token } = useContext(TokenDataContext);
-  console.log(postData);
-  const deletePostHandler = async (event) => {
-    event.preventDefault();
+    const [deletePostMessage, setDeletePostMessage] = useState("");
+    const { token } = useContext(TokenDataContext);
 
-    // setSettingOptionsPopUp((prev) => !prev);
+    const deletePostHandler = async (event) => {
+        event.preventDefault();
 
-    const res = await ky
-      .delete(`${backendUrl}/posts/${postData._id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .json();
+        // setSettingOptionsPopUp((prev) => !prev);
 
-    setDeletePostMessage("Post deleted!");
-    setUpdUserFeed((prev) => !prev);
-    setTimeout(() => {
-      setDeletePostPopup((prev) => !prev);
-      setPostSettings((prev) => !prev);
-    }, 2000);
-  };
+        const res = await ky
+            .delete(`${backendUrl}/posts/${postData._id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .json();
 
-  return (
-    <div className="delete_popup">
-      {!deletePostMessage ? (
-        <article>
-          <p>Do you really want to delete your post?</p>
-          <div>
-            <button onClick={deletePostHandler} className="post_settings_btn">
-              Delete
-            </button>
-            <button
-              onClick={() => {
-                setDeletePostPopup((prev) => !prev);
-                setPostSettings((prev) => !prev);
-              }}
-              className="cancel_delete_btn"
-            >
-              Cancel
-            </button>
-          </div>
-        </article>
-      ) : (
-        <p>{deletePostMessage}</p>
-      )}
-    </div>
-  );
+        setDeletePostMessage("Post deleted!");
+        setUpdUserFeed((prev) => !prev);
+        setTimeout(() => {
+            setDeletePostPopup((prev) => !prev);
+            setPostSettings((prev) => !prev);
+        }, 2000);
+    };
+
+    return (
+        <div className="delete_popup">
+            {!deletePostMessage ? (
+                <article>
+                    <p>Do you really want to delete your post?</p>
+                    <div>
+                        <button
+                            onClick={deletePostHandler}
+                            className="post_settings_btn"
+                        >
+                            Delete
+                        </button>
+                        <button
+                            onClick={() => {
+                                setDeletePostPopup((prev) => !prev);
+                                setPostSettings((prev) => !prev);
+                            }}
+                            className="cancel_delete_btn"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </article>
+            ) : (
+                <p>{deletePostMessage}</p>
+            )}
+        </div>
+    );
 };
 
 export default DeletePostPopup;
