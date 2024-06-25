@@ -105,7 +105,6 @@ const SinglePost = () => {
       const newLikes = crementLike + 1;
       setCrementLike(newLikes);
       setLikeToggle((likeToggle) => !likeToggle);
-      updateLikes(postData._id, newLikes);
     } else {
       await ky
         .delete(`${backendUrl}/likes/like`, {
@@ -119,13 +118,11 @@ const SinglePost = () => {
       const newLikes = crementLike - 1;
       setCrementLike(newLikes);
       setLikeToggle((likeToggle) => !likeToggle);
-      updateLikes(postData._id, newLikes);
     }
   };
 
   const newPostAge = calculatePostAge(postData?.post.createdAt);
 
-  console.log(postData);
   return (
     postData && (
       <main className="single_post_sec">

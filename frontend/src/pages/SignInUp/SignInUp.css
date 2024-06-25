@@ -12,7 +12,7 @@
   max-width: 12ch;
 }
 
-.sign_section img {
+.sign_section svg {
   width: 35%;
   margin-inline: auto;
 }
@@ -77,4 +77,12 @@ input:-webkit-autofill:focus {
   color: var(--mid-pink);
   font-weight: 600;
   text-decoration: none;
+}
+
+.register_error {
+  color: var(--mid-pink);
+  font-size: 16px;
+  max-width: 30ch;
+  text-align: center;
+  margin-inline: auto;
 }
