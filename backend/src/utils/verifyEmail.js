@@ -21,7 +21,6 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 export const sendEmail = asyncHandler(async ({ to, subject, text }) => {
     const accessToken = await oAuth2Client.getAccessToken();
-    // console.log("AccessToken", accessToken);
 
     if (!accessToken) {
         throw new Error("Could not get access token");
@@ -38,7 +37,6 @@ export const sendEmail = asyncHandler(async ({ to, subject, text }) => {
             accessToken: accessToken.token,
         },
     });
-    // console.log("transporter", transporter);
 
     const sentMessageInfo = await transporter.sendMail({
         from: `"Finstergram Team" <${GMAIL_ADDRESS}>`,

@@ -80,7 +80,6 @@ export async function getUserPosts(userId, authenticatedUserId) {
         });
         isFollowed = !!following; // Convert to boolean
     }
-    console.log(postsWithDetails);
 
     return {
         posts: postsWithDetails,
