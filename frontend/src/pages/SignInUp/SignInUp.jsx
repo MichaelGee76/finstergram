@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./SignInUp.css";
 import {
+  ColorModeContext,
   TokenDataContext,
   UserDataContext,
 } from "../../components/context/Context";
@@ -16,6 +17,7 @@ const SignInUp = () => {
   const [registerMessage, setRegisterMessage] = useState();
   const { setUser } = useContext(UserDataContext);
   const { setToken } = useContext(TokenDataContext);
+  const { colorSelect, setColorSelect } = useContext(ColorModeContext);
   const [registerData, setRegisterData] = useState({
     firstName: "",
     lastName: "",
@@ -38,6 +40,7 @@ const SignInUp = () => {
 
     setUser(res.result.user);
     console.log(res.result.userData);
+    setColorSelect(res.result.user.dark);
     setToken(res.result.tokens.accessToken);
 
     navigate("/");

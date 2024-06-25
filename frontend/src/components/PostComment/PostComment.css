@@ -23,6 +23,7 @@
   width: 100%;
   border: unset;
   border-radius: 12px;
+  padding-left: 12px;
   background-color: var(--input-grey);
 }
 

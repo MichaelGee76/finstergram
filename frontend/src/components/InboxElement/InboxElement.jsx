@@ -9,10 +9,14 @@ const calculatePostAge = (createdAt) => {
   const postAgeInMin = Math.floor(postAge / 1000 / 60); // 10
   const postAgeInHours = Math.floor(postAgeInMin / 60); // 0
   const showPostAge =
-    postAgeInHours >= 1
-      ? `${postAgeInHours} hours ago`
+    postAgeInHours >= 24 * 7
+      ? `${Math.floor(postAgeInHours / 24 / 7)}d`
+      : postAgeInHours >= 24
+      ? `${Math.floor(postAgeInHours / 24)}d`
+      : postAgeInHours >= 1
+      ? `${postAgeInHours}h ago`
       : postAgeInMin > 1
-      ? `${postAgeInMin} min ago`
+      ? `${postAgeInMin}m ago`
       : "just now";
 
   return { showPostAge, postAgeInHours };

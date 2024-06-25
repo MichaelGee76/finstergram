@@ -29,7 +29,7 @@ const ColorMode = () => {
     setColorSelect(res.result.dark);
   };
 
-  console.log(colorSelect);
+  console.log(user);
 
   return (
     <div className="colormode_wrapper">

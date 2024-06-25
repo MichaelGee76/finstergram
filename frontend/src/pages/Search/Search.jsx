@@ -2,7 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import "./Search.css";
 import ky from "ky";
 import { backendUrl } from "../../api/api";
-import { TokenDataContext } from "../../components/context/Context";
+import {
+  TokenDataContext,
+  UserDataContext,
+} from "../../components/context/Context";
 import SearchResult from "../../components/SearchResult/SearchResult";
 import { Link } from "react-router-dom";
 import DiscoverFeed from "../../components/DiscoverFeed/DiscoverFeed";
@@ -14,6 +17,7 @@ const Search = () => {
   const [searchInput, setSearchInput] = useState("");
   const [changeHeaderZ, setChangeHeaderZ] = useState(false);
   const { token } = useContext(TokenDataContext);
+  const { user } = useContext(UserDataContext);
 
   useEffect(() => {
     const searchHandler = async () => {
@@ -176,7 +180,8 @@ const Search = () => {
                 searchInput &&
                 result.userName
                   .toLowerCase()
-                  .includes(searchInput.toLowerCase()) && (
+                  .includes(searchInput.toLowerCase()) &&
+                result.userName !== user.userName && (
                   <SearchResult key={result._id} result={result} />
                 )
             )

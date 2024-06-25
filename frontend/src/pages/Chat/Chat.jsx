@@ -35,7 +35,7 @@ const Chat = () => {
     };
 
     chatData();
-  }, [chatUpd, reloadChat]);
+  }, [chatUpd]);
 
   useEffect(() => {
     const messagesSeen = async () => {
@@ -47,7 +47,7 @@ const Chat = () => {
           },
         })
         .json();
-      setChatUpd((prev) => !prev);
+      // setChatUpd((prev) => !prev);
     };
 
     messagesSeen();
