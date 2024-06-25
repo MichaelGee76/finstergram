@@ -18,7 +18,6 @@ import { userToView } from "../../helpers/userToView.js";
 // }
 
 export async function updateUser(authenticatedUserId, updatedData) {
-    console.log(updatedData);
     const user = await User.findById(authenticatedUserId);
     if (!user) throw new Error("user not found");
 

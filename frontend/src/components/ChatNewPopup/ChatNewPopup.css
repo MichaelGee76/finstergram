@@ -60,3 +60,42 @@
   object-fit: cover;
   border-radius: 100px;
 }
+@media (min-width: 1024px) {
+  .new_chat {
+    max-width: 800px;
+    display: block;
+    margin-inline: auto;
+    right: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .new_chat_upper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .new_chat_upper h2 {
+    font-size: 24px;
+  }
+
+  .new_chat_output {
+    padding: 16px;
+  }
+
+  .new_chat_output article {
+    padding: 16px;
+    border-bottom: 1px solid var(--input-grey);
+  }
+
+  .new_chat_output article a div h3 {
+    font-size: 18px;
+  }
+
+  .new_chat_profilepic {
+    min-width: 60px;
+    height: 60px;
+  }
+}

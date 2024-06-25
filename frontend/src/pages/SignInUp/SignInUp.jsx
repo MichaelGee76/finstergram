@@ -34,13 +34,16 @@ const SignInUp = () => {
 
     const res = await ky
       .post(`${backendUrl}/users/login`, {
-        json: { email: registerData.email, password: registerData.password },
+        json: {
+          email: registerData.email,
+          password: registerData.password,
+        },
         credentials: "include",
       })
       .json();
 
     setUser(res.result.user);
-    console.log(res.result.userData);
+
     setColorSelect(res.result.user.dark);
     setToken(res.result.tokens.accessToken);
 

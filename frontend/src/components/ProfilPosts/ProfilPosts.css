@@ -28,7 +28,7 @@
 .sections {
   display: flex;
   transition: transform 0.3s ease-in-out;
-  width: 300%;
+  width: 100%;
 }
 
 .section {
@@ -38,9 +38,26 @@
 }
 
 .section img {
-  width: 133px;
-  height: 133px;
+  width: unset;
+  height: unset;
+  aspect-ratio: 1/1;
   object-fit: cover;
 
   border-radius: 4px;
+}
+@media only screen and (min-width: 1024px) {
+  .section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+  }
+  .section img {
+    /* width: 153px;
+    height: 153px;
+     */
+    aspect-ratio: 1/1;
+    object-fit: cover;
+
+    border-radius: 4px;
+  }
 }

@@ -24,3 +24,28 @@
   flex-direction: column;
   gap: 12px;
 }
+@media (min-width: 1024px) {
+  .chat_dash {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-block: 32px;
+    padding-inline: 16px;
+  }
+
+  .chat_dash_nav {
+    justify-content: space-between;
+  }
+
+  .chat_dash_output {
+    max-width: 100%;
+  }
+
+  .chat_dash_nav div h1 {
+    font-size: 32px;
+  }
+
+  .chat_dash_nav div svg {
+    width: 24px;
+    height: 24px;
+  }
+}

@@ -75,3 +75,84 @@ form div .location_edit_wrapper {
 form div .location_edit_wrapper p {
   font-size: 16px;
 }
+@media (min-width: 1024px) {
+  .edit_post_sec {
+    margin: auto;
+    padding: 32px;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--main-background);
+    margin-top: 150px;
+  }
+
+  .edit_post_sec form {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .edit_post_sec form div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .edit_post_sec form div label {
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .edit_post_sec form div input {
+    padding: 8px;
+    border: 1px solid var(--loginfont-grey);
+    border-radius: 6px;
+    font-size: 16px;
+  }
+
+  .edit_post_sec form div .hashtags_output {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .edit_post_sec form div .hashtags_output div {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-grey);
+    border-radius: 6px;
+    padding: 4px 8px;
+  }
+
+  .edit_post_sec .edit_hashtag_btn,
+  .edit_post_sec .edit_post_btn {
+    width: fit-content;
+    align-self: start;
+    padding: 10px 24px;
+    font-size: 16px;
+  }
+
+  .edit_post_sec .location_suggestions {
+    margin-top: 8px;
+    background-color: var(--main-background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .edit_post_sec .location_suggestions div {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  .edit_post_sec .location_suggestions div:hover {
+    background-color: var(--input-grey);
+  }
+
+  form div .location_edit_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

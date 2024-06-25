@@ -4,8 +4,6 @@ const RegisterPopUp = ({ userData }) => {
   const resendEmailHandler = (event) => {
     event.preventDefault();
 
-    console.log(userData);
-
     // const res = ky.pos
   };
 

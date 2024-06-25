@@ -37,3 +37,9 @@
   z-index: 2000;
   background-color: var(--main-background);
 }
+@media only screen and (min-width: 1024px) {
+  .posts_popup {
+    max-width: 600px;
+    margin: auto;
+  }
+}
