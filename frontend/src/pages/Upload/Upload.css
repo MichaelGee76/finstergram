@@ -281,11 +281,62 @@
   background-color: var(--mid-pink);
 }
 .filter_range::-moz-range-thumb {
-  -webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none;
   appearance: none;
-  margin-top: -4px; /* Centers thumb on the track */
+  margin-top: -4px;
   width: 1rem;
   height: 1rem;
   border-radius: 20px;
   background-color: var(--mid-pink);
+}
+@media (min-width: 1024px) {
+  .upload_section {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+  }
+
+  .img_upload_wrapper {
+    height: 500px;
+    padding-bottom: 0;
+  }
+
+  .upload_img {
+    height: 500px;
+  }
+
+  .upload_text_section {
+    flex-direction: row;
+    align-items: start;
+    padding: 20px 0;
+  }
+
+  .upload_profile_img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .upload_text_section textarea {
+    flex: 1;
+    min-height: 80px;
+    padding: 20px;
+  }
+
+  .upload_hashtags_section {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hashtags_output div {
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+
+  .postbtn {
+    padding: 12px 24px;
+    font-size: 20px;
+  }
 }

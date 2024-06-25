@@ -37,7 +37,7 @@
 @media (min-width: 1024px) {
   .post_cmnt_wrapper {
     position: sticky;
-    bottom: -1px;
+    bottom: -3px;
 
     width: auto;
     padding: 24px;

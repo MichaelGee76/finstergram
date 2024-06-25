@@ -57,3 +57,28 @@
   font-weight: 600;
   border: unset;
 }
+@media (min-width: 1024px) {
+  .post_settings_popup {
+    align-items: center;
+    text-align: center;
+  }
+
+  .post_settings_content {
+    width: 400px; /* Max width for the settings content */
+    border-radius: 8px;
+  }
+
+  .post_settings_btn,
+  .post_settings_link,
+  .post_settings_popup .close_settings_popup {
+    height: 50px;
+    font-size: 18px;
+    border-top: 1px solid var(--main-text);
+  }
+
+  .post_settings_popup .close_settings_popup {
+    margin-top: 8px;
+    font-size: 18px;
+    border-radius: 8px;
+  }
+}

@@ -101,3 +101,22 @@ article .newfollow_btn {
   justify-content: space-between;
   width: 100%;
 }
+@media (min-width: 1024px) {
+  .inbox_sec {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inbox_sec article {
+    width: 50%;
+    max-width: 600px;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .inbox_upper {
+    padding-block: 20px;
+  }
+}

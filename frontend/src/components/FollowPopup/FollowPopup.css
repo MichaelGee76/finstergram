@@ -45,3 +45,26 @@
   color: var(--mid-pink);
   border-bottom: 4px solid var(--mid-pink);
 }
+@media (min-width: 1024px) {
+  .follow_popup {
+    position: fixed;
+    display: block;
+    margin-inline: auto;
+    width: 60%;
+    max-width: 600px;
+    border-radius: 25px;
+    padding: 32px;
+  }
+
+  .follow_popup_inner {
+    padding: 32px 32px 100px 32px;
+  }
+
+  .tab {
+    width: 50%;
+  }
+
+  .tab.active {
+    font-size: 18px;
+  }
+}

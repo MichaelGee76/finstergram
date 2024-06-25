@@ -11,3 +11,52 @@
   padding-bottom: 12px;
   margin-bottom: 12px;
 }
+@media (min-width: 1024px) {
+  .single_post_sec {
+    margin-bottom: 60px;
+    padding-top: 32px;
+    width: 60%; /* Anpassung auf eine angemessene Breite */
+    max-width: 800px; /* Maximale Breite, um zu große Breiten zu vermeiden */
+    margin: auto; /* Zentrieren */
+  }
+
+  .single_post_back {
+    padding-bottom: 16px;
+  }
+
+  .single_post_back .cmt_userinfos {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .post_wrapper {
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Schatten für bessere Abhebung */
+  }
+
+  .post_upper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .post_reactions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+  }
+
+  .cmt_userinfos .hashtags_wrapper {
+    margin-top: 12px;
+  }
+
+  .more_cmnts_btn {
+    margin-left: auto; /* Zentriert den Button im Bereich */
+    margin-right: auto;
+  }
+
+  .post_date_wrapper {
+    justify-content: space-between; /* Optimiert die Anzeige von Datum und Ort */
+  }
+}

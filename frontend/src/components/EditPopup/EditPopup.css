@@ -1,7 +1,8 @@
 .edit_popup {
   position: fixed;
-  bottom: 0;
   left: 0;
+  bottom: 0;
+
   right: 0;
   top: 0;
   background-color: var(--main-background);
@@ -62,4 +63,42 @@ select {
   background-color: var(--input-grey);
   border-radius: 10px;
   padding-right: 30px;
+}
+@media (min-width: 1024px) {
+  .edit_popup {
+    position: fixed;
+    display: block;
+    margin-inline: auto;
+    width: 90%;
+    max-width: 800px;
+    padding: 32px;
+  }
+
+  .edit_img_svg {
+    top: 70px;
+    right: 310px;
+  }
+
+  .edit_inputs {
+    gap: 15px;
+  }
+
+  .edit_inputs input,
+  .edit_inputs select {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .calendar {
+    padding-right: 20px;
+  }
+
+  .button_unclicked {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .profile_title h1 {
+    font-size: 24px;
+  }
 }

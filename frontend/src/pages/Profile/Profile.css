@@ -80,3 +80,58 @@
   border-right: 1.6px solid rgba(128, 128, 128, 0.299);
   padding-inline: 40px;
 }
+@media only screen and (min-width: 1024px) {
+  .profile {
+    max-width: 600px; /* Center the profile for better visual balance */
+    margin: auto;
+    padding: 10px;
+  }
+
+  .profile_img img {
+    width: 100px; /* Adjust profile image size for smaller desktops */
+    height: 100px;
+  }
+
+  .profile_info h1,
+  .profile_numbers h1 {
+    font-size: 18px; /* Adjust heading size for readability */
+  }
+
+  .profile_info p,
+  .profile_numbers p {
+    font-size: 14px; /* Adjust paragraph text size */
+  }
+
+  .profile_numbers {
+    padding: 0 20px; /* Add padding to align numbers properly */
+  }
+
+  .profile_nav svg,
+  .userOn svg {
+    width: 24px; /* Adjust SVG icons size */
+    height: 24px;
+  }
+
+  .userOn {
+    position: absolute;
+    top: 80px;
+    right: -5px;
+  }
+
+  .profile_info {
+    padding: 10px 0; /* Adjust padding around the profile information */
+  }
+
+  .font_link {
+    font-size: 14px; /* Adjust the size of clickable links */
+  }
+
+  .profile_numberbox {
+    flex-basis: 33%; /* Ensure number boxes take equal width */
+    justify-content: center; /* Center the content within the number boxes */
+  }
+
+  .profile_numberbox h1 {
+    margin-bottom: 5px; /* Adjust spacing between number and label */
+  }
+}

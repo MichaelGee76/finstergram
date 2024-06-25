@@ -99,3 +99,29 @@
   width: 100%;
   z-index: 999;
 }
+@media (min-width: 1024px) {
+  .settings_popup {
+    max-width: 600px;
+    margin: auto;
+    bottom: 10%;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+  }
+
+  .setting_section {
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+
+  .setting_container {
+    padding: 12px 0;
+  }
+
+  .logout,
+  .cancel {
+    margin-left: 20px;
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+}
