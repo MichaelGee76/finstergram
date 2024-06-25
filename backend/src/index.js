@@ -120,7 +120,7 @@ app.use("/api/v1/message", messageRouter);
 
 // Catch-All Route einrichten, um index.html für alle nicht gefundenen Routen zurückzugeben
 app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
