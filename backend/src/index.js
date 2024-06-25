@@ -73,6 +73,12 @@ import { google } from "googleapis";
 import dotenv from "dotenv";
 import { commentRouter } from "./routes/commentRouter.js";
 import cookieSession from "cookie-session";
+import httpProxy from "http-proxy";
+
+// Proxy-Server einrichten
+const proxy = httpProxy.createProxyServer({
+    target: "https://finstergram-1-1.onrender.com",
+});
 
 const PORT = process.env.PORT || 4420;
 
@@ -105,10 +111,6 @@ app.use(express.json());
 //Wenn Express.js-Anwendung Formulardaten analysieren werden, die mit dem application/x-www-form-urlencoded MIME-Typ gesendet werden, dann ist diese Zeile notwendig. Andernfalls ist sie nicht erforderlich.
 app.use(express.urlencoded({ extended: false }));
 
-// Serve static files from the frontend dist directory if they exist locally
-const frontendDir = path.join(__dirname, "../frontend/dist");
-app.use(express.static(frontendDir));
-
 // Routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/posts", postRouter);
@@ -118,12 +120,12 @@ app.use("/api/v1/save", saveRouter);
 app.use("/api/v1/follow", followRouter);
 app.use("/api/v1/message", messageRouter);
 
-// Catch-all route to serve index.html for all other routes
+// Catch-all route to serve frontend for all other routes
 app.get("*", (req, res) => {
     if (req.path.startsWith("/api/")) {
         return res.status(404).json({ message: "API route not found" });
     }
-    res.sendFile(path.join(frontendDir, "index.html"));
+    proxy.web(req, res);
 });
 
 app.listen(PORT, () => {
