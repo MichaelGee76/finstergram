@@ -149,10 +149,10 @@ function App() {
                                             }
                                         />
                                         <Route
-                                            path="/*"
+                                            path="/likedposts"
                                             element={
                                                 <AuthRequired>
-                                                    <Home />
+                                                    <LikedPosts />
                                                 </AuthRequired>
                                             }
                                         />
