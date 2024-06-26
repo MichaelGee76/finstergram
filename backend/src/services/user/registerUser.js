@@ -48,13 +48,16 @@ export async function registerUser({
         sendEmail({
             to: user.email,
             subject: "Welcome to Finstagram",
-            text: `Hey ${user.firstName},
-        welcome to Finstagram. Please click the link below to verify your account:
-        https://finstergram.onrender.com/api/v1/users/verifyEmail/${user._id}
+            html: `
+            <p>Hey ${user.firstName},</p>
 
-        Have fun with finstagraming
+            <p>Welcome to Finstagram. Please click the link below to verify your account:</p>
 
-        Your Finstagram Team
+            <p><a href="https://finstergram.onrender.com/api/v1/users/verifyEmail/${user._id}">Verify your account</a></p>
+
+            <p>Have fun here!</p>
+            
+            <p>Your Finstagram Team</p>
         `,
         });
 
