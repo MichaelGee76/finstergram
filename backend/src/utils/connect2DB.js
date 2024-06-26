@@ -6,7 +6,7 @@ dotenv.config();
 
 export const connect2DB = asyncHandler(async () => {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
-        dbName: "finstergram",
+        dbName: "finstergram-live",
     });
     console.log("MongoDB connected");
 });

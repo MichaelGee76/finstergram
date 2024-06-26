@@ -43,6 +43,8 @@ const Inbox = () => {
       .json();
   };
 
+  console.log(inbox);
+
   return (
     <section className="inbox_sec">
       <div onClick={inboxToggleHandler} className="inbox_icon_wrapper">

@@ -47,14 +47,17 @@ export async function registerUser({
         await user.save();
         sendEmail({
             to: user.email,
-            subject: "Welcome to Finstergram",
-            text: `Hey ${user.firstName},
-        welcome to Finstergram. Please click the link below to verify your account:
-        http://localhost:4420/api/v1/users/verifyEmail/${user._id}
+            subject: "Welcome to Finstagram",
+            html: `
+            <p>Hey ${user.firstName},</p>
 
-        Have fun with finstergraming
+            <p>Welcome to Finstagram. Please click the link below to verify your account:</p>
 
-        Your Finstergram Team
+            <p><a href="https://finstergram.onrender.com/api/v1/users/verifyEmail/${user._id}">Verify your account</a></p>
+
+            <p>Have fun here!</p>
+            
+            <p>Your Finstagram Team</p>
         `,
         });
 
