@@ -119,14 +119,14 @@ const Nav = () => {
               <g clipPath="url(#clip1_1_1934)">
                 <path
                   d="M8.74954 7.78769L17.174 16.2122"
-                  stroke="white"
+                  stroke="var(--main-background)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <path
                   d="M17.1783 7.78353L8.74509 16.2167"
-                  stroke="white"
+                  stroke="var(--main-background)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -223,13 +223,19 @@ const Nav = () => {
             />
             <defs>
               <clipPath id="clip0_1_2137">
-                <rect x="0.875" width="24" height="24" rx="12" fill="white" />
+                <rect
+                  x="0.875"
+                  width="24"
+                  height="24"
+                  rx="12"
+                  fill="var(--main-background)"
+                />
               </clipPath>
               <clipPath id="clip1_1_2137">
                 <rect
                   width="40"
                   height="40"
-                  fill="white"
+                  fill="var(--main-background)"
                   transform="translate(-7.125 -8)"
                 />
               </clipPath>

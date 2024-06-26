@@ -15,8 +15,10 @@
 }
 
 .chat_view_content img {
+  min-height: 48px;
+  max-height: 48px;
   min-width: 48px;
-  height: 48px;
+  max-width: 48px;
   border-radius: 100px;
   object-fit: cover;
 }

@@ -370,7 +370,7 @@ const SinglePost = () => {
             <p className="post_desctext">{postData.post.description}</p>
             <div className="hashtags_wrapper">
               {postData.post.hashtags?.map((hashtag, index) => (
-                <Link key={index} to={`/search/${hashtag}`}>
+                <Link key={index} to={`/hashtagposts/${hashtag}`}>
                   #{hashtag}
                 </Link>
               ))}

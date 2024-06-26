@@ -302,7 +302,7 @@ const DiscoverPostPopup = ({
       {postData?.hashtags.length > 0 && (
         <div className="hashtags_wrapper">
           {postData.hashtags?.map((hashtag, index) => (
-            <Link key={index} to={`/search/${hashtag}`}>
+            <Link key={index} to={`/hashtagposts/${hashtag}`}>
               #{hashtag}
             </Link>
           ))}

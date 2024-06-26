@@ -49,7 +49,7 @@ nav a p {
   stroke: var(--mid-pink);
 }
 
-nav .upload_link svg {
+/* nav .upload_link svg {
   fill: none;
 }
 
@@ -57,7 +57,7 @@ nav .active .upload_svg {
   fill: none;
   background-color: var(--mid-pink);
   border-radius: 100px;
-}
+} */
 
 nav .active svg {
   stroke: var(--main-background);
@@ -80,7 +80,8 @@ nav .active svg rect {
     border-radius: 0 20px 20px 0; /* Rundung nur an den rechten Ecken */
     border-top: none;
     border-left: 1px solid var(--input-grey);
-    box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.03), /* Schatten oben rechts */ -15px 15px 25px rgba(0, 0, 0, 0.1),
+    box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.03),
+      /* Schatten oben rechts */ -15px 15px 25px rgba(0, 0, 0, 0.1),
       /* Schatten oben links */ 15px -15px 25px rgba(0, 0, 0, 0.03),
       /* Schatten unten rechts */ -15px -15px 25px rgba(0, 0, 0, 0.03); /* Schatten unten links */
   }
