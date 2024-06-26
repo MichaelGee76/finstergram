@@ -67,7 +67,7 @@ const ProfilPosts = ({
                 />
               ))
             ) : (
-              <p>Hier sind alle Beiträge.</p>
+              <p>Here are your posts.</p>
             )}
           </div>
           <div className="section"></div>

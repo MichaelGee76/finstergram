@@ -88,3 +88,7 @@ h1 {
   justify-content: center;
   gap: 8px;
 }
+
+button {
+  cursor: pointer;
+}

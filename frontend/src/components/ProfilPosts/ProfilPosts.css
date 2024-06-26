@@ -13,7 +13,7 @@
   padding: 20px 0;
   cursor: pointer;
   font-weight: bold;
-  color: #555;
+  color: var(--icons-grey);
 }
 
 .tab.active {
