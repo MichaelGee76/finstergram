@@ -25,6 +25,7 @@ export async function getInbox(authenticatedUserId) {
     commentId: { $exists: true },
   })
     .populate({ path: "userId", select: "userName profilePicture" })
+    .populate({ path: "postId", select: "postId picture" })
     .populate({ path: "commentId", select: "content" });
 
   // Finde alle Kommentare zu den Posts des authentifizierten Users
