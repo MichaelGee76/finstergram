@@ -65,7 +65,7 @@ const SinglePost = () => {
     };
 
     getOnePostHandler();
-  }, []);
+  }, [commentUpd]);
 
   const saveToggleHandler = async () => {
     if (!saveToggle) {
@@ -410,7 +410,7 @@ const SinglePost = () => {
           </section>
           <PostComment
             setCommentUpd={setCommentUpd}
-            postId={postData._id}
+            postId={postData.post._id}
             setUpdUserFeed={setUpdUserFeed}
             replyMessage={replyMessage}
           />
