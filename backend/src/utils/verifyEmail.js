@@ -20,7 +20,7 @@ const oAuth2Client = new google.auth.OAuth2(
 
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-export const sendEmail = asyncHandler(async ({ to, subject, text }) => {
+export const sendEmail = asyncHandler(async ({ to, subject, html }) => {
     const accessToken = await oAuth2Client.getAccessToken();
     console.log("test333");
     console.log(accessToken);
@@ -45,8 +45,7 @@ export const sendEmail = asyncHandler(async ({ to, subject, text }) => {
         from: `"Finstagram Team" <${GMAIL_ADDRESS}>`,
         to,
         subject,
-        text,
-        html: text.replace(/\n/g, "<br/>"),
+        html,
     });
 
     return sentMessageInfo.accepted.includes(to);
