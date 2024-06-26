@@ -16,6 +16,16 @@
   height: 100svh;
   width: 100%;
   overflow: scroll;
+  animation: slide-down 0.6s ease forwards;
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .inbox_sec article .inbox_upper {
@@ -49,7 +59,6 @@
   justify-content: flex-start;
   position: relative;
   min-height: 73px;
-  border-bottom: 2px solid var(--input-grey);
 }
 
 .inbox_sec .new_inbox_wrapper {
@@ -100,6 +109,7 @@ article .newfollow_btn {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  border-bottom: 2px solid var(--input-grey);
 }
 @media (min-width: 1024px) {
   .inbox_sec {
@@ -109,11 +119,18 @@ article .newfollow_btn {
   }
 
   .inbox_sec article {
-    width: 50%;
-    max-width: 600px;
+    width: 44%;
+    min-width: 650px;
+    left: 26%;
+
     padding: 32px;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .inbox_sec article::-webkit-scrollbar {
+    display: none;
   }
 
   .inbox_upper {

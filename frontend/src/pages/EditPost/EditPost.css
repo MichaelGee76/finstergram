@@ -23,10 +23,11 @@
 
 .edit_post_sec form div input {
   padding: 6px;
-  border: 1px solid var(--loginfont-grey);
+  border: 1px solid var(--input-grey);
   border-radius: 6px;
   margin-bottom: 6px;
   font-size: 16px;
+  background-color: var(--main-background);
 }
 
 .edit_post_sec form div .hashtags_output {

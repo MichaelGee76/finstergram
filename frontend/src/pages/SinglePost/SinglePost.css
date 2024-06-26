@@ -30,7 +30,7 @@
   }
 
   .post_wrapper {
-    padding: 24px;
+    padding: 2px;
     border-radius: 24px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Schatten für bessere Abhebung */
   }
@@ -43,8 +43,9 @@
 
   .post_reactions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding-top: 12px;
+    gap: 24px;
   }
 
   .cmt_userinfos .hashtags_wrapper {

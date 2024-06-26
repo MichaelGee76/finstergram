@@ -89,7 +89,6 @@ const Post = ({
         const newLikes = crementLike + 1;
         setCrementLike(newLikes);
         setLikeToggle((prev) => !prev);
-        updateLikes(postData._id, newLikes);
       } else {
         await ky
           .delete(`${backendUrl}/likes/like`, {
@@ -103,7 +102,6 @@ const Post = ({
         const newLikes = crementLike - 1;
         setCrementLike(newLikes);
         setLikeToggle((prev) => !prev);
-        updateLikes(postData._id, newLikes);
       }
       setUpdUserFeed();
     } catch (error) {

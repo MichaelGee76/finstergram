@@ -7,7 +7,7 @@ import {
   UserDataContext,
 } from "../../components/context/Context";
 import SearchResult from "../../components/SearchResult/SearchResult";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import DiscoverFeed from "../../components/DiscoverFeed/DiscoverFeed";
 
 const Search = () => {
@@ -18,6 +18,12 @@ const Search = () => {
   const [changeHeaderZ, setChangeHeaderZ] = useState(false);
   const { token } = useContext(TokenDataContext);
   const { user } = useContext(UserDataContext);
+
+  // const location = useLocation();
+  // const { hashtag } = useParams();
+  // const searchHashtag = location.pathname !== "_";
+  // console.log(hashtag);
+  // console.log(searchHashtag);
 
   useEffect(() => {
     const searchHandler = async () => {
@@ -47,6 +53,13 @@ const Search = () => {
     };
     searchHandler();
   }, [searchToggle]);
+
+  // useEffect(() => {
+  //   if (searchHashtag) {
+  //     setSearchToggle(false);
+  //     setSearchInput(hashtag);
+  //   }
+  // }, [hashtag]);
 
   return (
     <main className="search_site">

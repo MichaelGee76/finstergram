@@ -89,7 +89,11 @@ const SignInUp = () => {
         "message" in registerMessage ? (
           ""
         ) : (
-          <RegisterPopUp userData={registerMessage} />
+          <RegisterPopUp
+            userData={registerMessage}
+            setRegisterMessage={setRegisterMessage}
+            setToggle={setToggle}
+          />
         )
       ) : (
         ""

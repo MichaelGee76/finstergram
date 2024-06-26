@@ -7,6 +7,7 @@
   left: 0;
   padding: 48px 24px 24px 24px;
   background-color: var(--main-background);
+  animation: slide-up 0.5s ease forwards;
 }
 
 .new_chat_upper {

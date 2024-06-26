@@ -25,13 +25,30 @@
   line-height: 160%;
 }
 
-.register_success_section button {
+.register_success_section div {
+  display: flex;
+  gap: 6px;
+}
+
+.register_success_section .back_to_login {
   background-color: var(--light-pink);
   border: unset;
-  padding: 6px 18px;
+  padding: 6px 16px;
   border-radius: 20px;
   color: var(--input-grey);
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
+}
+
+.register_success_section button {
+  border: 1px solid var(--light-pink);
+  background-color: unset;
+  padding: 6px 18px;
+  border-radius: 20px;
+  color: var(--light-pink);
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: unset;
 }

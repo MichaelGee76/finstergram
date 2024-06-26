@@ -1,10 +1,11 @@
 .follow_btn {
   background-color: var(--mid-pink) !important;
-  color: var(--input-grey);
+  color: white;
   padding: 6px 16px;
   border-radius: 20px;
   font-weight: 500;
   cursor: pointer;
+  border: unset;
 }
 
 .unfollow_btn {

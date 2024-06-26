@@ -97,7 +97,7 @@
 }
 @media (min-width: 1024px) {
   .search_site {
-    margin-top: 50px; /* Etwas mehr Abstand von der oberen Leiste */
+    margin-top: 100px; /* Etwas mehr Abstand von der oberen Leiste */
     padding-bottom: 50px; /* Gleichbleibender Abstand am unteren Rand */
     max-width: 600px; /* Maximale Breite für die Suchseite zentrieren */
     margin-left: auto; /* Zentrierung der Suchseite */
@@ -105,17 +105,16 @@
   }
 
   .search_res_upper {
-    flex-direction: row; /* Änderung der Flex-Richtung für eine Zeile */
-    justify-content: space-between; /* Abstand zwischen Form und Schaltflächen */
     padding-top: 20px;
     padding-bottom: 20px;
     padding-inline: 20px; /* Mehr innere Abstände */
+    align-items: center;
   }
 
   .search_site form {
     flex: 1; /* Formular nimmt verfügbaren Raum ein */
     max-width: 600px; /* Maximale Breite der Suchleiste */
-    margin-right: 20px; /* Abstand zur rechten Seite */
+    width: 100%;
   }
 
   .search_btns_wrapper {

@@ -355,7 +355,7 @@ const Profile = () => {
         >
           {/* Following Tab */}
           <h1> {userProfile.followingNumber}</h1>
-          <p>Gefolgt</p>
+          <p>Following</p>
         </div>
       </div>
 

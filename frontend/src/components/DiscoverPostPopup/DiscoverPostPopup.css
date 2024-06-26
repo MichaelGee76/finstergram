@@ -9,6 +9,7 @@
   height: 100svh;
   padding-inline: 14px;
   overflow: scroll;
+  animation: fade-in 0.3s ease forwards;
 }
 
 .discover_post_popup .cmt_userinfos {
@@ -46,4 +47,19 @@
 
 .discover_back_img {
   width: 24px;
+}
+
+@media (min-width: 1024px) {
+  .discover_post_popup {
+    padding-bottom: 0;
+    width: 44%;
+    min-width: 650px;
+    left: 26%;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .discover_post_popup::-webkit-scrollbar {
+    display: none;
+  }
 }

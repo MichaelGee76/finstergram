@@ -128,14 +128,23 @@ const Home = () => {
       </div>
 
       <section className="posts_section">
-        {feed?.slice(0, loadMorePosts)?.map((post) => (
-          <Post
-            setFixBg={setFixBg}
-            key={post._id}
-            postData={post}
-            setUpdUserFeed={setUpdUserFeed}
-          />
-        ))}
+        {feed ? (
+          feed
+            ?.slice(0, loadMorePosts)
+            ?.map((post) => (
+              <Post
+                setFixBg={setFixBg}
+                key={post._id}
+                postData={post}
+                setUpdUserFeed={setUpdUserFeed}
+              />
+            ))
+        ) : (
+          <div className="nofeed_wrapper">
+            {" "}
+            <p>New on Finsta?</p> <Link to="/search">Discover feed</Link>{" "}
+          </div>
+        )}
         {feed?.length >= loadMorePosts && (
           <button
             onClick={() =>

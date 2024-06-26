@@ -30,6 +30,25 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.nofeed_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30svh;
+}
+
+.nofeed_wrapper p {
+  font-size: 16px;
+}
+
+.nofeed_wrapper a {
+  color: var(--mid-pink);
+  font-weight: 500;
+  font-size: 20px;
+  text-decoration: underline;
+}
 @media only screen and (min-width: 1024px) {
   .dash_section {
     max-width: 600px;

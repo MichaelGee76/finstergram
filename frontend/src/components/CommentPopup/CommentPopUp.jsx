@@ -39,7 +39,7 @@ const CommentPopUp = ({
 
     getCommentsFromPost();
   }, [commentUpd]);
-
+  console.log(postData);
   return (
     <section className="cmnt_popup">
       <div className="cmt_upper">
@@ -74,7 +74,10 @@ const CommentPopUp = ({
           <h3>Comments</h3>
         </div>
 
-        <Link style={{ position: "relative" }} to="/chatDashboard">
+        <Link
+          style={{ position: "relative" }}
+          to={`chat/${postData.userId._id}`}
+        >
           <svg
             width="28"
             height="28"
@@ -152,7 +155,7 @@ const CommentPopUp = ({
         <p className="post_desctext">{postData.description}</p>
         <div className="hashtags_wrapper">
           {postData.hashtags?.map((hashtag, index) => (
-            <Link key={index} to={`/search/${hashtag}`}>
+            <Link key={index} to={`/hashtagposts/${hashtag}`}>
               #{hashtag}
             </Link>
           ))}
