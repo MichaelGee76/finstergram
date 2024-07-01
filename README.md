@@ -18,7 +18,7 @@ You can check out the live site [here](https://www.mern-stack.de/).
 - **Image Cropping**: Uploaded images are cropped before saving to optimize database space.
 - **Chat Functionality**: Chat with people you follow.
 - **Inbox**: See notifications for likes and comments on your posts and comments.
-- **Discover Page**: Explore posts from users you are not following.
+- **Discover/Search Page**: Explore posts from users you are not following. Search for users and hashtags
 
 ## Tech Stack
 
@@ -32,15 +32,14 @@ You can check out the live site [here](https://www.mern-stack.de/).
 - **Full-Stack Development**: Building a robust full-stack application with React, Express.js, and Mongoose.
 - **Advanced Features**: Implementing complex features like real-time chat, image processing, and responsive design.
 
+## Team Members and Contributions
+
+- **[@MichaelGee76](https://github.com/MichaelGee76)**: Backend (Routes, Services, DB Management), Deployment, Gitmaster, Project presentation
+- **[@Reazy96](https://github.com/Reazy96)**: Profilepage, Edit profile, media querrys
+- **[@Zied1981](https://github.com/Zied1981)**: Backend (Routes, Services, DB Management), Loadingscreen, Saved and liked Posts pages, Settingspopup, Edit Posts page
+- **[@fredward_p](https://github.com/fredwardp)**: Login/Register, Homepage, Uploadposts, Searchpage/Discover Feed, Inboxpopup, Messanger, Posts & Comments, Darkmode
+
 ## Screenshots
 
 ![finsta_light](https://github.com/MichaelGee76/finstergram/assets/148052437/25524e52-59df-4400-a3a7-cf4f2051e022)
 ![finsta_dark](https://github.com/MichaelGee76/finstergram/assets/148052437/63e536d8-3428-4b41-8717-3da471c92f42)
-
-
-## Team Members and Contributions
-
-- **[@MichaelGee76](https://github.com/MichaelGee76)**: Backend (Routes, Services, DB Management), Deployment, Gitmaster
-- **@Reazy96**: Profilepage, Edit profile, media querrys
-- **@Zied1981**: Backend (Routes, Services, DB Management), Loadingscreen, Saved and liked Posts pages, Settingspopup, Edit Posts page
-- **@fredward_p**: Login/Register, Homepage, Uploadposts, Searchpage/Discover Feed, Inboxpopup, Messanger, Posts & Comments
